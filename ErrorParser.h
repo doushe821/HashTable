@@ -1,0 +1,15 @@
+#ifndef ERROR_PARSER_H_INCLUDED
+#define ERROR_PARSER_H_INCLUDED
+
+enum ErrorCodes
+{
+    FILE_NULL_POINTER = -9,
+    BUFFER_NULL_POINTER,
+    FREAD_ERROR,
+    ALLOCATION_FAILURE,
+    MODULE_SUCCESS = 0,
+};
+
+void ParseError(enum ErrorCodes code);
+
+#endif // ERROR_PARSER_H_INCLUDED
