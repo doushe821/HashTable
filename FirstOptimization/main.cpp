@@ -1,16 +1,38 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <x86intrin.h>
 
 #include "TextPreprocessor.h"
 #include "FileBufferizer.h"
 #include "ErrorParser.h"
 #include "HashTable.h"
+
 //#include "hash.h"
 //#include "List/List.h"
 
 int main(int argc, char** argv)
 {
-    unsigned long long start = __rdtsc();
+    char A[64] = "perspective";
+    char B[64] = "problematic";
+    unsigned long long start, end;
+    start = __rdtsc();
+    for(int i = 0; i < 1000; i++)
+    {
+        //fprintf(stderr, "%d\n", strcmp64byte(A, B));
+        strcmp64byte(A, B);
+    }
+    end = __rdtsc();
+    fprintf(stderr, "%llu\n", end - start);
+    start = __rdtsc();
+    for(int i = 0; i < 1000; i++)
+    {
+        strncmp(A, B, 64);
+    }
+    end = __rdtsc();
+    fprintf(stderr, "%llu\n", end - start);
+
+    return 0;
+    //unsigned long long start = __rdtsc();
 
     FILE* InputFP = fopen("HolyBible.txt", "r+b");
     if(InputFP == NULL)
@@ -46,7 +68,7 @@ int main(int argc, char** argv)
     HashTableDump(&HashTable);
 
     const size_t TestWordsNumber = 71;
-    char* TestArray[] = 
+    char TestArray[TestWordsNumber][64] = 
     {
         "perspective",
         "permissions",
@@ -128,7 +150,7 @@ int main(int argc, char** argv)
 
     HashTableDestr(&HashTable);
 
-    unsigned long long end = __rdtsc();
+    //unsigned long long end = __rdtsc();
 
     fprintf(stderr, "%llu\n", end - start);
 

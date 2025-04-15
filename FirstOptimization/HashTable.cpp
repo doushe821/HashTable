@@ -172,5 +172,5 @@ static int KeysComp(void* Key, void* KeyFromList)
     char* KeyStr = (char*)Key;
     char* KeyStrFromList = (char*)KeyFromList;
 
-    return strcmp(KeyStr, KeyStrFromList);
+    return strcmp64byte(KeyStr, KeyStrFromList);
 }

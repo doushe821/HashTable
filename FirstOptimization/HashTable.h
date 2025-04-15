@@ -15,4 +15,6 @@ int HashTableDestr(HashTable_t* HashTable);
 enum ErrorCodes HashTableSearch(HashTable_t* HashTable, void* Key);
 enum ErrorCodes HashTableDump(HashTable_t* HashTable);
 
+extern "C" int strcmp64byte(const char* stringA, const char* stringB);
+
 #endif
