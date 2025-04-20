@@ -4,15 +4,19 @@
 
 #include "HashTable.h"
 #include "List/List.h"
+#include "List/ListStruct.h"
 #include "ErrorParser.h"
 #include "hash.h"
 #include "FileBufferizer.h"
+#include <emmintrin.h>
+#include <xmmintrin.h>
+#include <x86intrin.h>
 
 const size_t HashTableWidth = 256; 
-const size_t WordLengthMax = 64;
-const size_t listInitSize = 4048;
+const size_t WordLengthMax = 32;
+const size_t listInitSize = 4096;
 
-static enum ErrorCodes ListInsertOrIncrementHashTable(char* key, List_t* list);
+static enum ErrorCodes ListInsertOrIncrementHashTable(char* key, HashTable_t* HashTable, size_t bucketIndex);
 
 static int KeysComp(void* Key, void* KeyFromList);
 
@@ -22,13 +26,30 @@ HashTable_t HashTableInit(FILE* fp)
     size_t bufferSize = GetFileSize(fp);
     HashTable_t HashTable = {};
 
-    List_t** BucketArray = (List_t**)calloc(sizeof(List_t*), HashTableWidth);
-    if(BucketArray == NULL)
+    List_t** KeysBucketArray = (List_t**)calloc(sizeof(List_t*), HashTableWidth);
+    List_t** ValuesBucketArray = (List_t**)calloc(sizeof(List_t*), HashTableWidth);
+
+    if(KeysBucketArray == NULL)
     {
+        if(ValuesBucketArray == NULL)
+        {
+            free(ValuesBucketArray);
+        }
         free(buffer);
         HashTable.ErrorCode = ALLOCATION_FAILURE;
         return HashTable;
     }
+
+    if(ValuesBucketArray == NULL)
+    {
+        free(KeysBucketArray);
+        free(buffer);
+        HashTable.ErrorCode = ALLOCATION_FAILURE;
+        return HashTable;
+    }
+
+    HashTable.KeysBucketArray = KeysBucketArray;
+    HashTable.ValuesBucketArray = ValuesBucketArray;
 
     char word[WordLengthMax] = {};
     for(size_t CharsRead = 0; CharsRead < bufferSize; CharsRead++)
@@ -47,14 +68,14 @@ HashTable_t HashTableInit(FILE* fp)
 
         size_t hash = SimpleHash(word, WordLengthMax);
         
-        if(BucketArray[hash] == NULL)
+        if(KeysBucketArray[hash] == NULL)
         {
-            ListInit(&(BucketArray[hash]), listInitSize, sizeof(size_t) + WordLengthMax);
+            ListInit(&(KeysBucketArray[hash]), listInitSize, WordLengthMax);
+            ListInit(&(ValuesBucketArray[hash]), listInitSize, sizeof(size_t));
         }
 
-        ParseError(ListInsertOrIncrementHashTable(word, BucketArray[hash])); 
+        ParseError(ListInsertOrIncrementHashTable(word, &HashTable, hash)); 
     }
-    HashTable = {BucketArray};
     free(buffer);
     return HashTable;
 }
@@ -66,30 +87,30 @@ enum ErrorCodes HashTableDump(HashTable_t* HashTable)
     {
         return FILE_NULL_POINTER;
     }
-    NodeInfo info = {};
+    NodeInfo infoKeys = {};
     size_t Number = 0;
     char string[WordLengthMax] = {};
     for(size_t i = 0; i < HashTableWidth; i++)
     {
-        if(HashTable->BucketArray[i] != NULL)
+        if(HashTable->KeysBucketArray[i] != NULL)
         {
             size_t index = 0;
-            info = LNodeInfo(HashTable->BucketArray[i], index);
-            index = info.next;
+            infoKeys = LNodeInfo(HashTable->KeysBucketArray[i], index);
+            index = infoKeys.next;
             while(index != 0)
             {
-                void* Value = ListGetNodeValueInd(HashTable->BucketArray[i], index);
+                void* Key = (char*)HashTable->KeysBucketArray[i]->data + index * HashTable->KeysBucketArray[i]->elsize;//ListGetNodeValueInd(HashTable->BucketArray[i], index);
     
-                memcpy(string, Value, WordLengthMax);
+                memcpy(string, Key, WordLengthMax);
     
                 fprintf(dumpFile, "%s ", string);
     
-                memcpy(&Number, (char*)Value + WordLengthMax, sizeof(Number));
+                memcpy(&Number, (char*)HashTable->ValuesBucketArray[i]->data + HashTable->ValuesBucketArray[i]->elsize * index, sizeof(Number));
                 
                 fprintf(dumpFile, "%zu\n", Number);
 
-                info = LNodeInfo(HashTable->BucketArray[i], index);
-                index = info.next;
+                infoKeys = LNodeInfo(HashTable->KeysBucketArray[i], index);
+                index = infoKeys.next;
             }
         }
     }
@@ -101,36 +122,44 @@ int HashTableDestr(HashTable_t* HashTable)
 {
     for(size_t i = 0; i < HashTableWidth; i++)
     {
-        void* address = (List_t*)(HashTable->BucketArray[i]);
+        void* address = (List_t*)(HashTable->KeysBucketArray[i]);
         if(address != NULL)
         {
             ListDstr((List_t*)address);
+            address = (List_t*)(HashTable->ValuesBucketArray[i]);
+            ListDstr((List_t*)address);
         }
     }
-    free(HashTable->BucketArray);
+    free(HashTable->KeysBucketArray);
+    free(HashTable->ValuesBucketArray);
     return MODULE_SUCCESS;
 }
 
-static enum ErrorCodes ListInsertOrIncrementHashTable(char* key, List_t* list)
+static enum ErrorCodes ListInsertOrIncrementHashTable(char* key, HashTable_t* HashTable, size_t bucketIndex)
 {
-    size_t index = ListSearchInd(list, key, KeysComp); 
+    size_t index = ListSearchInd(HashTable->KeysBucketArray[bucketIndex], key, KeysComp); 
     if(index == 0)
     {
-        void* value = calloc(WordLengthMax + sizeof(size_t), sizeof(char));
-        size_t counter = 1;
-        memcpy((char*)value + WordLengthMax, &counter, sizeof(counter));
-        memcpy(value, key, WordLengthMax);
-        PushFront(list, value);
-        free(value);
+        size_t counterInit = 1;
+        PushFront(HashTable->KeysBucketArray[bucketIndex], key);
+        PushFront(HashTable->ValuesBucketArray[bucketIndex], &counterInit);
+
+        //void* value = calloc(WordLengthMax + sizeof(size_t), sizeof(char));
+        //size_t counter = 1;
+        //memcpy((char*)value + WordLengthMax, &counter, sizeof(counter));
+        //memcpy(value, key, WordLengthMax);
+        //PushFront(list, value);
+        //free(value);
     }
     else
     {
-        void* NodeValue = ListGetNodeValueInd(list, index);
-        size_t counter = 0;
-        memcpy(&counter, (char*)NodeValue + WordLengthMax, sizeof(size_t));
-        counter++;
-        memcpy((char*)NodeValue + WordLengthMax, &counter, sizeof(size_t));
-        ListUpdateNodeValue(list, NodeValue, index);
+        (*((size_t*)((char*)HashTable->ValuesBucketArray[bucketIndex]->data + index * HashTable->ValuesBucketArray[bucketIndex]->elsize)))++;
+        //void* NodeValue = (char*)list->data + index * list->elsize;//ListGetNodeValueInd(list, index);
+        //size_t counter = 0;
+        //memcpy(&counter, (char*)NodeValue + WordLengthMax, sizeof(size_t));
+        //counter++;
+        //memcpy((char*)NodeValue + WordLengthMax, &counter, sizeof(size_t));
+        //ListUpdateNodeValue(list, NodeValue, index);
     }
 
     return MODULE_SUCCESS;
@@ -149,20 +178,19 @@ enum ErrorCodes HashTableSearch(HashTable_t* HashTable, void* Key)
 
     size_t hash = SimpleHash(Key, WordLengthMax);
 
-    size_t index = ListSearchInd(HashTable->BucketArray[hash], Key, KeysComp);
+    size_t index = ListSearchInd(HashTable->KeysBucketArray[hash], Key, KeysComp);
 
-    void* Value = ListGetNodeValueInd(HashTable->BucketArray[hash], index);
+    void* Value = (char*)HashTable->KeysBucketArray[hash]->data + index * HashTable->KeysBucketArray[hash]->elsize;// ListGetNodeValueInd(HashTable->BucketArray[hash], index);
 
     char string[WordLengthMax] = {};
     memcpy(string, Value, WordLengthMax);
     
     fprintf(stdout, "%s ", string);
 
-    size_t Number =  0;
-    memcpy(&Number, (char*)Value + WordLengthMax, sizeof(Number));
-    
-    fprintf(stdout, "%zu\n", Number);
+    size_t Number =  *(size_t*)((char*)HashTable->ValuesBucketArray[hash]->data + index * HashTable->ValuesBucketArray[hash]->elsize);
+    //memcpy(&Number, (char*)Value + WordLengthMax, sizeof(Number));
 
+    fprintf(stdout, "%zu\n", Number);
 
     return MODULE_SUCCESS;
 }

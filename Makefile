@@ -20,7 +20,9 @@ CC?=clang
 TARGET=debug
 
 ifeq ($(TARGET), release)
-	CFLAGS=-O0
+	CFLAGS=-O0 \
+else ifeq($(TARGET), releaseO2)
+	CFLAGS=-O2 	
 else ifeq ($(TARGET), debug)
 	CFLAGS=-ggdb3 -std=c++17 -Wall -Wextra -Weffc++ -Waggressive-loop-optimizations \
 	-Wc++14-compat -Wmissing-declarations -Wcast-align -Wcast-qual -Wchar-subscripts \

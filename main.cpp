@@ -5,6 +5,7 @@
 #include "FileBufferizer.h"
 #include "ErrorParser.h"
 #include "HashTable.h"
+#include "x86intrin.h"
 //#include "hash.h"
 //#include "List/List.h"
 
@@ -46,7 +47,7 @@ int main(int argc, char** argv)
     HashTableDump(&HashTable);
 
     const size_t TestWordsNumber = 71;
-    char* TestArray[] = 
+    char TestArray[TestWordsNumber][32] = 
     {
         "perspective",
         "permissions",

@@ -6,7 +6,8 @@
 
 struct HashTable_t 
 {
-    List_t** BucketArray;
+    List_t** KeysBucketArray;
+    List_t** ValuesBucketArray;
     enum ErrorCodes ErrorCode;
 };
 
