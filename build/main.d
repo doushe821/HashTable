@@ -1,2 +1,2 @@
-build/main.o: main.cpp TextPreprocessor.h FileBufferizer.h ErrorParser.h \
- HashTable.h List/List.h
+build/main.o: main.cpp FileBufferizer.h ErrorParser.h HashTable.h \
+ List/List.h

@@ -4,19 +4,18 @@
 #include <ctype.h>
 
 #include "TextPreprocessor.h"
-#include "ErrorParser.h"
 #include "FileBufferizer.h"
 
 int PreprocessText(FILE* InputFile, FILE* OutputFile)
 {
     if(InputFile == NULL)
     {
-        return FILE_NULL_POINTER;
+        return -1;
     }
 
     if(OutputFile == NULL)
     {
-        return FILE_NULL_POINTER;
+        return -1;
     }
 
     size_t FileSize = GetFileSize(InputFile);
@@ -31,7 +30,7 @@ int PreprocessText(FILE* InputFile, FILE* OutputFile)
 
     if(fread(Buffer, sizeof(char), FileSize, InputFile) != FileSize)
     {
-        return FREAD_ERROR;
+        return -1;
     }
 
     
@@ -74,6 +73,6 @@ int PreprocessText(FILE* InputFile, FILE* OutputFile)
     free(Buffer);
     free(OutputBuffer);
     
-    return MODULE_SUCCESS;
+    return 0;
 }
 

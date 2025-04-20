@@ -20,11 +20,9 @@ CC?=clang
 TARGET=debug
 
 ifeq ($(TARGET), release)
-	CFLAGS=-O0 \
-else ifeq($(TARGET), releaseO2)
-	CFLAGS=-O2 	
+	CFLAGS=-O2
 else ifeq ($(TARGET), debug)
-	CFLAGS=-ggdb3 -std=c++17 -Wall -Wextra -Weffc++ -Waggressive-loop-optimizations \
+	CFLAGS=-ggdb3 -g -z noexecstack -std=c++17 -Wall -Wextra -Weffc++ -Waggressive-loop-optimizations -no-pie\
 	-Wc++14-compat -Wmissing-declarations -Wcast-align -Wcast-qual -Wchar-subscripts \
 	-Wconditionally-supported -Wconversion -Wctor-dtor-privacy -Wempty-body -Wfloat-equal \
 	-Wformat-nonliteral -Wformat-security -Wformat-signedness -Wformat=2 -Winline -Wlogical-op \
@@ -38,20 +36,27 @@ else ifeq ($(TARGET), debug)
 endif
 
 
-SOURCES=main.cpp hash.cpp TextPreprocessor.cpp FileBufferizer.cpp HashTable.cpp List/List.cpp ErrorParser.cpp
+SOURCES=main.cpp TextPreprocessor.cpp FileBufferizer.cpp
+SOURCES_ASM=
 OBJECTS:=$(addprefix $(OUT_O_DIR)/,$(SOURCES:.cpp=.o))
+OBJECTS_ASM:=$(addprefix $(OUT_O_DIR)/,$(SOURCES_ASM:.asm=.o))
+LISTINGS:=$(addprefix $(OUT_O_DIR)/,$(SOURCES_ASM:.cpp=.lst))
 DEPS=$(OBJECTS:.o=.d)
 
-EXECUTABLE=Hash
+EXECUTABLE=TextPreprocessor
 
 
 .PHONY: clean
 .PHONY: all
 
-all: $(SOURCES) $(EXECUTABLE)
+all: $(SOURCES) $(SOURCES_ASM) $(EXECUTABLE)
 
-$(EXECUTABLE): $(OBJECTS)
-	@$(CC) $(LDFLAGS) $(CFLAGS) $(LFLAGS) $(OBJECTS) -o $@
+$(EXECUTABLE): $(OBJECTS) $(OBJECTS_ASM)
+	@$(CC) $(LDFLAGS) $(CFLAGS) $(LFLAGS) $(OBJECTS_ASM) $(OBJECTS) -o $@
+
+$(OBJECTS_ASM) : $(OUT_O_DIR)/%.o : %.asm
+	@mkdir -p $(@D)
+	@nasm -f elf64 $< -g -o $@
 
 $(OBJECTS) : $(OUT_O_DIR)/%.o : %.cpp
 	@mkdir -p $(@D)
@@ -64,4 +69,4 @@ $(DEPS) : $(OUT_O_DIR)/%.d : %.cpp
 include $(DEPS)
 
 .PHONY clean:
-	rm -rf *.o l
+	rm -rf *.o l build

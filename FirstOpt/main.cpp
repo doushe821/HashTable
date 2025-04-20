@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "TextPreprocessor.h"
-#include "FileBufferizer.h"
 #include "ErrorParser.h"
 #include "HashTable.h"
 #include "List/ListStruct.h"
@@ -14,25 +12,6 @@ int main(int argc, char** argv)
 {
 
     unsigned long long start = __rdtsc();
-
-    FILE* InputFP = fopen("HolyBible.txt", "r+b");
-    if(InputFP == NULL)
-    {
-        fprintf(stderr, "Failed to open file: %s%d\n", __FILE__, __LINE__);
-        return FILE_NULL_POINTER;
-    }
-
-    FILE* OutputFP = fopen("ReadyTohash.txt", "w+b");
-    if(InputFP == NULL)
-    {
-        fprintf(stderr, "Failed to open file: %s%d\n", __FILE__, __LINE__);
-        fclose(InputFP);
-        return FILE_NULL_POINTER;
-    }
-
-    PreprocessText(InputFP, OutputFP);
-    fclose(InputFP);
-    fclose(OutputFP);
 
     FILE* HashTableFile = fopen("ReadyTohash.txt", "r+b");
     if(HashTableFile == NULL)
