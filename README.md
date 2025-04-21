@@ -44,4 +44,39 @@ Completion time of programm is measured by perf. It will be measured for each ve
 
 Since we are going to implement optimizations subsequently, we have to somehow measure, how effective each optimization was. In order to do that we will use equivalent of COP (coefficient of performance) that also takes in account 
 quantity of lines written in assembly, or using intrinsics functions:
-$\eta=\frac{k}{\alpha}\cdot1000$
+```math
+\eta=\frac{k}{\alpha}\cdot1000
+```
+Where $k=\frac{t_\text{naive}}{t_\text{optimized}}$ and $\alpha$ is number of strings written in assembly.
+
+Since hash tables are mainly a searching tool, all the benches will include only repeatative searching requests.
+
+Error is calculated using following formula:
+```math
+\sigma_k=k\cdot(\frac{\sum(k_i-\overline{k})^2}{N(N-1)})^{1/2}
+```
+
+## Naive version
+Naive version is pretty simple: hash function calculates sum of every charachter of the key string and takes remainder from division by number of buckets (256 in our case) as a hash for bucket.
+
+Pointers to buckets are stored in a list, and buckets themselves are initialized after first their "index" hash sum is approached for the first time.
+
+If same word appears multiple times, its value is being increased, so at the end we will have a statistical dictionary of a book.
+
+Searching and inserting elements in hash table is implemented by calculating hash of a given key, then, finding it with strcmp and linear search in the bucket.
+
+Keys in values are stored in two separate lists, however, their indexes in the lists are synchronized.
+
+This is profile of naive version:
+
+![](PerfImages/NaiveProfile.png)
+
+On the first glance, it looks like hash functions takes most of the working time, however there is a block of functions that are responsible for searching elements in the hash table and their combined time
+is actually bigger, than SimpleHash() time. So we will optimize search first.
+
+![](PerfImages/NaiveActualTopTime.png)
+
+## First optimization
+In order to optimize search function we will the fact that our keys' size is limited to 256 bytes. 
+
+New function - size_t ListSearch(const char* Key, void* listData, size_t ListSize)
