@@ -24,7 +24,7 @@ we need to make our task less general and specify format and funtionality of our
 1. Number of buckets is much less than number of keys, 256 in our case, while.
 2. All compiler optimizations are gonna be disabled, programm will be running with O0.
 3. Hash function is going to be extremely simple.
-4. We are going to work only with ywords (arrats of linear data with maximum length of 256 bits). For better visualization we are going to use char strings, even tho our table will be able to work with any type of data within size limit.
+4. We are going to work only with ywords (arrays of linear data with maximum length of 256 bits). For better visualization we are going to use char strings, even tho our table will be able to work with any type of data within size limit.
 
 ## Low-level optimizations problems
 Main problem of any low-level optimizations is that it reduces readability and compatability of program: it becomes harder to read, loses some functionality, because while implementing low-level optimizations, 
@@ -45,9 +45,9 @@ Completion time of programm is measured by perf. It will be measured for each ve
 Since we are going to implement optimizations subsequently, we have to somehow measure, how effective each optimization was. In order to do that we will use equivalent of COP (coefficient of performance) that also takes in account 
 quantity of lines written in assembly, or using intrinsics functions:
 ```math
-\eta=\frac{k}{\alpha}\cdot1000
+\eta=\frac{k}{q}\cdot1000
 ```
-Where $k=\frac{t_\text{naive}}{t_\text{optimized}}$ and $\alpha$ is number of strings written in assembly.
+Where $k=\frac{t_\text{naive}}{t_\text{optimized}}$ and q is number of strings written in assembly.
 
 Since hash tables are mainly a searching tool, all the benches will include only repeatative searching requests.
 
@@ -70,6 +70,7 @@ Keys in values are stored in two separate lists, however, their indexes in the l
 This is the profile of naive version:
 <details>
 <summary>Naive version profile</summary>
+  
 ![](PerfImages/NaiveProfile.png)
 </details>
 
@@ -173,6 +174,7 @@ This is profile of second optmization:
 
 <details>
   <summary>Second optimization profile</summary>
+  
 ![](PerfImages/SecondOptProfile.png)
 </details>
 
@@ -197,10 +199,46 @@ asm volatile
 </details>
 
 <details>
+  
 <summary>Third optimization profile</summary>
+  
 ![](PerfImages/ThirdOptProfile.png)
 </details>
 
 ## Data processing
 Let's place experimental data in a table:
 
+<table>
+  <tr>
+    <th>Version</th>
+    <th>$t$, ticks</th>
+    <th>$\varepsilon_t$</th>
+    <th>$k$, performance coefficient</th>
+    <th>$q$, number of asm lines</th> 
+  </tr>
+  <tr>
+    <th>Naive</th>
+    <th>$405024407\pm 3719079$</th>
+    <th>0.009</th>
+    <th>1.0</th>
+    <th>0</th>
+  </tr>
+  <tr>
+    <th>First optimization</th>
+    <th>$325236470\pm 2852285$</th>
+    <th>0.009<\th>
+    <th>1.25</th>
+    <th>31</th>
+  </tr>
+  <tr>
+    <th>Second optimization</th>
+    <th>(250443085\pm 1621090)</th>
+    <th>0.006<\th>
+    <th>1.62</th>
+    <th>40</th>
+  <\tr>
+  <tr>
+    
+  </tr>
+      
+</table>
