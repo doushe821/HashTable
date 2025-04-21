@@ -20,9 +20,9 @@ CC?=clang
 TARGET=debug
 
 ifeq ($(TARGET), release)
-	CFLAGS=-O0 -g -no-pie -z noexecstack -flto
+	CFLAGS=-O0 -g -no-pie -z noexecstack -mavx2
 else ifeq ($(TARGET), debug)
-	CFLAGS=-ggdb3 -g -z noexecstack -std=c++17 -Wall -Wextra -Weffc++ -Waggressive-loop-optimizations -no-pie -flto \
+	CFLAGS=-ggdb3 -g -z noexecstack -std=c++17 -Wall -Wextra -Weffc++ -Waggressive-loop-optimizations -no-pie -mavx2\
 	-Wc++14-compat -Wmissing-declarations -Wcast-align -Wcast-qual -Wchar-subscripts \
 	-Wconditionally-supported -Wconversion -Wctor-dtor-privacy -Wempty-body -Wfloat-equal \
 	-Wformat-nonliteral -Wformat-security -Wformat-signedness -Wformat=2 -Winline -Wlogical-op \

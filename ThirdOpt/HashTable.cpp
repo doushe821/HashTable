@@ -26,7 +26,6 @@ HashTable_t HashTableInit(FILE* fp)
     HashTable_t HashTable = {};
 
     List_t** KeysBucketArray = (List_t**)aligned_alloc(sizeof(__m256), sizeof(List_t*) * HashTableWidth);
-    memset(KeysBucketArray, 0, sizeof(List_t*) * HashTableWidth);
     if(KeysBucketArray == NULL)
     {
         HashTable.ErrorCode = ALLOCATION_FAILURE;
@@ -34,7 +33,6 @@ HashTable_t HashTableInit(FILE* fp)
         return HashTable;
     }
     List_t** ValuesBucketArray = (List_t**)aligned_alloc(sizeof(__m256), sizeof(List_t*) * HashTableWidth);  
-    memset(ValuesBucketArray, 0, sizeof(List_t*) * HashTableWidth);
 
     if(ValuesBucketArray == NULL)
     {
@@ -47,7 +45,7 @@ HashTable_t HashTableInit(FILE* fp)
     HashTable.KeysBucketArray = KeysBucketArray;
     HashTable.ValuesBucketArray = ValuesBucketArray;
 
-    __attribute__((aligned(sizeof(__m256)))) char word[WordLengthMax] = {};
+    char* word = (char*)aligned_alloc(sizeof(__m256), WordLengthMax);
 
     for(size_t CharsRead = 0; CharsRead < bufferSize; CharsRead++)
     {
@@ -99,8 +97,17 @@ HashTable_t HashTableInit(FILE* fp)
         }
 
         ParseError(ListInsertOrIncrementHashTable(word, &HashTable, hash)); 
-        memset(word, 0, WordLengthMax);
+
+        asm volatile
+        ( 
+            "vpxor %%ymm0, %%ymm0, %%ymm0\t\n"
+            "vmovaps %%ymm0, (%0)"
+            :"=r" (word)
+            :"r" (word)
+            :"memory", "ymm0"
+        );
     }
+    free(word);
     free(buffer);
     return HashTable;
 }
@@ -260,6 +267,5 @@ static int KeysComp(void* Key, void* KeyFromList)
 {
     char* KeyStr = (char*)Key;
     char* KeyStrFromList = (char*)KeyFromList;
-
     return strcmp(KeyStr, KeyStrFromList);
 }

@@ -26,7 +26,7 @@ HashTable_t HashTableInit(FILE* fp)
     HashTable_t HashTable = {};
 
     List_t** KeysBucketArray = (List_t**)aligned_alloc(sizeof(__m256), sizeof(List_t*) * HashTableWidth);
-    memset(KeysBucketArray, 0, sizeof(List_t*) * HashTableWidth);
+        
     if(KeysBucketArray == NULL)
     {
         HashTable.ErrorCode = ALLOCATION_FAILURE;
@@ -34,7 +34,6 @@ HashTable_t HashTableInit(FILE* fp)
         return HashTable;
     }
     List_t** ValuesBucketArray = (List_t**)aligned_alloc(sizeof(__m256), sizeof(List_t*) * HashTableWidth);  
-    memset(ValuesBucketArray, 0, sizeof(List_t*) * HashTableWidth);
 
     if(ValuesBucketArray == NULL)
     {
