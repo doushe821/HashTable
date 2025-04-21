@@ -234,7 +234,7 @@ Let's place experimental data in a table:
   <tr>
     <th>Second optimization</th>
     <th>$(250443085\pm 1621090)$</th>
-    <th>$0.006$</tr>th>
+    <th>$0.006$</th>
     <th>$1.62$</th>
     <th>$40$</th>
   <\tr>
