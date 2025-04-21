@@ -207,38 +207,103 @@ asm volatile
 
 ## Data processing
 Let's place experimental data in a table:
-
+<details>
+  <summary>Show/hide data table</summary>
 <table>
   <tr>
     <th>Version</th>
-    <th>$t$, ticks</th>
+    <th>$t$</th>
     <th>$\varepsilon_t$</th>
-    <th>$k$, performance coefficient</th>
-    <th>$q$, number of asm lines</th> 
+    <th>$k$</th>
+    <th>$q$</th> 
   </tr>
   <tr>
     <th>Naive</th>
     <th>$405024407\pm 3719079$</th>
-    <th>0.009</th>
-    <th>1.0</th>
-    <th>0</th>
+    <th>$0.009$</th>
+    <th>$1.0$</th>
+    <th>$0$</th>
   </tr>
   <tr>
     <th>First optimization</th>
     <th>$325236470\pm 2852285$</th>
-    <th>0.009<\th>
-    <th>1.25</th>
-    <th>31</th>
+    <th>$0.009$</th>
+    <th>$1.25$</th>
+    <th>$31$</th>
   </tr>
   <tr>
     <th>Second optimization</th>
-    <th>(250443085\pm 1621090)</th>
-    <th>0.006<\th>
-    <th>1.62</th>
-    <th>40</th>
+    <th>$(250443085\pm 1621090)$</th>
+    <th>$0.006$</tr>th>
+    <th>$1.62$</th>
+    <th>$40$</th>
   <\tr>
   <tr>
-    
+    <th>Third optimization</th>
+    <th>$(249389648\pm 1013016)$</th>
+    <th>$0.004$</th>
+    <th>$1.63$</th>
+    <th>$5$</th>
   </tr>
-      
 </table>
+</details>
+
+Now let's compare effectiveness of every optimization:
+
+<details>
+  <summary>Show/hide data table</summary>
+<table>
+  <tr>
+    <th>Version</th>
+    <th>$\eta$</th>
+  </tr>
+  <tr>
+    <th>First optimization</th>
+    <th>$40.32$</th>
+  </tr>
+  <tr>
+    <th>Second optimization</th>
+    <th>$32.5$</th>
+  </tr>
+  <tr>
+    <th>Third optimization</th>
+    <th>$200.8$</th>
+  </tr>
+</table>
+</details>
+
+According to results, we can tell that the method of calculating COP that we have chosen is not the right one, since the least impactful optimization has the highest COP. Let's change our definition of COP:
+```math
+\eta=\frac{\Delta k}{q}\cdot 1000
+```
+This way we get:
+
+<table>
+  <tr>
+    <th>Version</th>
+    <th>$\eta$</th>
+  </tr>
+  <tr>
+    <th>First optimization</th>
+    <th>$8.06$</th>
+  </tr>
+  <tr>
+    <th>Second optimization</th>
+    <th>$9.25$</th>
+  </tr>
+  <tr>
+    <th>Third optimization</th>
+    <th>$0.8$</th>
+  </tr>
+</table>
+
+Now COP correlates much more with actual data.
+
+## Sufficiency
+Now, why would we stop on the third optimization? Dynamic shows, that optimizing hottest function at that point gives less than $1\%$ to performance, so, considering we cannot optimize other functions any further,
+we come to a conclusion: any further optimization are gonna be insufficient.
+
+## Conclusion
+The most impactful optimization was the second one, which was unexpected, as the first one reduced relative time of search module from $28.29\%$ to $13.12\%$.
+Because of that we can assume, that we should have picked up first optimization target strictly following profile. However, this conclusion is speculative, 
+since search module and hash function took almost even time, so may be our way of optimizing hash calculation was just more effective.
