@@ -24,7 +24,7 @@ we need to make our task less general and specify format and funtionality of our
 1. Number of buckets is much less than number of keys, 256 in our case, while.
 2. All compiler optimizations are gonna be disabled, programm will be running with O0.
 3. Hash function is going to be extremely simple.
-4. We are going to work only with ywords (arrats of linear data with maximum length of 256 bytes). For better visualization we are going to use char strings, even tho our table will be able to work with any type of data within size limit.
+4. We are going to work only with ywords (arrats of linear data with maximum length of 256 bits). For better visualization we are going to use char strings, even tho our table will be able to work with any type of data within size limit.
 
 ## Low-level optimizations problems
 Main problem of any low-level optimizations is that it reduces readability and compatability of program: it becomes harder to read, loses some functionality, because while implementing low-level optimizations, 
@@ -68,8 +68,10 @@ Searching and inserting elements in hash table is implemented by calculating has
 Keys in values are stored in two separate lists, however, their indexes in the lists are synchronized.
 
 This is the profile of naive version:
-
+<details>
+<summary>Naive version profile</summary>
 ![](PerfImages/NaiveProfile.png)
+</details>
 
 On the first glance, it looks like hash functions takes most of the working time, however there is a block of functions that are responsible for searching elements in the hash table and their combined time
 is actually bigger, than SimpleHash() time. So we will optimize search first.
@@ -77,7 +79,7 @@ is actually bigger, than SimpleHash() time. So we will optimize search first.
 ![](PerfImages/NaiveActualTopTime.png)
 
 ## First optimization
-In order to optimize search function we will the fact that our keys' size is limited to 256 bytes. 
+In order to optimize search function we will the fact that our keys' size is limited to 256 bits. 
 
 New function - size_t ListSearch(const char* Key, void* listData, size_t ListSize) loads key and elements of the list (here it treats list like an array) in ymm registers and then xors them. Then, vptest allows to check for 0 in register (it sets ZF to 1, if ymm == 0). Return value is index of the key in the bucket. If key isn't found, it returns 0. 
 
@@ -119,12 +121,15 @@ ListSearch:
     
 
 .KeyFound:
-    ret```
+  ret
+```
 </details>
 
-This is the profile of first optimization:
+<details>
+<summary>First optimization profile</summary>
 
 ![](PerfImages/FirstOptProfile.png)
+</details>
 
 It is obvious that next step is optimizing SimpleHash() - programms' hash function.
 
@@ -134,7 +139,9 @@ write it on inline assembly, so it will always be inlined and there not gonna be
 
 <details>
 <summary>Show/hide code</summary>
+  
 ```asm
+
 asm volatile
 ( 
     "xor %%rax, %%rax\t\n"
@@ -161,3 +168,39 @@ asm volatile
 );
 ```
 </details>
+
+This is profile of second optmization:
+
+<details>
+  <summary>Second optimization profile</summary>
+![](PerfImages/SecondOptProfile.png)
+</details>
+
+## Third optimization
+
+Now it's time ot optimize memset() function that is needed to clear the buffer when hash table is being intialized.
+
+That's easy, because, again, keys' sizes are limited to 256 bits, so we can load buffer to ymm register and then set it to needed value via SIMD instructions.
+
+<details>
+<summary>Show/hide code</summary>
+```asm
+asm volatile
+( 
+    "vpxor %%ymm0, %%ymm0, %%ymm0\t\n"
+    "vmovaps %%ymm0, (%0)"
+    :"=r" (word)
+    :"r" (word)
+    :"memory", "ymm0"
+);
+```
+</details>
+
+<details>
+<summary>Third optimization profile</summary>
+![](PerfImages/ThirdOptProfile.png)
+</details>
+
+## Data processing
+Let's place experimental data in a table:
+
