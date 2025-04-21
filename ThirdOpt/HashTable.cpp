@@ -112,6 +112,44 @@ HashTable_t HashTableInit(FILE* fp)
     return HashTable;
 }
 
+ErrorCodes HashTableInsert(const char* key, HashTable_t* HashTable)
+{
+   
+    if(strlen(key) > WordLengthMax)
+    {
+        HashTable->ErrorCode = KEY_IS_TOO_BIG;
+    }
+    size_t hash = 0;
+    asm volatile
+    ( 
+        "xor %%rax, %%rax\t\n"
+        "xor %%rdx, %%rdx\t\n"
+
+        "movq %1, %%rsi\t\n"
+        "movq $32, %%rcx\t\n"
+
+        ".HashInsertLoop:\t\n"
+
+        "movb (%%rsi), %%dl\t\n"
+        "addq %%rdx, %%rax\t\n"
+
+        "add $1, %%rsi\t\n"
+
+        "dec %%rcx\t\n"
+        "cmp $0, %%rcx\t\n"
+        "jne .HashInsertLoop\t\n"
+
+        "movq %%rax, %0\t\n"
+        :"=r" (hash)
+        :"r" (key)
+        :"rax", "rbx", "rcx", "rdx", "rsi", "memory"
+    );
+    size_t NewValue = 1;
+    PushInd(HashTable->KeysBucketArray[hash], (void*)key, GetLinearListSize((HashTable->KeysBucketArray[hash])) + 1);
+    PushInd(HashTable->ValuesBucketArray[hash], &NewValue, GetLinearListSize((HashTable->ValuesBucketArray[hash])) + 1);
+    return MODULE_SUCCESS;
+}
+
 inline size_t SimpleHash(void* value, size_t size)
 {
     const int TableWidth = 256;
