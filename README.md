@@ -122,11 +122,42 @@ ListSearch:
     ret```
 </details>
 
-
 This is the profile of first optimization:
 
 ![](PerfImages/FirstOptProfile.png)
 
 It is obvious that next step is optimizing SimpleHash() - programms' hash function.
 
-## SecondOpt
+## Second optimization
+As mentioned earlier, programm's hash function is the simplest one can come up with: it calculates sum of all keys's byte, treating them as char variables and then takes remainder of division by 256 (number of buckets). We will
+write it on inline assembly, so it will always be inlined and there not gonna be anything unnecessary in it.
+
+<details>
+<summary>Show/hide code</summary>
+```asm
+asm volatile
+( 
+    "xor %%rax, %%rax\t\n"
+    "xor %%rdx, %%rdx\t\n"
+
+    "movq %1, %%rsi\t\n"
+    "movq $32, %%rcx\t\n"
+
+    ".HashInitLoop:\t\n"
+
+    "movb (%%rsi), %%dl\t\n"
+    "addq %%rdx, %%rax\t\n"
+
+    "add $1, %%rsi\t\n"
+
+    "dec %%rcx\t\n"
+    "cmp $0, %%rcx\t\n"
+    "jne .HashInitLoop\t\n"
+
+    "movq %%rax, %0\t\n"
+    :"=r" (hash)
+    :"r" (word)
+    :"rax", "rbx", "rcx", "rdx", "rsi", "memory"
+);
+```
+</details>
