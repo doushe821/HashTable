@@ -186,7 +186,9 @@ That's easy, because, again, keys' sizes are limited to 256 bits, so we can load
 
 <details>
 <summary>Show/hide code</summary>
+  
 ```asm
+
 asm volatile
 ( 
     "vpxor %%ymm0, %%ymm0, %%ymm0\t\n"
