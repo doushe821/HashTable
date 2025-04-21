@@ -67,7 +67,7 @@ Searching and inserting elements in hash table is implemented by calculating has
 
 Keys in values are stored in two separate lists, however, their indexes in the lists are synchronized.
 
-This is profile of naive version:
+This is the profile of naive version:
 
 ![](PerfImages/NaiveProfile.png)
 
@@ -79,4 +79,54 @@ is actually bigger, than SimpleHash() time. So we will optimize search first.
 ## First optimization
 In order to optimize search function we will the fact that our keys' size is limited to 256 bytes. 
 
-New function - size_t ListSearch(const char* Key, void* listData, size_t ListSize)
+New function - size_t ListSearch(const char* Key, void* listData, size_t ListSize) loads key and elements of the list (here it treats list like an array) in ymm registers and then xors them. Then, vptest allows to check for 0 in register (it sets ZF to 1, if ymm == 0). Return value is index of the key in the bucket. If key isn't found, it returns 0. 
+
+This simple function uses SIMD instructions instead of linear byte-to-byte comparison as strncmp or strcmp does, which makes it faster.
+
+Here is ListSearch() source code:
+
+<details>
+<summary>Show/hide code</summary>
+  
+```asm
+global ListSearch
+
+ListSearch:
+    xor rax, rax
+    cmp rdx, 0h
+    je .KeyFound
+
+    add rsi, 20h
+ 
+.SearchLoop:
+
+    inc rax
+    vmovaps ymm0, yword [rdi]
+    vmovaps ymm1, yword [rsi]
+
+    vpxor ymm0, ymm1 
+    vptest ymm0, ymm0
+    jz .KeyFound
+
+    add rsi, 20h
+    sub rdx, 20h
+
+    cmp rdx, 0h
+    jne .SearchLoop
+
+    xor rax, rax 
+    ret
+    
+
+.KeyFound:
+    ret```
+</details>
+
+
+This is the profile of first optimization:
+
+![](PerfImages/FirstOptProfile.png)
+
+It is obvious that next step is optimizing SimpleHash() - programms' hash function.
+
+## SecondOpt
