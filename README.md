@@ -301,6 +301,18 @@ This way we get:
 
 Now COP correlates much more with actual data.
 
+Now let's calculate overall COP:
+
+```math
+\eta=8.28
+```
+Or in terms of first way of calculation:
+```math
+\eta=21.447
+```
+
+(result are given)
+
 ## Sufficiency
 Now, why would we stop on the third optimization? Dynamic shows, that optimizing hottest function at that point gives less than $1\%$ to performance, so, considering we cannot optimize other functions any further,
 we come to a conclusion: any further optimization are gonna be insufficient.
