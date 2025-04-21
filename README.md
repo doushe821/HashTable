@@ -186,7 +186,9 @@ That's easy, because, again, keys' sizes are limited to 256 bits, so we can load
 
 <details>
 <summary>Show/hide code</summary>
+  
 ```asm
+
 asm volatile
 ( 
     "vpxor %%ymm0, %%ymm0, %%ymm0\t\n"
@@ -299,11 +301,23 @@ This way we get:
 
 Now COP correlates much more with actual data.
 
+Now let's calculate overall COP:
+
+```math
+\eta=8.28
+```
+Or in terms of first way of calculation:
+```math
+\eta=21.447
+```
+
+(result are given without absolute errors because they are negligible)
+
 ## Sufficiency
 Now, why would we stop on the third optimization? Dynamic shows, that optimizing hottest function at that point gives less than $1\%$ to performance, so, considering we cannot optimize other functions any further,
 we come to a conclusion: any further optimization are gonna be insufficient.
 
 ## Conclusion
-The most impactful optimization was the second one, which was unexpected, as the first one reduced relative time of search module from $28.29\%$ to $13.12\%$.
+The most impactful optimization was the second one, which was unexpected, as the first one reduced relative time of search module from $28.29$% to $13.12$%.
 Because of that we can assume, that we should have picked up first optimization target strictly following profile. However, this conclusion is speculative, 
 since search module and hash function took almost even time, so may be our way of optimizing hash calculation was just more effective.
