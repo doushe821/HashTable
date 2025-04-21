@@ -311,13 +311,13 @@ Or in terms of first way of calculation:
 \eta=21.447
 ```
 
-(result are given)
+(result are given without absolute errors because they are negligible)
 
 ## Sufficiency
 Now, why would we stop on the third optimization? Dynamic shows, that optimizing hottest function at that point gives less than $1\%$ to performance, so, considering we cannot optimize other functions any further,
 we come to a conclusion: any further optimization are gonna be insufficient.
 
 ## Conclusion
-The most impactful optimization was the second one, which was unexpected, as the first one reduced relative time of search module from $28.29\%$ to $13.12\%$.
+The most impactful optimization was the second one, which was unexpected, as the first one reduced relative time of search module from $28.29$% to $13.12$%.
 Because of that we can assume, that we should have picked up first optimization target strictly following profile. However, this conclusion is speculative, 
 since search module and hash function took almost even time, so may be our way of optimizing hash calculation was just more effective.
