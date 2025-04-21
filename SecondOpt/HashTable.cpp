@@ -72,7 +72,7 @@ HashTable_t HashTableInit(FILE* fp)
             "movq %1, %%rsi\t\n"
             "movq $32, %%rcx\t\n"
     
-            ".lLoop:\t\n"
+            ".HashInitLoop:\t\n"
     
             "movb (%%rsi), %%dl\t\n"
             "addq %%rdx, %%rax\t\n"
@@ -81,7 +81,7 @@ HashTable_t HashTableInit(FILE* fp)
     
             "dec %%rcx\t\n"
             "cmp $0, %%rcx\t\n"
-            "jne .lLoop\t\n"
+            "jne .HashInitLoop\t\n"
     
             "movq %%rax, %0\t\n"
             :"=r" (hash)
@@ -211,7 +211,7 @@ enum ErrorCodes HashTableSearch(HashTable_t* HashTable, void* Key)
         "movq %1, %%rsi\t\n"
         "movq $32, %%rcx\t\n"
 
-        ".Loop:\t\n"
+        ".HashSearchLoop:\t\n"
 
         "movb (%%rsi), %%dl\t\n"
         "addq %%rdx, %%rax\t\n"
@@ -220,7 +220,7 @@ enum ErrorCodes HashTableSearch(HashTable_t* HashTable, void* Key)
 
         "dec %%rcx\t\n"
         "cmp $0, %%rcx\t\n"
-        "jne .Loop\t\n"
+        "jne .HashSearchLoop\t\n"
 
         "movq %%rax, %0\t\n"
         :"=r" (hash)

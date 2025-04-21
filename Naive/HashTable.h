@@ -13,7 +13,8 @@ struct HashTable_t
 
 HashTable_t HashTableInit(FILE* fp);
 int HashTableDestr(HashTable_t* HashTable);
-enum ErrorCodes HashTableSearch(HashTable_t* HashTable, void* Key);
 enum ErrorCodes HashTableDump(HashTable_t* HashTable);
+
+enum ErrorCodes HashTableSearch(HashTable_t* HashTable, void* Key);
 
 #endif

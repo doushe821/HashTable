@@ -1,15 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "FileBufferizer.h"
 #include "ErrorParser.h"
 #include "HashTable.h"
+#include "List/ListStruct.h"
 #include "x86intrin.h"
 //#include "hash.h"
 //#include "List/List.h"
 
 int main(int argc, char** argv)
 {
+
     unsigned long long start = __rdtsc();
 
     FILE* HashTableFile = fopen("ReadyTohash.txt", "r+b");
@@ -19,15 +20,14 @@ int main(int argc, char** argv)
     }
 
     HashTable_t HashTable = HashTableInit(HashTableFile);
-
-    fprintf(stderr, "Hash Initialization Complete\n");
+    fprintf(stderr, "Hashing complete!\n");
 
     fclose(HashTableFile);
     
     HashTableDump(&HashTable);
 
     const size_t TestWordsNumber = 71;
-    char TestArray[TestWordsNumber][32] = 
+    __attribute__((aligned(sizeof(__m256)))) char TestArray[TestWordsNumber][32] = 
     {
         "perspective",
         "permissions",
@@ -101,12 +101,12 @@ int main(int argc, char** argv)
         "prohibition",
         "precompiled",
     };    
-
     for(size_t i = 0; i < TestWordsNumber; i++)
     {
         HashTableSearch(&HashTable, TestArray[i]);
     }
 
+    
     HashTableDestr(&HashTable);
 
     unsigned long long end = __rdtsc();

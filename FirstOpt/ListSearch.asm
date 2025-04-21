@@ -5,7 +5,7 @@ ListSearch:
     cmp rdx, 0h
     je .KeyFound
 
-    add rsi, 20h ; + 32 bytes
+    add rsi, 20h
  
 .SearchLoop:
 

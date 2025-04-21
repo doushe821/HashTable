@@ -40,6 +40,11 @@ void ParseError(enum ErrorCodes code)
         {
             break;
         }
+        case UNEXPECTED_BEHAVIOUR:
+        {
+            fprintf(stderr, "Program faced unexpected behaviour on ...\n");
+            break;
+        }
         default:
         {
             return ;
