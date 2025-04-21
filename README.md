@@ -28,11 +28,13 @@ we need to make our task less general and specify format and funtionality of our
 
 ## Low-level optimizations problems
 Main problem of any low-level optimizations is that it reduces readability and compatability of program: it becomes harder to read, loses some functionality, because while implementing low-level optimizations, 
-we always rely on opportunities that are specific to a task, e.g. strictly limited key size.
+we always rely on opportunities that are specific to a task, e.g. strictly limited key size. 
+
+Because of that we should be conscious with our optimizations, that is why they should be precise and laconic.
 
 ## Profiling
 Profiling is measuring programm's space and time usage function-wise. It can help to detect so cold "hot" functions: ones that are working most of the time. This will allow us to targetly
-optimize those functions and achieve bigger performance boost. 
+optimize those functions and achieve bigger performance boost. It is mandatory to keep our assembly insertions as brief as possible.
 
 Profiler for this project is perf. Perf is a part of Linux kernel, so it can be used on any distro and is well accessible. Besides functions' time usage, perf also shows how many ticks it took to finish program, so basically we are gonna be measuring
 time with help of perf.
@@ -40,4 +42,6 @@ time with help of perf.
 ## Measurements
 Completion time of programm is measured by perf. It will be measured for each version of programm until random error is less than 1% of measuring value.
 
-Since we are going to implement optimizations subsequently, we have to somehow measure, how effective each optimization was. In order to do that we will use equivalent of COP (coefficient of performance) 
+Since we are going to implement optimizations subsequently, we have to somehow measure, how effective each optimization was. In order to do that we will use equivalent of COP (coefficient of performance) that also takes in account 
+quantity of lines written in assembly, or using intrinsics functions:
+$\eta=\frac{k}{\alpha}\cdot1000$
