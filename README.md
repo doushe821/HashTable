@@ -21,7 +21,7 @@ for some optimizations.
 This project main idea is to implement some low-level optimization such as assembly inline code, SIMD, assembly functions in open adressing hash table structure. To implement those optimizations 
 we need to make our task less general and specify format and funtionality of our hash table. Those restrictions are gonna be:
 
-1. Number of buckets is much less than number of keys, 256 in our case, while.
+1. Number of buckets is much less than number of keys, 1024 in our case (this way, with our test files Load factor will be around 10 word per bucket).
 2. All compiler optimizations are gonna be disabled, programm will be running with O0.
 3. Hash function is going to be extremely simple.
 4. We are going to work only with ywords (arrays of linear data with maximum length of 256 bits). For better visualization we are going to use char strings, even tho our table will be able to work with any type of data within size limit.
@@ -56,6 +56,23 @@ Error is calculated using following formula:
 \sigma_k=k\cdot(\frac{\sum(k_i-\overline{k})^2}{N(N-1)})^{1/2}
 ```
 
+## Hash comparison
+In the beginning, we have to choose right hash: one that can easily be optimized, yet one with good distribution.
+
+I came up with a simple cash that calculates subsumms of the key (in groups of 8) and then xors them with seed.
+
+Let's compare its distribution with MurMur2 (which is fairly harder to optimize):
+
+![](HashTestImages/MurMur1024.png)
+
+![](HashTestImages/Whacky1024.png)
+
+As you can see, distributions are comparable, however, Whacky hash loses a bit. To measure it properly, we will calculate dispersion of number of words in each bucket (normalised by load factor):
+
+$\sigma_\text{MurMur}=1.0234509874327002$
+
+$\sigma_\text{Whacky}=1.7210710632676653$
+
 ## Naive version
 Naive version is pretty simple: hash function calculates sum of every charachter of the key string and takes remainder from division by number of buckets (256 in our case) as a hash for bucket.
 
@@ -74,12 +91,55 @@ This is the profile of naive version:
 ![](PerfImages/NaiveProfile.png)
 </details>
 
-On the first glance, it looks like hash functions takes most of the working time, however there is a block of functions that are responsible for searching elements in the hash table and their combined time
-is actually bigger, than SimpleHash() time. So we will optimize search first.
-
-![](PerfImages/NaiveActualTopTime.png)
+That way we can tell that we should optimize hash first.
 
 ## First optimization
+Program hash function (WackyHash2) calculates subsums of the key and then xors them with seed.
+
+We can easily optimize it with intrinsics functions that use SIMD instructions:
+
+<details>
+<summary>Show/hide code</summary>
+  
+```c
+
+static size_t WhackyHash2_SIMD(void* Key, size_t len, size_t MaxValue)
+{
+    size_t seed = 0x69696ABE1;
+    size_t MLG = 0xABE1;
+    size_t tony = 0xEDA666EDA6667878;
+    
+    __m256i seedm256 = _mm256_set1_epi64x(seed);
+
+    size_t HashSubSums[4] = {};
+    for(size_t i = 0; i < 4; i++)
+    {
+        HashSubSums[i] = ((char*)Key)[i * 8] +  ((char*)Key)[i * 8 + 1] + ((char*)Key)[i * 8 + 2] + ((char*)Key)[i * 8 + 3]
+        + ((char*)Key)[i * 8 + 4] +  ((char*)Key)[i * 8 + 5] + ((char*)Key)[i * 8 + 6] + ((char*)Key)[i * 8 + 7];
+    }
+
+    __m256i SubSums256 = {(long long)HashSubSums[0], (long long)HashSubSums[1], (long long)HashSubSums[2], (long long)HashSubSums[3]};
+    SubSums256 = _mm256_xor_si256(SubSums256, seedm256);
+
+    size_t HashSum = SubSums256[0] + SubSums256[1] + SubSums256[2] + SubSums256[3];
+    return HashSum % MaxValue;
+}
+
+```
+</details>
+
+This way, we can gain high performance boost using only 3 assembly lines. Quite impressive!
+
+This is profile of first optmization:
+
+<details>
+  <summary>Second optimization profile</summary>
+  
+![](PerfImages/SecondOptProfile.png)
+</details>
+
+
+## Second optimization
 In order to optimize search function we will the fact that our keys' size is limited to 256 bits. 
 
 New function - size_t ListSearch(const char* Key, void* listData, size_t ListSize) loads key and elements of the list (here it treats list like an array) in ymm registers and then xors them. Then, vptest allows to check for 0 in register (it sets ZF to 1, if ymm == 0). Return value is index of the key in the bucket. If key isn't found, it returns 0. 
@@ -129,54 +189,10 @@ ListSearch:
 <details>
 <summary>First optimization profile</summary>
 
-![](PerfImages/FirstOptProfile.png)
+![](PerfImages/SecondOptProfile.png)
 </details>
 
 It is obvious that next step is optimizing SimpleHash() - programms' hash function.
-
-## Second optimization
-As mentioned earlier, programm's hash function is the simplest one can come up with: it calculates sum of all keys's byte, treating them as char variables and then takes remainder of division by 256 (number of buckets). We will
-write it on inline assembly, so it will always be inlined and there not gonna be anything unnecessary in it.
-
-<details>
-<summary>Show/hide code</summary>
-  
-```asm
-
-asm volatile
-( 
-    "xor %%rax, %%rax\t\n"
-    "xor %%rdx, %%rdx\t\n"
-
-    "movq %1, %%rsi\t\n"
-    "movq $32, %%rcx\t\n"
-
-    ".HashInitLoop:\t\n"
-
-    "movb (%%rsi), %%dl\t\n"
-    "addq %%rdx, %%rax\t\n"
-
-    "add $1, %%rsi\t\n"
-
-    "dec %%rcx\t\n"
-    "cmp $0, %%rcx\t\n"
-    "jne .HashInitLoop\t\n"
-
-    "movq %%rax, %0\t\n"
-    :"=r" (hash)
-    :"r" (word)
-    :"rax", "rbx", "rcx", "rdx", "rsi", "memory"
-);
-```
-</details>
-
-This is profile of second optmization:
-
-<details>
-  <summary>Second optimization profile</summary>
-  
-![](PerfImages/SecondOptProfile.png)
-</details>
 
 ## Third optimization
 
@@ -221,30 +237,30 @@ Let's place experimental data in a table:
   </tr>
   <tr>
     <th>Naive</th>
-    <th>$405024407\pm 3719079$</th>
-    <th>$0.009$</th>
-    <th>$1.0$</th>
+    <th>$14402605506.0\pm 33491079$</th>
+    <th>$0.002$</th>
+    <th>$1.00$</th>
     <th>$0$</th>
   </tr>
   <tr>
     <th>First optimization</th>
-    <th>$325236470\pm 2852285$</th>
-    <th>$0.009$</th>
-    <th>$1.25$</th>
-    <th>$31$</th>
+    <th>$10651982323\pm 29034815$</th>
+    <th>$0.003$</th>
+    <th>$1.36$</th>
+    <th>$3$</th>
   </tr>
   <tr>
     <th>Second optimization</th>
-    <th>$(250443085\pm 1621090)$</th>
-    <th>$0.006$</th>
-    <th>$1.62$</th>
+    <th>$7040251868.0\pm 5638961$</th>
+    <th>$0.0008$</th>
+    <th>$2.06$</th>
     <th>$40$</th>
   <\tr>
   <tr>
     <th>Third optimization</th>
-    <th>$(249389648\pm 1013016)$</th>
-    <th>$0.004$</th>
-    <th>$1.63$</th>
+    <th>$6876360513.6\pm 4891910$</th>
+    <th>$0.0007$</th>
+    <th>$2.12$</th>
     <th>$5$</th>
   </tr>
 </table>
@@ -252,29 +268,6 @@ Let's place experimental data in a table:
 
 Now let's compare effectiveness of every optimization:
 
-<details>
-  <summary>Show/hide data table</summary>
-<table>
-  <tr>
-    <th>Version</th>
-    <th>$\eta$</th>
-  </tr>
-  <tr>
-    <th>First optimization</th>
-    <th>$40.32$</th>
-  </tr>
-  <tr>
-    <th>Second optimization</th>
-    <th>$32.5$</th>
-  </tr>
-  <tr>
-    <th>Third optimization</th>
-    <th>$200.8$</th>
-  </tr>
-</table>
-</details>
-
-According to results, we can tell that the method of calculating COP that we have chosen is not the right one, since the least impactful optimization has the highest COP. Let's change our definition of COP:
 ```math
 \eta=\frac{\Delta k}{q}\cdot 1000
 ```
@@ -287,30 +280,23 @@ This way we get:
   </tr>
   <tr>
     <th>First optimization</th>
-    <th>$8.06$</th>
+    <th>$120$</th>
   </tr>
   <tr>
     <th>Second optimization</th>
-    <th>$9.25$</th>
+    <th>$17.5$</th>
   </tr>
   <tr>
     <th>Third optimization</th>
-    <th>$0.8$</th>
+    <th>$12$</th>
   </tr>
 </table>
-
-Now COP correlates much more with actual data.
 
 Now let's calculate overall COP:
 
 ```math
-\eta=8.28
+\eta=23.3
 ```
-Or in terms of first way of calculation:
-```math
-\eta=21.447
-```
-
 (result are given without absolute errors because they are negligible)
 
 ## Sufficiency
@@ -318,6 +304,4 @@ Now, why would we stop on the third optimization? Dynamic shows, that optimizing
 we come to a conclusion: any further optimization are gonna be insufficient.
 
 ## Conclusion
-The most impactful optimization was the second one, which was unexpected, as the first one reduced relative time of search module from $28.29$% to $13.12$%.
-Because of that we can assume, that we should have picked up first optimization target strictly following profile. However, this conclusion is speculative, 
-since search module and hash function took almost even time, so may be our way of optimizing hash calculation was just more effective.
+As expected, most efficient optimizations in terms of COP was the first one, followed by the second. However, it is noticable that second optimizatin gave more overall performance boost. 
