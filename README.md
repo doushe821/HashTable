@@ -134,6 +134,7 @@ This is profile of first optmization:
 
 <details>
   <summary>First optimization profile</summary>
+  
   ![](PerfImages/FirstOptProfile.png)
 
 </details>
@@ -189,6 +190,8 @@ ListSearch:
 <details>
 <summary>Second optimization profile</summary>
 
+  ![](PerfImages/SecondOptProfile.png)
+
 </details>
 
 It is obvious that next step is optimizing SimpleHash() - programms' hash function.
@@ -218,6 +221,8 @@ asm volatile
 <details>
   
 <summary>Third optimization profile</summary>
+
+  ![](PerfImages/ThirdOptProfile.png)
   
 </details>
 
