@@ -36,7 +36,7 @@ else ifeq ($(TARGET), debug)
 endif
 
 
-SOURCES=main.cpp FileBufferizer.cpp HashTable.cpp List/List.cpp ErrorParser.cpp
+SOURCES=main.cpp FileBufferizer.cpp HashTable.cpp List/List.cpp ErrorParser.cpp HashTableBench.cpp
 SOURCES_ASM=ListSearch.asm
 OBJECTS:=$(addprefix $(OUT_O_DIR)/,$(SOURCES:.cpp=.o))
 OBJECTS_ASM:=$(addprefix $(OUT_O_DIR)/,$(SOURCES_ASM:.asm=.o))

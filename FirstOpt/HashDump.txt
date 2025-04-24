@@ -1,5 +1,6 @@
-Peiyi 4
+Peiyi 1
 however 56
+Peiyi 3
 further 52
 Dover 2
 again 64
@@ -35,8 +36,9 @@ uniform 6
 Peter 4
 Width 2
 detab 4
-State 128
+State 1
 product 64
+State 127
 White 8
 through 332
 commercially 8
@@ -70,7 +72,7 @@ Newer 2
 Scientific 2
 Token 2
 removes 4
-fundamentals 2
+fundamentals 1
 Title 2
 Other 58
 Introduction 44
@@ -107,6 +109,7 @@ batch 4
 LTb 2
 prudent 2
 sLC 2
+fundamentals 1
 Roome 1
 shrinks 1
 uncover 1
@@ -115,7 +118,7 @@ aname 1
 References 2
 fread 3
 Items 1
-popular 19
+popular 1
 architecture 435
 Stine 4
 imprint 4
@@ -125,6 +128,7 @@ physics 16
 current 256
 thought 7
 image 21
+popular 18
 Slope 2
 hence 24
 clean 11
@@ -158,7 +162,7 @@ afree 8
 payroll 1
 replacements 1
 naked 1
-writing 93
+writing 1
 technologies 12
 Jenny 2
 Discipline 16
@@ -167,6 +171,7 @@ Addressing 26
 quarter 4
 courses 2
 field 234
+writing 92
 filed 2
 Lewis 8
 reprint 2
@@ -202,11 +207,12 @@ Tondo 1
 evolves 1
 bfree 2
 fsetpos 4
-context 24
+context 1
 Assembling 12
 teach 10
 begin 397
 being 105
+context 23
 break 71
 Sergt 2
 mechanical 11
@@ -235,7 +241,8 @@ tightly 2
 islower 3
 heads 1
 unofficially 1
-authors 12
+authors 1
+authors 11
 claim 4
 Using 70
 unveils 2
@@ -270,7 +277,7 @@ sprintf 9
 freed 8
 ispunct 1
 promote 2
-clear 32
+clear 1
 obvious 16
 Bytes 8
 Integrated 14
@@ -285,6 +292,7 @@ feeds 4
 turning 12
 debug 8
 chair 8
+clear 31
 shorter 35
 Academic 22
 tossing 2
@@ -308,7 +316,8 @@ glean 1
 arrangements 1
 arena 2
 conditionals 1
-Money 8
+Money 1
+Money 7
 World 38
 asked 20
 board 48
@@ -350,8 +359,9 @@ inserts 1
 broad 1
 western 1
 FAILURE 1
-request 37
+request 1
 Capacitors 6
+request 36
 various 58
 symbols 22
 leads 24
@@ -388,7 +398,7 @@ vprintf 4
 reentry 1
 fgetc 3
 isprint 1
-Suite 2
+Suite 1
 Transmission 60
 Arithmetic 67
 Point 20
@@ -421,6 +431,7 @@ RtD 2
 incorporated 3
 Chronicles 2
 Wiley 2
+Suite 1
 Weinberger 2
 Thereafter 3
 dealt 2
@@ -430,12 +441,13 @@ legitimately 1
 needn 1
 Parts 1
 partopt 2
-large 202
+large 1
 Resettable 16
 Reflection 4
 difference 51
 quantum 4
 Write 285
+large 201
 SiO 4
 inverts 8
 block 459
@@ -472,7 +484,7 @@ alloc 21
 meaningfully 2
 frand 1
 redeclared 4
-Asynchronous 18
+Asynchronous 1
 Jerry 3
 Amplifiers 2
 Until 8
@@ -485,6 +497,7 @@ space 202
 combinable 2
 consequences 2
 latch 172
+Asynchronous 17
 brain 8
 interconnect 2
 Collection 2
@@ -505,7 +518,8 @@ Minus 1
 modifiable 2
 turmoil 1
 SIGABRT 2
-written 312
+written 1
+written 311
 publications 2
 sisters 2
 Power 34
@@ -546,11 +560,12 @@ subexpressions 1
 unrecognized 1
 strcspn 1
 quietly 1
-accessible 18
+accessible 1
 logic 1051
 guide 3
 Multiplexers 18
 Programmed 4
+accessible 17
 COMPLEXITY 2
 simultaneously 61
 individually 9
@@ -588,7 +603,8 @@ fseek 8
 mixture 1
 borrows 1
 hypothetical 1
-usually 142
+usually 1
+usually 141
 reports 10
 suppose 21
 Coinvented 2
@@ -631,10 +647,11 @@ listopt 25
 cater 1
 alone 3
 Empty 1
-build 125
+build 1
 aware 7
 Input 72
 Short 16
+build 124
 rapid 4
 pages 72
 Linux 2
@@ -664,7 +681,7 @@ backspaces 1
 appearance 4
 binds 1
 atime 1
-doing 20
+doing 1
 Tools 6
 Prediction 8
 makes 68
@@ -682,6 +699,7 @@ particulates 2
 fancy 6
 DOLLARS 2
 Wrote 4
+doing 19
 slowest 20
 asynchronously 22
 green 68
@@ -701,7 +719,7 @@ chars 10
 peripherally 1
 safer 1
 dates 2
-offer 22
+offer 1
 Microsystems 6
 Young 2
 Big 23
@@ -720,6 +738,7 @@ summons 2
 results 78
 history 17
 falls 10
+offer 21
 infeasible 2
 installation 2
 dimes 2
@@ -747,10 +766,11 @@ Users 1
 ctime 3
 freep 10
 TABSIZE 2
-taken 217
+taken 1
 great 35
 which 831
 Loopy 4
+taken 216
 Charleston 2
 price 17
 metal 34
@@ -791,9 +811,10 @@ referenced 1
 prevptr 1
 conceptually 1
 denom 4
-gates 440
+gates 1
 names 118
 Department 6
+gates 439
 without 151
 fluid 4
 going 28
@@ -825,11 +846,12 @@ lexicographically 3
 lseek 11
 degenerate 1
 utility 1
-Publishing 4
+Publishing 1
 Derivation 12
 Types 17
 Instructions 86
 professional 12
+Publishing 3
 organization 27
 HEXADECIMAL 6
 identified 13
@@ -862,7 +884,7 @@ wchar 7
 Unexpected 1
 incompletely 1
 Pad 1
-challenges 8
+challenges 1
 explanations 3
 casez 20
 Advanced 52
@@ -881,6 +903,7 @@ DISPLAY 6
 hodgepodge 2
 Enhanced 6
 SPECINT 8
+challenges 7
 comparable 4
 Dictionary 2
 FFFD 10
@@ -893,8 +916,9 @@ undcl 4
 supplemented 1
 theta 1
 predefined 2
-chips 148
+chips 1
 Truth 24
+chips 147
 End 2
 PowerPoint 2
 Foundation 8
@@ -927,8 +951,9 @@ undeclared 1
 initializers 29
 fcntl 5
 ftell 3
-level 382
+level 1
 fresh 5
+level 381
 systems 239
 electrical 18
 three 360
@@ -978,7 +1003,7 @@ mechanized 1
 abort 4
 SIGSEGV 1
 radix 1
-while 262
+while 1
 these 398
 All 118
 Assignment 8
@@ -1000,6 +1025,7 @@ kinds 14
 fewer 51
 nodes 22
 duals 8
+while 261
 TRANSISTOR 2
 roads 2
 sleep 4
@@ -1019,10 +1045,11 @@ fgets 13
 chunk 1
 incorporates 2
 SUCCESS 1
-Inc 10
+Inc 1
 Eng 2
 Sutherland 2
 holds 73
+Inc 9
 phone 30
 ModelSim 8
 GAME 2
@@ -1060,11 +1087,12 @@ Adjacent 3
 succeeding 1
 EPSILON 2
 redeclares 1
-about 174
+about 1
 registration 4
 Sequential 134
 Multicycle 40
 lines 160
+about 173
 where 214
 seeks 6
 weird 6
@@ -1101,9 +1129,10 @@ pains 1
 continuation 1
 datum 1
 SIGTERM 1
-particularly 25
+particularly 1
 often 137
 found 108
+particularly 24
 their 249
 Technology 6
 bibliographical 2
@@ -1150,7 +1179,8 @@ mtime 1
 unrestricted 1
 relax 1
 sqare 1
-microarchitecture 66
+microarchitecture 1
+microarchitecture 65
 support 64
 value 837
 facilities 13
@@ -1191,9 +1221,10 @@ fragmented 1
 admissible 1
 ldexp 1
 strtoul 2
-Web 22
+Web 1
 Map 4
 books 36
+Web 21
 FPGA 108
 enter 20
 appreciate 8
@@ -1245,7 +1276,7 @@ casts 9
 allocating 1
 DATE 1
 CHAR 3
-Her 6
+Her 1
 Bit 28
 cover 19
 sized 11
@@ -1261,6 +1292,7 @@ pairs 13
 preference 4
 allow 25
 dependency 14
+Her 5
 topic 11
 weeks 6
 Erasable 6
@@ -1283,11 +1315,12 @@ SAFE 1
 observations 1
 adjustable 1
 substatement 6
-Jim 6
+Jim 1
 dozen 5
 She 20
 Replaced 4
 focus 10
+Jim 5
 built 170
 American 10
 HIGH 110
@@ -1328,7 +1361,8 @@ asset 1
 Mar 2
 shaky 1
 YACC 1
-The 4464
+The 1
+The 4463
 state 1062
 Kim 4
 Publishers 8
@@ -1373,7 +1407,8 @@ NAME 7
 referencer 1
 pipes 3
 fsize 18
-other 525
+other 1
+other 524
 San 6
 references 9
 One 132
@@ -1417,7 +1452,7 @@ Enumerator 1
 officially 1
 successively 1
 fputc 3
-contemporary 3
+contemporary 1
 touch 2
 Multilevel 22
 CPLD 2
@@ -1451,6 +1486,7 @@ AMAT 16
 egakcapW 2
 unreliable 2
 Imm 2
+contemporary 2
 stdio 58
 mainframes 1
 Rob 1
@@ -1463,7 +1499,7 @@ Par 93
 liberalize 1
 Variadic 1
 unsuccessful 1
-discipline 57
+discipline 1
 interfaces 5
 Language 47
 years 63
@@ -1471,6 +1507,7 @@ colleagues 5
 schematics 34
 Shi 2
 outputs 356
+discipline 56
 stock 10
 screw 2
 extra 27
@@ -1511,7 +1548,7 @@ generating 2
 recompiled 2
 diagonally 1
 stbuf 10
-successfully 6
+successfully 1
 Simulation 16
 feedback 20
 Advances 4
@@ -1529,6 +1566,7 @@ GVDD 2
 CONCATENATE 2
 minor 3
 MODE 4
+successfully 5
 abb 2
 Everything 2
 legitimate 3
@@ -1553,7 +1591,7 @@ opens 4
 Americas 1
 EDOM 2
 frexp 1
-Acknowledgments 2
+Acknowledgments 1
 Variable 14
 Specific 4
 hints 3
@@ -1592,6 +1630,7 @@ JESD 2
 ALVC 6
 waves 18
 approaches 7
+Acknowledgments 1
 henceforth 2
 msdos 1
 allocation 5
@@ -1599,7 +1638,7 @@ unbuffered 5
 typed 2
 catenation 1
 errno 10
-Production 5
+Production 1
 For 600
 Art 6
 Encoding 12
@@ -1626,6 +1665,7 @@ CALCULATING 10
 Doubleprecision 2
 definitive 2
 VIRTUAL 4
+Production 4
 Per 2
 Pin 2
 Multiplier 8
@@ -1638,13 +1678,14 @@ May 1
 arctangent 1
 perms 6
 isdst 2
-world 72
+world 1
 first 531
 looks 31
 Machines 38
 Statements 30
 experience 24
 still 80
+world 71
 quite 14
 electronic 14
 Duo 14
@@ -1679,7 +1720,7 @@ coordinate 4
 Externally 1
 rescanning 1
 SEEK 5
-loves 2
+loves 1
 xviii 4
 Decoders 8
 Blocking 8
@@ -1716,11 +1757,12 @@ Scientists 2
 improvements 5
 sound 7
 krL 6
+loves 1
 occurrence 16
 hasty 1
 plays 2
 HUGE 3
-prune 2
+prune 1
 arithmetic 211
 Families 6
 universities 14
@@ -1772,17 +1814,19 @@ embedded 6
 recognized 4
 dissipated 2
 Landmark 2
+prune 1
 Additive 2
 maxpt 1
 thereafter 2
 nlist 9
-especially 48
+especially 1
 PLAN 2
 every 80
 But 100
 would 338
 terms 85
 construction 18
+especially 47
 flows 27
 write 411
 rules 63
@@ -1815,7 +1859,7 @@ ANSI 35
 relational 26
 owner 5
 constituting 2
-Oklahoma 4
+Oklahoma 1
 guidebooks 2
 ISBN 4
 Addition 38
@@ -1823,6 +1867,7 @@ Set 133
 prove 24
 Coverage 2
 split 17
+Oklahoma 3
 prior 20
 politician 4
 amplifiers 2
@@ -1855,7 +1900,7 @@ dummy 1
 bee 3
 soley 1
 ddd 1
-refinement 2
+refinement 1
 Research 6
 developing 4
 Use 103
@@ -1889,6 +1934,7 @@ schlepping 2
 PDIP 4
 terminated 20
 Parallel 4
+refinement 1
 VTAB 3
 interdependence 1
 whitespace 1
@@ -1896,7 +1942,7 @@ PATH 2
 prevp 6
 specifiers 26
 intialized 1
-VHDL 318
+VHDL 1
 start 81
 trademarks 6
 registered 10
@@ -1904,6 +1950,7 @@ How 139
 Complexity 8
 Hardware 110
 Building 86
+VHDL 317
 views 4
 programmed 26
 conducting 6
@@ -1940,10 +1987,11 @@ assistance 1
 progressions 1
 dfd 6
 STDC 1
-visit 10
+visit 1
 Modeling 14
 lab 22
 applicants 2
+visit 9
 shown 579
 repeatedly 25
 words 207
@@ -1976,7 +2024,8 @@ unary 43
 associates 2
 Nor 2
 interleave 1
-Digilent 6
+Digilent 1
+Digilent 5
 pioneering 2
 connection 27
 input 1435
@@ -2015,7 +2064,7 @@ tword 3
 indicators 3
 LONG 4
 MANT 2
-style 49
+style 1
 Kaufmann 26
 Jennifer 4
 Karnaugh 52
@@ -2037,6 +2086,7 @@ Whr 2
 hours 5
 Graphics 6
 did 23
+style 48
 MAPS 2
 specifying 26
 Redesign 6
@@ -2062,8 +2112,9 @@ centralize 1
 magnitudes 2
 hyperbolic 3
 abnormally 1
-can 1399
+can 1
 young 2
+can 1398
 CMOS 148
 big 76
 conforming 4
@@ -2099,7 +2150,8 @@ ieeexplore 4
 fputs 9
 die 1
 demanded 1
-and 9184
+and 1
+and 9183
 Berkeley 7
 units 95
 Glitches 8
@@ -2131,8 +2183,9 @@ dcl 35
 systemindependent 2
 formulated 1
 signedness 1
-Floating 81
+Floating 1
 Resolution 8
+Floating 80
 shows 614
 risqu 2
 Now 62
@@ -2163,7 +2216,7 @@ generality 4
 worth 5
 allocators 1
 gid 1
-Sum 10
+Sum 1
 Circular 4
 types 172
 instructions 891
@@ -2171,6 +2224,7 @@ Receiver 4
 bar 6
 Pdynamic 4
 LOOK 4
+Sum 9
 simplifies 11
 Convince 2
 pad 6
@@ -2196,7 +2250,7 @@ compressed 1
 yyval 1
 slots 1
 unsiffixed 1
-Sun 9
+Sun 1
 National 7
 introductory 3
 Our 17
@@ -2215,6 +2269,7 @@ subsidized 2
 synth 84
 CONV 40
 Fraction 10
+Sun 8
 Indexing 2
 diffofsums 36
 mfc 26
@@ -2230,9 +2285,10 @@ Mnemonic 2
 Integral 4
 Treenode 3
 Daylight 2
-interested 12
+interested 1
 Includes 2
 odd 20
+interested 11
 particular 147
 end 902
 truth 280
@@ -2270,8 +2326,9 @@ digression 1
 utype 7
 fcn 6
 afp 1
-are 3556
+are 1
 understand 60
+are 3555
 alk 2
 Out 44
 Policies 4
@@ -2310,7 +2367,8 @@ evaluation 18
 mentioning 1
 cat 17
 attributed 1
-MIPS 766
+MIPS 1
+MIPS 765
 all 832
 Transistor 18
 Structural 16
@@ -2355,11 +2413,12 @@ restricted 8
 qsort 26
 bsd 1
 notational 2
-Two 70
+Two 1
 Chapters 16
 adjacent 50
 precaution 2
 ABSTRACTION 4
+Two 69
 eat 2
 Choosing 2
 Observed 2
@@ -2399,11 +2458,12 @@ Trailing 2
 iob 9
 EXIT 2
 calendar 8
-sequential 239
+sequential 1
 job 15
 sec 13
 off 76
 Grinnell 2
+sequential 238
 outlandish 2
 minimizing 4
 synthesizers 6
@@ -2437,7 +2497,8 @@ Postscript 1
 SIZE 2
 NULL 93
 surprisingly 1
-has 949
+has 1
+has 948
 Thinking 4
 Operands 14
 characteristics 74
@@ -2483,12 +2544,13 @@ STEP 3
 linefeed 2
 cpi 2
 pci 4
-You 168
+You 1
 Internal 8
 Unsigned 16
 see 223
 WebPACK 20
 ddcabugs 2
+You 167
 attempting 3
 Invented 6
 Likewise 31
@@ -2516,7 +2578,8 @@ substitution 3
 successive 7
 informally 1
 eligible 1
-bug 30
+bug 1
+bug 29
 medicine 2
 equivalent 151
 progressed 2
@@ -2549,7 +2612,7 @@ XMAX 1
 positioned 1
 regarded 1
 mandated 1
-old 91
+old 1
 presenting 2
 her 34
 Elsevier 10
@@ -2559,6 +2622,7 @@ Features 2
 industrial 4
 degrades 8
 pan 2
+old 90
 bit 1502
 worst 31
 biologists 2
@@ -2607,9 +2671,10 @@ commentary 1
 subsection 2
 fpi 2
 pfi 2
-Combinational 124
+Combinational 1
 she 30
 via 12
+Combinational 123
 Assembly 126
 successful 9
 introduces 39
@@ -2644,7 +2709,8 @@ February 3
 men 1
 apparently 1
 UINT 1
-the 23623
+the 1
+the 23622
 A 3617
 Stanford 14
 experiment 3
@@ -2688,7 +2754,8 @@ unsuffixed 2
 Blockptr 2
 FILENAME 1
 SHRT 2
-University 50
+University 1
+University 49
 seamlessly 2
 tie 4
 B 1374
@@ -2726,7 +2793,8 @@ shielded 1
 uid 1
 nbr 2
 enumerator 15
-designed 54
+designed 1
+designed 53
 teaching 12
 C 962
 fit 36
@@ -2767,8 +2835,9 @@ variadic 2
 bitfield 1
 tan 3
 sig 5
-his 70
+his 1
 D 1293
+his 69
 Services 6
 Congress 2
 Analysis 28
@@ -2809,7 +2878,7 @@ Applying 2
 disagree 1
 directed 1
 separators 1
-preserving 4
+preserving 1
 E 221
 climbing 4
 YORK 2
@@ -2843,6 +2912,7 @@ clearing 2
 displace 2
 remained 2
 hit 40
+preserving 3
 government 2
 RBOb 2
 fop 6
@@ -2854,7 +2924,7 @@ cos 4
 arr 2
 ofp 3
 cnt 8
-flawlessly 2
+flawlessly 1
 homepage 2
 Circuits 48
 Comments 14
@@ -2899,6 +2969,7 @@ POST 6
 INFORMATION 2
 TSOP 6
 everywhere 3
+flawlessly 1
 Whatever 1
 Formally 2
 amessage 3
@@ -2908,7 +2979,7 @@ ino 10
 Concatenation 1
 enforced 1
 injected 1
-deadwood 2
+deadwood 1
 for 3194
 received 23
 may 667
@@ -2949,6 +3020,7 @@ protection 18
 Assuming 3
 Politics 2
 Millions 4
+deadwood 1
 Counting 6
 msg 2
 truncation 3
@@ -2960,7 +3032,7 @@ understood 3
 probable 1
 mmm 1
 jmp 2
-diagrams 32
+diagrams 1
 machines 117
 H 51
 mkp 2
@@ -2968,6 +3040,7 @@ Shifters 12
 included 29
 any 496
 regularity 38
+diagrams 31
 networking 2
 Biased 6
 threeinput 4
@@ -3003,7 +3076,8 @@ iop 7
 recorded 2
 definite 1
 difftime 2
-I 390
+I 1
+I 389
 Camera 10
 illustrate 57
 permission 25
@@ -3041,7 +3115,7 @@ Header 14
 var 3
 children 3
 env 5
-new 322
+new 1
 Behind 8
 xii 2
 J 90
@@ -3049,6 +3123,7 @@ Ithaca 2
 war 2
 ultimately 2
 modularity 32
+new 321
 centered 2
 increase 41
 families 56
@@ -3089,11 +3164,12 @@ diagnose 1
 condoned 1
 Switches 1
 nnn 1
-but 648
+but 1
 was 281
 Software 14
 K 190
 Architectural 8
+but 647
 HDLs 62
 transition 171
 practice 52
@@ -3132,7 +3208,8 @@ nonuniform 2
 indented 3
 precedes 1
 tradeoff 1
-L 190
+L 1
+L 189
 Interior 4
 Multiple 28
 Bubble 14
@@ -3159,7 +3236,7 @@ abnormal 3
 Beside 1
 admitted 1
 deleting 3
-conclude 8
+conclude 1
 use 884
 M 235
 Parameterized 8
@@ -3176,6 +3253,7 @@ parallel 69
 creating 11
 Simplify 8
 research 10
+conclude 7
 vin 16
 properties 21
 corrupting 2
@@ -3205,8 +3283,9 @@ legalize 1
 discards 1
 Everyone 1
 mandates 1
-how 442
+how 1
 approach 18
+how 441
 who 41
 building 148
 Westford 2
@@ -3246,7 +3325,8 @@ extraneous 1
 searches 4
 suppressed 2
 neighbor 1
-Computer 74
+Computer 1
+Computer 73
 resemble 4
 material 18
 O 177
@@ -3287,7 +3367,7 @@ badlydesigned 1
 believes 1
 nonfield 1
 modifier 10
-pedagogy 4
+pedagogy 1
 combines 15
 welcomed 2
 learning 12
@@ -3295,6 +3375,7 @@ son 4
 Developmental 2
 PLAs 42
 its 562
+pedagogy 3
 behavior 73
 Device 30
 bringing 4
@@ -3323,8 +3404,9 @@ uniqueness 1
 Braces 2
 interprets 1
 clearerr 3
-not 1391
+not 1
 designer 56
+not 1390
 extended 73
 way 341
 maintain 7
@@ -3353,7 +3435,7 @@ pushback 5
 moderate 1
 dereferencing 2
 Escape 1
-Customer 2
+Customer 1
 Access 20
 R 416
 yet 67
@@ -3377,15 +3459,17 @@ ops 10
 CONFLICT 2
 soldered 8
 turnaround 2
+Customer 1
 exposition 1
 Bjarne 1
 subscripts 4
 coercion 2
 redirect 1
 unadored 1
-Before 13
+Before 1
 processors 136
 S 1872
+Before 12
 Counters 6
 Peculiarities 4
 discrete 34
@@ -3422,7 +3506,7 @@ criteria 1
 addpoint 1
 opt 2
 inactive 1
-Products 6
+Products 1
 Contamination 6
 own 40
 abstract 28
@@ -3435,6 +3519,7 @@ reliably 12
 particle 2
 floating 293
 freshman 4
+Products 5
 won 7
 T 239
 scenario 6
@@ -3461,8 +3546,9 @@ fragment 3
 releases 1
 pointeropt 4
 midnight 1
-run 103
+run 1
 Hexadecimal 20
+run 102
 sum 241
 exploded 2
 separate 84
@@ -3497,7 +3583,8 @@ facility 3
 abcdef 2
 closedir 8
 monocase 1
-our 88
+our 1
+our 87
 licenses 4
 synthesize 13
 V 447
@@ -3536,10 +3623,11 @@ getfloat 2
 ptr 40
 treenode 1
 tempfile 2
-Overview 6
+Overview 1
 xiv 2
 Mapped 10
 xvi 2
+Overview 5
 includes 47
 consider 83
 continuous 44
@@ -3570,7 +3658,7 @@ announce 1
 bitlevel 1
 manifest 1
 prefixed 2
-pleasant 3
+pleasant 1
 Southern 4
 Denise 4
 Diodes 10
@@ -3608,6 +3696,7 @@ Configuration 2
 grounded 2
 reflects 7
 OxideSemiconductor 2
+pleasant 2
 Keywords 3
 supposedly 1
 Thompson 1
@@ -3617,7 +3706,7 @@ suffices 3
 dddddd 1
 wor 3
 denoting 1
-George 14
+George 1
 Morrison 2
 complete 64
 xix 6
@@ -3629,6 +3718,7 @@ put 50
 transistor 140
 location 50
 throughout 30
+George 13
 synonymously 2
 bidirectional 2
 portable 16
@@ -3655,7 +3745,8 @@ popularity 1
 answered 2
 str 10
 splicing 1
-Design 293
+Design 1
+Design 292
 two 1224
 Signed 12
 Buffer 18
@@ -3704,10 +3795,11 @@ oriented 1
 unlinked 1
 promotions 3
 Angles 1
-exciting 6
+exciting 1
 Nvidia 6
 Tables 22
 straightforward 22
+exciting 5
 supporting 23
 intimate 2
 probably 21
@@ -3740,7 +3832,7 @@ initializations 3
 Blanks 3
 filecopy 8
 issuance 1
-Metastability 8
+Metastability 1
 followed 77
 entering 4
 donation 2
@@ -3757,6 +3849,7 @@ thinking 8
 relative 37
 flipflop 6
 automata 2
+Metastability 7
 Tctsetup 6
 operands 162
 shifting 17
@@ -3786,13 +3879,14 @@ moreroce 1
 morecore 6
 latitude 2
 Inside 1
-elements 173
+elements 1
 nMOS 146
 instructor 10
 hundreds 16
 provided 39
 gracious 2
 you 528
+elements 172
 limiting 10
 physical 276
 invented 15
@@ -3823,7 +3917,8 @@ Larger 1
 verifies 1
 unsigend 1
 redeclaration 1
-Blocks 80
+Blocks 1
+Blocks 79
 Rotators 8
 Action 10
 Multiprocessors 10
@@ -3861,7 +3956,7 @@ typified 1
 delivers 1
 category 1
 spelling 1
-examples 101
+examples 1
 Public 2
 elsevier 10
 pMOS 98
@@ -3870,6 +3965,7 @@ Coefficient 4
 editions 4
 FEATURES 2
 features 22
+examples 100
 concepts 7
 contains 203
 odometer 2
@@ -3905,7 +4001,7 @@ HASHSIZE 3
 sys 9
 flushbuf 4
 typewriter 2
-reserved 33
+reserved 1
 directly 81
 combinational 384
 SUPPLEMENTS 2
@@ -3927,6 +4023,7 @@ sevenseg 4
 override 4
 linearly 4
 mantissa 30
+reserved 32
 volatile 23
 Serial 2
 Expand 3
@@ -3939,7 +4036,8 @@ metaphor 4
 terabyte 2
 accounts 2
 employee 1
-a 10475
+a 1
+a 10474
 memories 112
 Center 4
 Random 20
@@ -3982,9 +4080,10 @@ Mixtures 1
 Recent 1
 trigraph 2
 approved 2
-together 112
+together 1
 Delays 6
 Single 56
+together 111
 Sample 4
 adopters 2
 university 4
@@ -4021,7 +4120,7 @@ dissects 2
 shipping 2
 explicit 31
 Length 5
-subjects 4
+subjects 1
 thirteen 2
 kilobyte 4
 c 957
@@ -4029,6 +4128,7 @@ Discharging 2
 operates 33
 argument 177
 external 124
+subjects 3
 sometime 4
 explored 12
 manually 2
@@ -4042,7 +4142,7 @@ EXTRENAL 1
 EXTERNAL 5
 machineindependent 1
 Update 1
-Praise 2
+Praise 1
 explains 14
 Morgan 50
 Models 4
@@ -4077,13 +4177,14 @@ Ignore 2
 maximize 2
 mysterious 2
 TEMPORAL 2
+Praise 1
 Preprocessing 4
 Syntactically 4
 typedefs 7
 services 2
 parenthetical 1
 deemed 1
-e 232
+e 1
 www 24
 Online 6
 Binary 59
@@ -4094,6 +4195,7 @@ produces 166
 Modern 27
 measures 4
 voltages 54
+e 231
 transfer 39
 continue 45
 smallest 22
@@ -4123,7 +4225,8 @@ computationally 2
 ellipsis 3
 Macros 1
 isxdigit 1
-circuits 366
+circuits 1
+circuits 365
 ACKNOWLEDGMENTS 2
 improved 46
 Athlon 8
@@ -4174,11 +4277,12 @@ Dirent 8
 inherits 1
 IOFBF 2
 squeezed 1
-adding 112
+adding 1
 Editor 4
 Baca 2
 millions 16
 g 253
+adding 111
 counting 19
 apiece 2
 involved 12
@@ -4209,7 +4313,7 @@ Mashey 1
 grammatically 1
 MAXTOKEN 5
 elided 1
-DIEGO 2
+DIEGO 1
 Static 28
 Timing 64
 semester 6
@@ -4251,13 +4355,15 @@ TABLE 6
 inductor 4
 resource 2
 Wafers 2
+DIEGO 1
 bogged 1
 bitcount 4
 variants 2
 IFBLK 1
 Saving 2
 Monday 1
-Harris 51
+Harris 1
+Harris 50
 United 4
 Number 104
 displays 4
@@ -4307,8 +4413,9 @@ Except 5
 subarray 3
 ptinrect 3
 qualification 1
-Rambus 4
+Rambus 1
 projects 8
+Rambus 3
 counties 4
 lowlevel 2
 constant 190
@@ -4342,13 +4449,14 @@ frequent 2
 arcane 1
 Spurious 1
 stepping 1
-Levels 6
+Levels 1
 Lights 18
 SOFTWARE 2
 software 47
 printing 23
 programs 181
 movement 4
+Levels 5
 become 38
 k 100
 FALSE 108
@@ -4376,7 +4484,7 @@ xyz 1
 Excess 1
 stripped 1
 defect 1
-Sheets 10
+Sheets 1
 starting 55
 provides 79
 multiple 173
@@ -4409,6 +4517,7 @@ l 59
 scaled 12
 multithreaded 2
 outweigh 2
+Sheets 9
 INSTRUMENTS 4
 hidden 5
 office 2
@@ -4421,7 +4530,8 @@ IFCHR 1
 representable 9
 IOLBF 1
 Coordinated 1
-microprocessors 78
+microprocessors 1
+microprocessors 77
 profound 6
 Hubris 2
 extremes 2
@@ -4455,7 +4565,8 @@ cautious 1
 IFREG 1
 locution 2
 suitably 2
-CONTENTS 14
+CONTENTS 1
+CONTENTS 13
 contrast 34
 branch 311
 interest 19
@@ -4504,7 +4615,8 @@ IFDIR 4
 folded 1
 IONBF 1
 strftime 3
-computer 256
+computer 1
+computer 255
 Harvey 12
 strength 6
 foremost 2
@@ -4544,7 +4656,7 @@ reserves 1
 errorhandling 1
 FAILS 1
 vfprintf 3
-passions 2
+passions 1
 Senior 2
 p 415
 Pseudo 20
@@ -4575,6 +4687,7 @@ narrower 4
 CYCLE 8
 Policy 2
 spaced 4
+passions 1
 Clovis 1
 braces 29
 quadratically 1
@@ -4582,7 +4695,7 @@ troubles 1
 Europe 1
 Sizeof 1
 locale 2
-Rights 2
+Rights 1
 Course 2
 Axioms 16
 Stored 14
@@ -4609,6 +4722,7 @@ global 51
 ALUOutW 8
 WtuOULA 8
 maximums 2
+Rights 1
 Unlink 2
 modestly 1
 escape 19
@@ -4617,7 +4731,7 @@ settings 1
 coerce 1
 fscanf 6
 SCHAR 4
-Pinter 4
+Pinter 1
 explores 19
 Oxford 4
 Problematic 4
@@ -4626,6 +4740,7 @@ Arrays 60
 Performance 28
 access 290
 guided 2
+Pinter 3
 analog 37
 afford 2
 coined 2
@@ -4651,8 +4766,9 @@ helped 2
 dirdcl 5
 keycount 2
 standardizing 1
-detail 24
+detail 1
 s 3303
+detail 23
 appeal 2
 reader 19
 adders 84
@@ -4680,7 +4796,7 @@ rightrot 1
 affirmatively 1
 Printf 2
 UCHAR 2
-create 43
+create 1
 products 108
 States 8
 t 1654
@@ -4691,6 +4807,7 @@ presents 13
 workings 10
 powerful 29
 sophisticated 11
+create 42
 manufacturing 36
 impede 2
 coincidence 2
@@ -4729,7 +4846,7 @@ preliminaries 1
 declaratoropt 10
 stopping 1
 Sunday 3
-possibly 23
+possibly 1
 regard 2
 position 77
 hexadecimal 127
@@ -4737,6 +4854,7 @@ divide 61
 toasters 2
 caused 33
 inventor 4
+possibly 22
 rewrites 4
 scenic 2
 improves 6
@@ -4764,10 +4882,11 @@ exhausts 1
 Considering 1
 adjoin 1
 unquoted 1
-understanding 22
+understanding 1
 acting 12
 Parallelism 22
 engine 4
+understanding 21
 involves 38
 consists 78
 picnic 16
@@ -4797,7 +4916,7 @@ FLOAT 3
 Determining 1
 italic 1
 identifieropt 4
-Street 2
+Street 1
 overview 22
 linked 8
 priced 4
@@ -4829,6 +4948,7 @@ MemWriteM 4
 WgeRotmeM 8
 MetirWmeM 8
 woefully 2
+Street 1
 Rosler 1
 Pinson 1
 wordsize 1
@@ -4836,7 +4956,7 @@ easing 1
 echoes 1
 infile 4
 belong 1
-exploits 4
+exploits 1
 x 1551
 Testbenches 14
 Proper 4
@@ -4865,6 +4985,7 @@ concat 4
 rename 6
 thread 32
 friend 10
+exploits 3
 speech 44
 iTunes 2
 locate 2
@@ -4885,7 +5006,7 @@ pragma 5
 FOPEN 1
 domain 5
 RADIX 3
-appear 81
+appear 1
 Memory 472
 Area 4
 Supplementary 2
@@ -4899,6 +5020,7 @@ theoretically 2
 joined 18
 detect 6
 revisits 6
+appear 80
 yourself 16
 uninitialized 11
 claims 8
@@ -4921,7 +5043,8 @@ Parity 2
 routines 30
 August 1
 abbreviated 4
-students 40
+students 1
+students 39
 design 464
 hiking 4
 Publication 2
@@ -4962,7 +5085,7 @@ inches 2
 Kluwer 2
 comprehension 1
 stddef 7
-Code 336
+Code 1
 donate 2
 boards 16
 Jeff 2
@@ -4986,6 +5109,7 @@ Electronics 8
 severity 6
 Half 8
 Configuring 2
+Code 335
 varied 2
 budget 2
 monitors 4
@@ -5003,7 +5127,7 @@ opened 5
 newstyle 1
 superset 1
 minima 1
-Case 39
+Case 1
 Read 44
 Xilinx 46
 remain 43
@@ -5017,6 +5141,7 @@ inside 40
 shortest 26
 requests 10
 challenging 10
+Case 38
 Yellow 4
 metastability 20
 caught 2
@@ -5038,7 +5163,8 @@ vsprintf 3
 dirbuf 7
 uniquely 1
 memchr 1
-Illustrations 4
+Illustrations 1
+Illustrations 3
 Held 4
 Page 112
 larger 103
@@ -5077,7 +5203,7 @@ fileno 1
 mutually 1
 persists 6
 partsopt 2
-Supercomputer 2
+Supercomputer 1
 Deep 8
 blocks 273
 numerous 8
@@ -5111,12 +5237,13 @@ Fibonacci 6
 multiprocessors 6
 riches 2
 Reflections 4
+Supercomputer 1
 Date 2
 looked 2
 Constructions 1
 holder 1
 sscanf 8
-finite 57
+finite 1
 outdoors 2
 PARIS 2
 errata 4
@@ -5124,6 +5251,7 @@ Connecticut 2
 semiconductor 26
 firing 2
 record 17
+finite 56
 Gain 2
 inline 14
 demonstrating 6
@@ -5158,7 +5286,7 @@ parsed 1
 smoothly 1
 unread 1
 memcmp 1
-Lara 2
+Lara 1
 digest 2
 bright 6
 Unfortunately 44
@@ -5191,6 +5319,7 @@ eliF 8
 WetirWgeR 8
 MULTIPLY 2
 WIDTH 12
+Lara 1
 Dave 4
 comparatively 2
 aspect 3
@@ -5202,7 +5331,7 @@ unwisely 1
 bitfiddling 1
 UNBUF 3
 specifiersopt 8
-recent 8
+recent 1
 Gate 28
 Synchronizers 6
 center 6
@@ -5234,6 +5363,7 @@ andN 8
 CARRY 4
 nearby 6
 medium 14
+recent 7
 deallocates 11
 clever 2
 terminologies 2
@@ -5247,7 +5377,7 @@ worrying 2
 manner 1
 cosine 3
 mixtures 1
-strongly 22
+strongly 1
 family 35
 Labs 14
 single 446
@@ -5273,6 +5403,7 @@ PRIORITY 4
 endgenerate 2
 intend 4
 Lang 4
+strongly 21
 Plea 2
 indent 3
 awards 2
@@ -5292,7 +5423,7 @@ paused 1
 Parentheses 4
 mimics 1
 marker 1
-Programming 34
+Programming 1
 cannot 121
 possibilities 25
 Inputs 22
@@ -5317,6 +5448,7 @@ EPROM 16
 erases 2
 intact 2
 planes 12
+Programming 33
 merges 4
 ARCHITECTURE 2
 builds 2
@@ -5329,7 +5461,7 @@ phrase 2
 standardconforming 1
 strerror 2
 gmtime 3
-CA 2
+CA 1
 Propagation 8
 Description 86
 Real 34
@@ -5365,6 +5497,7 @@ equipotential 16
 fifths 2
 TOTAL 2
 Integration 2
+CA 1
 novice 1
 hurdle 1
 Here 14
@@ -5376,7 +5509,7 @@ syntactically 6
 preprocessing 5
 phases 3
 unavailable 1
-modern 61
+modern 1
 brings 6
 highly 9
 System 58
@@ -5384,6 +5517,7 @@ Superscalar 14
 Packaging 8
 offers 9
 Side 5
+modern 60
 microarchitectural 6
 online 2
 intrinsically 3
@@ -5430,7 +5564,7 @@ couldn 1
 Regrettably 1
 suppress 1
 ULONG 2
-effort 19
+effort 1
 correspondent 2
 enough 113
 themes 2
@@ -5442,6 +5576,7 @@ pulled 14
 namely 5
 Dual 12
 BD 14
+effort 18
 USING 32
 module 350
 avoids 4
@@ -5460,7 +5595,7 @@ MSDOS 2
 ungetc 6
 dirent 2
 trigonometric 1
-speaks 2
+speaks 1
 DC 42
 Translating 9
 itself 94
@@ -5492,6 +5627,7 @@ hierarchies 2
 weighs 2
 naught 2
 TRIES 2
+speaks 1
 Syntax 3
 Mile 1
 Pick 1
@@ -5502,8 +5638,9 @@ PERMS 6
 commandline 1
 Enumeration 1
 mktime 3
-Nate 4
+Nate 1
 Line 17
+Nate 3
 reused 15
 bullet 5
 school 8
@@ -5552,7 +5689,7 @@ couple 2
 interchange 5
 synopsis 1
 fflush 5
-tomorrow 2
+tomorrow 1
 number 901
 around 51
 during 138
@@ -5605,6 +5742,7 @@ closes 14
 transitioning 2
 crafty 2
 authoritative 2
+tomorrow 1
 served 1
 Pike 1
 thanks 1
@@ -5615,7 +5753,8 @@ rewind 3
 lvalue 23
 setbuf 2
 getenv 2
-Mudd 12
+Mudd 1
+Mudd 11
 Odds 8
 Ends 8
 Perspective 30
@@ -5656,7 +5795,8 @@ NKEYS 13
 parent 4
 capitalized 1
 mainly 1
-engineering 38
+engineering 1
+engineering 37
 researching 2
 Technical 2
 Plan 4
@@ -5710,11 +5850,12 @@ contin 4
 memcpy 2
 memset 1
 adopts 1
-experienced 8
+experienced 1
 worked 6
 guitar 2
 Assignments 4
 Branching 10
+experienced 7
 wooden 2
 chunks 6
 neighboring 8
@@ -5753,13 +5894,14 @@ Pictorially 1
 machinedependent 1
 nicety 1
 keyval 1
-Supply 10
+Supply 1
 taught 8
 Both 28
 phones 8
 impart 2
 Georgiana 4
 KB 130
+Supply 9
 stands 9
 Forbidden 2
 drives 10
@@ -5802,7 +5944,7 @@ WRONG 10
 parser 4
 tnodes 1
 tmpnam 7
-Rash 2
+Rash 1
 Subtraction 19
 Link 2
 competitively 4
@@ -5841,11 +5983,13 @@ suited 6
 Increased 2
 Fast 2
 travel 12
+Rash 1
 colons 1
 revise 1
-should 349
+should 1
 Time 65
 Translation 20
+should 348
 significant 279
 John 18
 substantially 23
@@ -5893,13 +6037,14 @@ nwhite 9
 unspecified 7
 maintaining 1
 atexit 3
-Corporation 16
+Corporation 1
 Kimberlee 2
 almost 52
 spoken 2
 microarchitectures 60
 supports 30
 values 343
+Corporation 15
 laptop 8
 technically 11
 mathematics 12
@@ -5945,7 +6090,7 @@ widest 1
 ferror 10
 elaboration 1
 synonyms 1
-FGPAs 2
+FGPAs 1
 acid 2
 rights 2
 Bugs 4
@@ -5997,6 +6142,7 @@ FK 8
 thinks 5
 gotten 2
 sorted 18
+FGPAs 1
 referential 4
 strcat 16
 unequivocally 1
@@ -6006,13 +6152,14 @@ vexing 1
 Confusingly 1
 unlink 1
 fwrite 2
-Zhao 4
+Zhao 1
 II 44
 When 354
 Open 8
 performance 168
 allows 29
 topics 12
+Zhao 3
 skills 2
 tongue 2
 head 19
@@ -6054,7 +6201,7 @@ review 1
 LF 1
 substatements 1
 swtich 1
-author 2
+author 1
 More 59
 dozens 2
 evenly 4
@@ -6099,6 +6246,7 @@ preset 2
 ASICs 12
 LSTTL 2
 Thin 4
+author 1
 printf 153
 Positioning 2
 setjmp 14
@@ -6111,7 +6259,7 @@ assure 1
 Allowable 1
 countenance 1
 ambiguities 1
-Composition 2
+Composition 1
 Corp 4
 From 86
 Form 8
@@ -6154,6 +6302,7 @@ profit 6
 Cont 4
 Experiments 2
 Last 8
+Composition 1
 Well 1
 manipulated 3
 stderr 21
@@ -6161,13 +6310,14 @@ declarators 14
 precompiled 1
 Mmmm 1
 Filenames 1
-Many 33
+Many 1
 Look 6
 prerequisites 2
 squash 2
 OF 38
 morass 2
 bottom 45
+Many 32
 faulty 4
 communicate 30
 dice 2
@@ -6205,7 +6355,7 @@ nbytes 2
 BS 1
 CR 1
 AT 1
-deal 16
+deal 1
 TOKYO 2
 yearly 2
 subset 34
@@ -6218,6 +6368,7 @@ Capacitor 2
 effectively 16
 concentrate 7
 determining 14
+deal 15
 lead 15
 Combining 2
 died 4
@@ -6255,7 +6406,7 @@ employ 1
 identifiers 29
 Pars 9
 USHRT 1
-shrubs 2
+shrubs 1
 Languages 68
 unique 34
 dedicated 20
@@ -6293,16 +6444,18 @@ motherboard 6
 droops 2
 VA 20
 Move 6
+shrubs 1
 Decrement 2
 Kernighan 3
 Holt 1
 twelve 1
 sticky 1
 Skip 1
-This 744
+This 1
 enjoys 8
 FRANCISCO 2
 Francisco 4
+This 743
 streamlined 2
 subdividing 4
 proper 51
@@ -6344,10 +6497,11 @@ indirection 5
 pushes 3
 redirection 3
 extent 1
-memory 1491
+memory 1
 Mary 2
 Terminology 4
 Variables 26
+memory 1490
 Stoc 2
 parity 4
 months 10
@@ -6384,7 +6538,7 @@ anyway 1
 implication 1
 strcmp 28
 narrow 1
-sought 2
+sought 1
 Encodings 4
 Skew 6
 Pipelined 44
@@ -6424,6 +6578,7 @@ buyers 2
 Pins 6
 VD 2
 publication 4
+sought 1
 Exit 2
 Linderman 1
 proven 1
@@ -6435,7 +6590,7 @@ subexpression 2
 bene 1
 preprocessors 2
 perror 2
-future 26
+future 1
 Obtaining 2
 electronics 12
 Lookaside 4
@@ -6444,6 +6599,7 @@ familiarity 8
 code 596
 care 54
 onehotlogic 2
+future 25
 hand 68
 grandmother 2
 base 220
@@ -6485,7 +6641,7 @@ spirit 1
 cooperating 1
 coordinates 5
 Copy 1
-plenty 3
+plenty 1
 Permissions 4
 need 169
 List 8
@@ -6532,6 +6688,7 @@ sounds 2
 feel 4
 krVi 2
 Over 2
+plenty 2
 Drechsler 1
 Interdata 1
 unions 20
@@ -6542,12 +6699,13 @@ fabs 2
 HT 1
 pointr 1
 exceptional 1
-McKenna 4
+McKenna 1
 Editorial 4
 Factoring 4
 Libraries 4
 page 465
 errors 73
+McKenna 3
 Roth 2
 Schilling 2
 points 118
@@ -6588,7 +6746,7 @@ ddddddE 2
 directories 2
 implementationdependent 3
 ceil 1
-AMSTERDAM 2
+AMSTERDAM 1
 uninitiated 7
 simply 64
 SK 2
@@ -6628,12 +6786,13 @@ date 12
 reflections 18
 Microchip 2
 Practices 2
+AMSTERDAM 1
 constructions 10
 hang 1
 owners 2
 relationals 1
 interactive 1
-nice 5
+nice 1
 TK 2
 Jazz 4
 Consumption 6
@@ -6669,6 +6828,7 @@ dissipating 2
 Plot 2
 generations 2
 Alignment 3
+nice 4
 compilation 11
 permissible 2
 intelligent 1
@@ -6677,7 +6837,7 @@ balancing 1
 echo 6
 embedding 2
 splits 3
-UK 2
+UK 1
 Supplements 4
 Zero 114
 Testbench 6
@@ -6718,13 +6878,14 @@ LT 4
 Factories 2
 ECONOMICS 2
 turner 2
+UK 1
 elif 23
 feof 6
 MS 2
 interaction 1
 refinements 1
 strtod 3
-OR 315
+OR 1
 available 144
 find 118
 bounty 2
@@ -6732,6 +6893,7 @@ electricity 8
 oscillation 2
 Fourmilab 2
 represented 81
+OR 314
 said 30
 gate 618
 predominant 2
@@ -6766,11 +6928,12 @@ negotiation 1
 nunits 7
 reconverted 1
 recognition 1
-free 93
+free 1
 Only 30
 Compiling 10
 Instruction 132
 labs 24
+free 92
 county 4
 inch 8
 descriptive 2
@@ -6803,7 +6966,7 @@ fine 1
 strdup 10
 adjacency 1
 export 1
-mail 6
+mail 1
 programming 78
 TO 32
 gave 5
@@ -6813,6 +6976,7 @@ challenge 8
 Most 69
 discarded 33
 bond 8
+mail 5
 connections 35
 explanation 8
 goal 7
@@ -6840,7 +7004,8 @@ getc 19
 stdout 25
 coalesced 1
 expressionopt 16
-have 996
+have 1
+have 995
 informative 4
 real 77
 here 54
@@ -6881,7 +7046,7 @@ cond 9
 hash 9
 atan 3
 Plus 1
-take 112
+take 1
 Claremont 4
 system 510
 affiliate 2
@@ -6895,6 +7060,7 @@ described 130
 transformed 5
 once 68
 York 8
+take 111
 VO 16
 keep 52
 main 342
@@ -6927,7 +7093,7 @@ numerically 2
 bracketed 2
 statistical 1
 opportunities 1
-introducing 12
+introducing 1
 near 19
 information 145
 Flintlock 2
@@ -6948,6 +7114,7 @@ MY 2
 impedance 86
 grid 8
 aren 6
+introducing 11
 late 14
 responsible 3
 Very 4
@@ -6971,12 +7138,13 @@ redefined 2
 acos 1
 modf 1
 fmod 1
-appropriate 64
+appropriate 1
 syntax 33
 fill 13
 Be 20
 team 14
 pick 7
+appropriate 63
 ADDING 4
 flat 6
 complements 6
@@ -7013,7 +7181,7 @@ aggregate 6
 redeclare 1
 strtok 4
 endp 7
-SINGAPORE 2
+SINGAPORE 1
 line 537
 Sums 4
 ably 2
@@ -7039,16 +7207,18 @@ imem 16
 Synthesizer 4
 pads 4
 bgez 2
+SINGAPORE 1
 bars 1
 strtol 6
 pain 1
 Parenthesization 1
 subscripted 2
 neat 1
-good 118
+good 1
 Utku 4
 Procedure 18
 Pipelines 4
+good 117
 huge 12
 Operating 6
 lock 18
@@ -7093,7 +7263,8 @@ RW 2
 separations 1
 catenated 1
 nobj 7
-perspective 10
+perspective 1
+perspective 9
 seem 13
 ends 33
 send 15
@@ -7130,8 +7301,9 @@ atof 36
 tail 4
 VT 1
 strspn 1
-book 164
+book 1
 tend 13
+book 163
 seen 27
 distinguish 16
 Exercises 138
@@ -7188,7 +7360,8 @@ unprocessed 2
 asin 1
 tanh 1
 mday 1
-Abraham 6
+Abraham 1
+Abraham 5
 Transistors 36
 debugging 13
 hope 15
@@ -7229,7 +7402,8 @@ sequenceopt 4
 nationality 1
 ascending 2
 week 4
-both 340
+both 1
+both 339
 much 160
 He 64
 kite 2
@@ -7266,7 +7440,7 @@ args 6
 aray 1
 cosh 1
 unconverted 2
-them 195
+them 1
 Publisher 2
 Algebra 10
 link 22
@@ -7280,6 +7454,7 @@ body 41
 hexi 2
 increased 31
 depending 58
+them 194
 inexpensive 16
 temperature 39
 draw 34
@@ -7313,7 +7488,8 @@ pday 2
 rect 9
 pipe 2
 tile 1
-time 982
+time 1
+time 981
 also 806
 reference 20
 then 566
@@ -7363,7 +7539,8 @@ walk 1
 comp 18
 sine 3
 ldiv 4
-Instructors 6
+Instructors 1
+Instructors 5
 long 266
 mainframe 4
 assembled 8
@@ -7398,7 +7575,8 @@ Precisely 1
 formulation 1
 xcat 4
 atol 1
-that 3215
+that 1
+that 3214
 born 4
 used 823
 PROMs 20
@@ -7444,7 +7622,7 @@ colleague 1
 rdev 1
 noticable 1
 delimited 2
-away 12
+away 1
 easy 89
 wind 2
 America 2
@@ -7467,6 +7645,7 @@ open 83
 role 7
 asks 6
 Frequency 8
+away 11
 contractors 2
 outmux 10
 Gk 4
@@ -7490,7 +7669,8 @@ descriptors 4
 sbrk 6
 ERANGE 5
 sinh 1
-more 621
+more 1
+more 620
 regarding 2
 xiii 2
 such 388
@@ -7533,8 +7713,9 @@ sole 1
 Newcomers 1
 arms 2
 declarationspecifiers 1
-from 1789
+from 1
 well 140
+from 1788
 rite 2
 some 315
 describes 78
@@ -7573,9 +7754,10 @@ interpreter 1
 experiments 1
 Treatment 1
 basically 1
-site 22
+site 1
 Machine 60
 many 310
+site 21
 Of 14
 At 97
 televisions 4
@@ -7616,7 +7798,8 @@ dominated 1
 succeding 1
 NDEBUG 1
 wday 1
-Packard 6
+Packard 1
+Packard 5
 Microsoft 6
 Preface 8
 Matched 4
@@ -7655,7 +7838,8 @@ restriction 4
 temp 34
 exchanges 2
 sval 11
-In 955
+In 1
+In 954
 languages 107
 Beneath 10
 Oh 6
@@ -7695,10 +7879,11 @@ laws 2
 Re 2
 readlines 7
 yday 1
-this 985
+this 1
 will 710
 designing 30
 Chapman 4
+this 984
 Ph 16
 Beijing 2
 Registers 48
@@ -7747,7 +7932,8 @@ highlight 1
 fpos 3
 Assertion 1
 capacious 1
-Equations 14
+Equations 1
+Equations 13
 Functions 43
 luxury 2
 city 2
@@ -7788,7 +7974,7 @@ auto 11
 wasn 1
 NALLOC 4
 smax 3
-they 464
+they 1
 recommend 10
 want 34
 Brigham 2
@@ -7798,6 +7984,7 @@ Illegal 7
 Reading 20
 explained 9
 into 669
+they 463
 pins 56
 spin 2
 advocates 2
@@ -7843,7 +8030,8 @@ productions 2
 specifier 63
 Calling 1
 localtime 3
-College 26
+College 1
+College 25
 Manager 4
 Logical 31
 By 83
@@ -7885,7 +8073,8 @@ suggestions 2
 Typically 1
 possibility 4
 formfeeds 1
-with 1989
+with 1
+with 1988
 Jr 2
 associate 6
 four 294
@@ -7930,9 +8119,10 @@ putc 15
 stat 20
 floatnode 3
 Headers 1
-It 441
+It 1
 fantastic 2
 Interview 56
+It 440
 Constants 20
 Generic 8
 including 81
@@ -7970,7 +8160,8 @@ canonrect 2
 dddddde 2
 recondite 1
 recording 1
-Digital 182
+Digital 1
+Digital 181
 attending 4
 Graphic 4
 selecting 8
@@ -8007,12 +8198,13 @@ ints 9
 recursivedescent 1
 floatingconstant 1
 SIGFPE 1
-next 503
+next 1
 companies 16
 Nibbles 8
 Operators 39
 soon 22
 hierarchy 59
+next 502
 user 67
 know 64
 sure 23
@@ -8058,7 +8250,7 @@ recovered 1
 inspected 1
 reinitialization 1
 prescribe 1
-Patterson 38
+Patterson 1
 extensively 9
 engineers 14
 sketching 4
@@ -8067,6 +8259,7 @@ http 4
 xvii 4
 Boolean 278
 Processor 100
+Patterson 37
 knowledge 15
 uses 306
 Captain 2
@@ -8113,7 +8306,7 @@ unadorned 1
 Incrementation 2
 overwriting 1
 legalizes 1
-brilliant 2
+brilliant 1
 Multithreading 14
 show 88
 fourmilab 2
@@ -8141,8 +8334,9 @@ megabytes 2
 Appendi 12
 Insulator 2
 loss 4
+brilliant 1
 wins 1
-Frances 2
+Frances 1
 Pr 2
 type 931
 only 672
@@ -8181,6 +8375,7 @@ resembles 3
 slot 6
 SignExt 4
 Addison 2
+Frances 1
 Lexical 4
 bury 1
 qualifier 36
@@ -8189,9 +8384,10 @@ decided 1
 realities 1
 twin 1
 submember 1
-work 113
+work 1
 To 173
 most 409
+work 112
 busy 12
 Devices 6
 craftsmen 2
@@ -8220,7 +8416,7 @@ subroutines 1
 undesired 1
 liability 1
 excluding 2
-excellent 10
+excellent 1
 Latches 20
 designers 46
 companion 10
@@ -8244,6 +8440,7 @@ unbounded 4
 standards 2
 bb 20
 exercisel 2
+excellent 9
 tiny 7
 extracted 3
 activates 2
@@ -8259,7 +8456,8 @@ Carrypropagate 2
 maintains 1
 SIGILL 1
 Escapes 1
-text 140
+text 1
+text 139
 Dynamic 36
 Evolution 8
 ONLINE 2
@@ -8289,7 +8487,8 @@ biography 2
 behaviour 2
 coercions 2
 MAXLEN 3
-very 53
+very 1
+very 52
 Readers 2
 My 6
 Address 173
@@ -8332,7 +8531,8 @@ formatted 7
 addpoints 1
 spot 1
 commaseparated 1
-be 2429
+be 1
+be 2428
 dc 2
 Chapter 427
 carefully 15
@@ -8367,7 +8567,7 @@ generator 4
 semantics 4
 monthname 4
 logarithm 4
-instances 11
+instances 1
 CAD 22
 runs 16
 Instead 45
@@ -8385,6 +8585,7 @@ preparing 3
 Zn 4
 essential 16
 synthesizer 34
+instances 10
 simulated 6
 existence 7
 EEPROM 12
@@ -8406,12 +8607,13 @@ STATIC 6
 dd 3
 Unnamed 2
 Blockno 5
-ed 18
+ed 1
 Communications 2
 decades 18
 must 639
 operating 94
 turn 64
+ed 17
 labeled 39
 NUMBER 10
 incorrect 21
@@ -8444,7 +8646,7 @@ MAXVAL 6
 PARENS 5
 Casting 1
 quot 2
-LONDON 2
+LONDON 1
 Integra 4
 Synthesis 24
 changed 35
@@ -8471,6 +8673,7 @@ initiates 2
 blabber 2
 permanent 4
 BGA 2
+LONDON 1
 Mathematical 4
 Objects 6
 announces 4
@@ -8479,9 +8682,10 @@ sqrt 12
 presented 8
 df 1
 replenish 1
-exercises 38
+exercises 1
 HEIDELBERG 2
 Questions 56
+exercises 37
 implement 107
 ch 28
 rows 64
@@ -8509,7 +8713,7 @@ Pragmas 2
 suppression 4
 exhausted 3
 suspended 2
-confusing 5
+confusing 1
 transistors 292
 traveling 8
 Example 704
@@ -8532,6 +8736,7 @@ predictor 24
 RIPPLE 2
 Virtually 2
 classification 2
+confusing 4
 locations 28
 sequences 22
 EDC 2
@@ -8555,7 +8760,7 @@ undergoes 3
 varieties 1
 ci 2
 departure 1
-managed 3
+managed 1
 he 80
 Designs 4
 Hazards 32
@@ -8580,12 +8785,13 @@ Merriam 2
 eightword 2
 caching 4
 Literal 3
+managed 2
 FEB 2
 shrinking 1
 YESMAN 1
 id 2
 al 1
-Multiplication 22
+Multiplication 1
 magical 4
 adventure 2
 president 4
@@ -8601,6 +8807,7 @@ Spatial 12
 dispenses 2
 translate 22
 PRECEDENCE 2
+Multiplication 21
 Integer 8
 permitted 21
 PREFIX 2
@@ -8619,7 +8826,8 @@ histogram 3
 am 2
 October 2
 SIGINT 1
-an 2072
+an 1
+an 2071
 claimed 2
 your 319
 Clifton 2
@@ -8653,7 +8861,7 @@ versatile 1
 mandatory 1
 untouched 1
 mathematically 2
-handled 16
+handled 1
 cm 20
 Solutions 4
 switching 18
@@ -8662,6 +8870,7 @@ potential 5
 bubbled 2
 bypassing 6
 precisely 10
+handled 15
 Latency 6
 declare 28
 CLA 20
@@ -8676,7 +8885,7 @@ ld 4
 hh 3
 supersede 1
 Opening 2
-consulted 2
+consulted 1
 Margins 4
 Swizzling 4
 operation 178
@@ -8717,6 +8926,7 @@ recurring 2
 ZeroExt 4
 Pedroni 2
 Configurable 4
+consulted 1
 Structure 9
 Typedef 5
 Spivack 1
@@ -8726,7 +8936,7 @@ pa 28
 relations 2
 ap 25
 submitted 1
-OXFORD 2
+OXFORD 1
 co 2
 Voltage 42
 Semiconductors 6
@@ -8760,6 +8970,7 @@ requested 11
 nd 5
 raindrops 2
 Colwell 2
+OXFORD 1
 Allison 1
 inclusive 11
 literally 2
@@ -8769,7 +8980,7 @@ syntactic 5
 documents 2
 decrementation 1
 DBL 7
-AND 472
+AND 1
 Ahead 6
 Representation 14
 adapted 6
@@ -8777,6 +8988,7 @@ do 219
 encounter 8
 classroom 4
 immensely 2
+AND 471
 component 112
 Binnary 2
 Circuit 40
@@ -8810,9 +9022,10 @@ abandon 1
 BUFSIZ 10
 cp 10
 BEL 1
-treatment 15
+treatment 1
 as 2055
 Cache 88
+treatment 14
 leading 70
 multicore 4
 Lecture 2
@@ -8846,7 +9059,8 @@ rb 1
 DIG 4
 trigraphs 1
 enacted 1
-of 9800
+of 1
+of 9799
 at 1244
 BOSTON 2
 Library 10
@@ -8890,10 +9104,11 @@ Conventionally 1
 DIRSIZ 5
 congruent 1
 DEL 1
-Frenzel 4
+Frenzel 1
 Sansome 2
 Printed 12
 COD 4
+Frenzel 3
 wonderful 2
 scientist 4
 computing 21
@@ -8933,7 +9148,8 @@ cs 35
 audible 1
 Flowing 1
 DFL 1
-in 6343
+in 1
+in 6342
 Itanium 2
 Project 4
 Bitwise 16
@@ -8973,9 +9189,10 @@ regularly 1
 necessity 1
 END 1
 ct 40
-Verilog 302
+Verilog 1
 created 11
 exploring 6
+Verilog 301
 HDL 520
 Program 26
 because 646
@@ -9023,13 +9240,14 @@ withdrawn 3
 assertion 1
 forgotten 1
 bsearch 4
-Jaeha 4
+Jaeha 1
 Courier 2
 DMH 2
 Modules 14
 Programmable 40
 Spartan 44
 labored 4
+Jaeha 3
 equations 152
 Filters 2
 crafted 4
@@ -9080,8 +9298,9 @@ wb 1
 lacking 1
 stillborn 1
 borrowing 1
-science 20
+science 1
 assistant 10
+science 19
 invention 6
 reading 68
 Maxwell 2
@@ -9129,7 +9348,7 @@ iq 4
 correspondence 1
 alphabetical 1
 otherprog 3
-Phoenix 2
+Phoenix 1
 by 1785
 Origins 4
 typically 75
@@ -9157,6 +9376,7 @@ resources 2
 ve 3
 Enableable 2
 sh 5
+Phoenix 1
 extensive 2
 rudiments 1
 Intermediate 1
@@ -9169,7 +9389,8 @@ readdir 10
 alluded 1
 SEC 1
 ROUNDS 1
-is 8606
+is 1
+is 8605
 SYDNEY 2
 Penrose 4
 Marilyn 2
@@ -9229,7 +9450,7 @@ dereferenced 1
 oblivious 1
 collide 1
 manages 1
-opportunity 2
+opportunity 1
 on 1827
 benefit 15
 it 1897
@@ -9275,10 +9496,12 @@ IIK 2
 kr 24
 Passion 2
 ISA 6
+opportunity 1
 refined 1
 AUG 1
 treeprint 8
-digital 256
+digital 1
+digital 255
 important 82
 mountains 2
 capital 4
@@ -9328,7 +9551,7 @@ pn 7
 np 18
 graphic 1
 IGN 1
-Process 4
+Process 1
 Drivers 2
 handles 17
 broader 2
@@ -9361,6 +9584,7 @@ EBX 8
 MEM 6
 iv 4
 vi 2
+Process 3
 sl 12
 memfile 10
 degrees 3
@@ -9375,7 +9599,7 @@ ls 3
 DIR 13
 multiples 1
 multibyte 1
-uk 2
+uk 1
 Further 14
 processor 872
 simulator 26
@@ -9410,6 +9634,7 @@ drilled 2
 leaders 2
 Divisor 2
 boolean 3
+uk 1
 arrange 4
 MAR 2
 shellsort 2
@@ -9419,7 +9644,8 @@ dirname 3
 incrementation 1
 oldname 1
 yielded 1
-or 2313
+or 1
+or 2312
 ix 2
 Product 8
 xi 2
@@ -9472,11 +9698,12 @@ interests 2
 ul 1
 intuitive 1
 Occasionally 1
-so 955
+so 1
 Pentium 118
 SAN 4
 ALU 336
 classic 12
+so 954
 computers 86
 ONE 46
 Drewyer 2
@@ -9512,8 +9739,9 @@ Improve 1
 lexical 4
 os 1
 realloc 4
-Architecture 128
+Architecture 1
 to 8557
+Architecture 127
 textbooks 18
 professor 16
 devices 83
@@ -9562,7 +9790,8 @@ VAL 3
 Letters 1
 SIG 3
 license 1
-include 220
+include 1
+include 219
 Printer 4
 Field 34
 passage 2
@@ -9603,9 +9832,10 @@ fillbuf 11
 yyyy 1
 recapitulation 1
 tp 16
-Idaho 4
+Idaho 1
 mountaineering 2
 Starter 10
+Idaho 3
 up 241
 picking 3
 arsenic 4
@@ -9650,7 +9880,7 @@ suffice 3
 ordered 1
 quicksort 4
 Legal 1
-Authors 2
+Authors 1
 my 8
 FSM 260
 details 50
@@ -9679,6 +9909,7 @@ FFFBFFF 2
 MAX 49
 digikey 2
 Multiplicand 2
+Authors 1
 collect 5
 OCT 1
 nx 1
@@ -9689,7 +9920,7 @@ ss 1
 asctime 3
 FLT 13
 RADIXn 2
-st 27
+st 1
 SLH 2
 Virtual 86
 compare 50
@@ -9730,6 +9961,7 @@ PRE 10
 ENT 8
 Debug 8
 INTEGRATED 2
+st 26
 entered 7
 MAY 1
 multistep 1
@@ -9739,7 +9971,8 @@ hashval 9
 promotion 11
 PER 1
 suppliers 1
-David 30
+David 1
+David 29
 Diego 2
 Bibby 4
 Designations 2
@@ -9787,7 +10020,7 @@ px 4
 unnamed 11
 cleanup 1
 tt 1
-overgrown 2
+overgrown 1
 anonymous 2
 billion 36
 qx 18
@@ -9821,6 +10054,7 @@ MSI 4
 BOX 6
 surface 4
 vs 4
+overgrown 1
 spelled 3
 sincere 1
 py 4
@@ -9830,7 +10064,7 @@ ERR 5
 provision 1
 accomodating 1
 marking 1
-MIT 6
+MIT 1
 NEW 2
 initial 61
 between 389
@@ -9842,6 +10076,7 @@ hundred 6
 greater 75
 mathematical 18
 element 129
+MIT 5
 Network 6
 talking 2
 causing 12
@@ -9876,7 +10111,7 @@ zp 2
 mechanically 1
 CUR 1
 weekday 3
-devoted 2
+devoted 1
 Putting 31
 questions 37
 Windows 16
@@ -9914,6 +10149,7 @@ Multiprocessor 2
 cooling 4
 speaker 4
 SNJ 12
+devoted 1
 Scanf 4
 supplying 2
 considerable 3
@@ -9926,13 +10162,14 @@ WRONLY 2
 Align 3
 ISO 1
 newname 1
-contact 4
+contact 1
 Latch 14
 Clock 32
 Space 6
 clearly 19
 example 652
 contain 89
+contact 3
 highest 16
 mapping 32
 MetalOxide 4
@@ -9967,7 +10204,8 @@ multiplicative 15
 accomplished 1
 UTC 2
 refines 1
-designs 64
+designs 1
+designs 63
 Duane 4
 Flags 5
 shipped 6
@@ -10013,7 +10251,8 @@ pleases 1
 skimped 1
 arrived 1
 EXP 4
-Logic 398
+Logic 1
+Logic 397
 Summary 48
 Cares 4
 Precedence 7
@@ -10056,7 +10295,8 @@ directs 1
 dirwalk 9
 isgraph 1
 lastarg 2
-Sarah 12
+Sarah 1
+Sarah 11
 Radio 4
 Delay 14
 Calls 13
@@ -10106,7 +10346,7 @@ NUL 2
 therein 1
 bizarre 1
 ABSDIFF 3
-solutions 5
+solutions 1
 helpful 38
 James 10
 xx 58
@@ -10114,6 +10354,7 @@ Fixed 22
 Cycle 88
 subject 16
 skipped 17
+solutions 4
 operate 75
 Chapt 34
 smaller 58
@@ -10140,7 +10381,7 @@ surprises 1
 unwritten 2
 extraprecision 1
 revoked 1
-similar 98
+similar 1
 NOT 120
 another 186
 explain 40
@@ -10153,6 +10394,7 @@ Digit 2
 VOL 38
 margins 18
 silicon 44
+similar 97
 Speed 16
 structure 182
 oversimplifies 2
@@ -10190,7 +10432,7 @@ subaggregate 4
 tmpfile 3
 TMP 1
 tangent 2
-Since 47
+Since 1
 McFadden 4
 several 147
 After 45
@@ -10205,6 +10447,7 @@ derives 6
 sounded 2
 added 71
 regular 16
+Since 46
 ionized 4
 forming 8
 nearest 10
@@ -10247,7 +10490,8 @@ outermost 3
 getbits 4
 diverse 1
 yy 2
-circuit 820
+circuit 1
+circuit 819
 Files 10
 segment 116
 execute 79
@@ -10305,11 +10549,12 @@ thereby 1
 wrapped 1
 reorder 1
 tagless 1
-Lucke 4
+Lucke 1
 Diril 4
 playing 2
 Gates 36
 PPT 4
+Lucke 3
 trigger 6
 modular 2
 million 28
@@ -10345,8 +10590,9 @@ Heart 2
 Going 2
 Plain 1
 parsing 2
-Organization 20
+Organization 1
 forward 26
+Organization 19
 section 187
 Casey 2
 rapidly 8
@@ -10382,7 +10628,7 @@ exponentiation 2
 remarks 1
 variant 2
 Usage 3
-printed 53
+printed 1
 PREFACE 10
 typical 31
 prototype 16
@@ -10416,6 +10662,7 @@ Freud 6
 highlighting 2
 VPP 8
 OEb 4
+printed 52
 MATCHED 2
 Close 2
 Predefined 2
@@ -10427,10 +10674,11 @@ recover 1
 removal 1
 deliberately 1
 memmove 2
-project 18
+project 1
 publish 4
 aided 18
 install 13
+project 17
 whether 142
 BENEATH 2
 contaminated 2
@@ -10462,8 +10710,9 @@ disappearing 2
 tighter 1
 Initializers 1
 longjmp 6
-California 4
+California 1
 complex 68
+California 3
 Three 33
 Systems 105
 Minimization 4
@@ -10512,7 +10761,7 @@ freeptr 1
 looping 2
 nesting 2
 fgetpos 4
-Given 26
+Given 1
 Cataloging 2
 These 177
 provide 75
@@ -10527,6 +10776,7 @@ shorted 2
 While 23
 Nodes 4
 programmable 66
+Given 25
 forever 14
 efforts 2
 Human 2
@@ -10552,7 +10802,8 @@ alphanumeric 1
 fprintf 16
 Below 1
 accompanying 1
-microprocessor 122
+microprocessor 1
+microprocessor 121
 CDs 4
 TWO 66
 exactly 61
@@ -10589,7 +10840,7 @@ Robin 1
 economy 1
 subtree 9
 participated 1
-lengthy 4
+lengthy 1
 About 2
 Interpreting 4
 content 4
@@ -10617,6 +10868,7 @@ accomplishes 2
 MULTICYCLE 4
 RdE 10
 EdR 8
+lengthy 3
 AVERAGE 2
 Lines 16
 trivial 7
@@ -10632,7 +10884,7 @@ excerpt 1
 putcher 1
 unequal 8
 arround 1
-enlightening 2
+enlightening 1
 Their 7
 Intel 106
 Order 8
@@ -10661,6 +10913,7 @@ CauseWrite 10
 Commercial 2
 webster 2
 sockets 4
+enlightening 1
 expects 7
 reserve 5
 getword 20
@@ -10668,7 +10921,7 @@ worried 1
 ghastly 1
 fortran 1
 lvalues 1
-Evans 2
+Evans 1
 Support 8
 Value 16
 Microarchitecture 140
@@ -10715,12 +10968,13 @@ weapons 2
 TYP 6
 Layer 4
 Prime 2
+Evans 1
 brace 14
 closest 1
 popping 3
 simples 1
 embed 1
-surfing 6
+surfing 1
 Honjo 2
 Noise 10
 Shift 46
@@ -10750,6 +11004,7 @@ predicttaken 8
 xCC 2
 LOADING 2
 Disks 2
+surfing 5
 zeroing 2
 cryptic 4
 Books 2
@@ -10760,7 +11015,7 @@ setbits 1
 ifdef 4
 lineptr 30
 additionally 1
-showing 43
+showing 1
 patents 4
 Cover 4
 Color 2
@@ -10774,6 +11029,7 @@ economically 2
 explore 18
 manufactured 14
 Coues 2
+showing 42
 Impatience 2
 coded 16
 FINDING 2

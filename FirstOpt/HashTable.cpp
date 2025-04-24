@@ -78,7 +78,7 @@ HashTable_t HashTableInit(FILE* fp)
     return HashTable;
 }
 
-enum ErrorCodes HashTableDump(HashTable_t* HashTable)
+enum HashErrors HashTableDump(HashTable_t* HashTable)
 {
     FILE* dumpFile = fopen("HashDump.txt", "w+b");
     if(dumpFile == NULL)
