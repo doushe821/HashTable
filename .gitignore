@@ -1,5 +1,10 @@
-*Makefile
-*makefile
-*build
-*Experimental
-*BenchData
+*.py
+*perf
+*csv
+*.txt
+*.data
+*.old
+*.GOVNO
+*.LEGA
+*.PENIS
+%data

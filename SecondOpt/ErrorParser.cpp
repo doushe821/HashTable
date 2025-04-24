@@ -2,7 +2,7 @@
 
 #include "ErrorParser.h"
 
-void ParseError(enum ErrorCodes code)
+void ParseError(enum HashErrors code)
 {
     switch(code)
     {
@@ -23,7 +23,7 @@ void ParseError(enum ErrorCodes code)
         }
         case ALLOCATION_FAILURE:
         {
-            fprintf(stderr, "Failed to allocate memory: \n"); // TODO LINE + FILE EVERYWHERE
+            fprintf(stderr, "Failed to allocate memory: \n");
             break;
         }
         case NULL_KEY_POINTER:
@@ -43,6 +43,11 @@ void ParseError(enum ErrorCodes code)
         case UNEXPECTED_BEHAVIOUR:
         {
             fprintf(stderr, "Program faced unexpected behaviour on ...\n");
+            break;
+        }
+        case KEY_IS_TOO_BIG:
+        {
+            fprintf(stderr, "Key you tried to insert is too big, it must be under 32 bytes.\n");
             break;
         }
         default:

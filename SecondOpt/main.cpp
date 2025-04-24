@@ -4,114 +4,40 @@
 #include "FileBufferizer.h"
 #include "ErrorParser.h"
 #include "HashTable.h"
+#include "HashTableBench.h"
 #include "List/ListStruct.h"
 #include "x86intrin.h"
-//#include "hash.h"
-//#include "List/List.h"
+
+// TODO Better hash, bigger table, load factor, fix README, strcmp in asm, 
 
 int main(int argc, char** argv)
 {
-    unsigned long long start = __rdtsc();
-
     FILE* HashTableFile = fopen("ReadyTohash.txt", "r+b");
-    if(HashTableFile == NULL)
+    
+   if(HashTableFile == NULL)
+   {
+       return FILE_NULL_POINTER;
+   }
+
+   const size_t BucketCount = 1024;
+   
+
+   size_t WordCounter = 0;
+   char* DataBuffer = FileToHashTableWordArray(HashTableFile, &WordCounter);
+   fclose(HashTableFile);
+
+    HashTable_t HashTable = HashTableInit(BucketCount);
+    ParseError(HashTable.ErrorCode);
+
+    for(size_t i = 0; i < WordCounter - 1; i++)
     {
-        return FILE_NULL_POINTER;
+        HashTableInsert(DataBuffer + i * sizeof(__m256), &HashTable);
     }
 
-    HashTable_t HashTable = HashTableInit(HashTableFile);
-    fprintf(stderr, "Hashing complete!\n");
-
-    fclose(HashTableFile);
-    
-    HashTableDump(&HashTable);
-
-    const size_t TestWordsNumber = 71;
-    __attribute__((aligned(sizeof(__m256)))) char TestArray[TestWordsNumber][32] = 
-    {
-        "perspective",
-        "permissions",
-        "permissions",
-        "programming",
-        "performance",
-        "programmers",
-        "politicians",
-        "predominant",
-        "propagation",
-        "picoseconds",
-        "parallelism",
-        "probability",
-        "parentheses",
-        "partitioned",
-        "proprietary",
-        "problematic",
-        "practically",
-        "propagating",
-        "palindromes",
-        "pictorially",
-        "predictions",
-        "potentially",
-        "progression",
-        "photographs",
-        "positioning",
-        "publication",
-        "prototyping",
-        "predictable",
-        "permissible",
-        "particulary",
-        "permanently",
-        "participate",
-        "portability",
-        "possibility",
-        "productions",
-        "prohibition",
-        "precompiled",
-        "programming",
-        "performance",
-        "programmers",
-        "politicians",
-        "predominant",
-        "propagation",
-        "picoseconds",
-        "parallelism",
-        "probability",
-        "parentheses",
-        "partitioned",
-        "proprietary",
-        "problematic",
-        "practically",
-        "propagating",
-        "palindromes",
-        "pictorially",
-        "predictions",
-        "potentially",
-        "progression",
-        "photographs",
-        "positioning",
-        "publication",
-        "prototyping",
-        "predictable",
-        "permissible",
-        "particulary",
-        "permanently",
-        "participate",
-        "portability",
-        "possibility",
-        "productions",
-        "prohibition",
-        "precompiled",
-    };    
-    for(size_t i = 0; i < TestWordsNumber; i++)
-    {
-        HashTableSearch(&HashTable, TestArray[i]);
-    }
-
-    
+    SearchBench(&HashTable);
+    LoadFactorBench(&HashTable);
     HashTableDestr(&HashTable);
-
-    unsigned long long end = __rdtsc();
-
-    fprintf(stderr, "%llu\n", end - start);
+    free(DataBuffer);
 
     return 0;
 }

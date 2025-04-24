@@ -1,3 +1,0 @@
-Average = 325236469.5
-Absolute error = 2852285.5
-Relative error = 0.008769882124181649

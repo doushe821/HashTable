@@ -3,9 +3,8 @@ global ListSearch
 ListSearch:
     xor rax, rax
     cmp rdx, 0h
-    je .KeyFound
-
-    add rsi, 20h ; + 32 bytes
+    je .KeyFound 
+    add rsi, 20h
  
 .SearchLoop:
 
