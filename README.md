@@ -134,6 +134,7 @@ This is profile of first optmization:
 
 <details>
   <summary>First optimization profile</summary>
+  ![](PerfImages/FirstOptProfile.png)
 
 </details>
 
