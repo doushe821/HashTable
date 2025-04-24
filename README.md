@@ -133,9 +133,8 @@ This way, we can gain high performance boost using only 3 assembly lines. Quite 
 This is profile of first optmization:
 
 <details>
-  <summary>Second optimization profile</summary>
-  
-![](PerfImages/SecondOptProfile.png)
+  <summary>First optimization profile</summary>
+
 </details>
 
 
@@ -187,9 +186,8 @@ ListSearch:
 </details>
 
 <details>
-<summary>First optimization profile</summary>
+<summary>Second optimization profile</summary>
 
-![](PerfImages/SecondOptProfile.png)
 </details>
 
 It is obvious that next step is optimizing SimpleHash() - programms' hash function.
@@ -220,7 +218,6 @@ asm volatile
   
 <summary>Third optimization profile</summary>
   
-![](PerfImages/ThirdOptProfile.png)
 </details>
 
 ## Data processing
