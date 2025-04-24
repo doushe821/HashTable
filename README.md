@@ -258,7 +258,7 @@ Let's place experimental data in a table:
     <th>$0.0008$</th>
     <th>$2.06$</th>
     <th>$40$</th>
-  <\tr>
+  </tr>
   <tr>
     <th>Third optimization</th>
     <th>$6876360513.6\pm 4891910$</th>
