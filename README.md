@@ -59,19 +59,25 @@ Error is calculated using following formula:
 ## Hash comparison
 In the beginning, we have to choose right hash: one that can easily be optimized, yet one with good distribution.
 
-I came up with a simple cash that calculates subsumms of the key (in groups of 8) and then xors them with seed.
+Best hash that suits our requirements is crc32. It already has an intrinsic optimization, so we don't even have to write anything on Assembly, which will boost COP.
 
-Let's compare its distribution with MurMur2 (which is fairly harder to optimize):
+Let's compare its distribution with much more complicated MurMur2 (which cannot be optimized with SIMD). We will compare them on a working hash table width of 1024 buckets.
 
-![](HashTestImages/MurMur1024.png)
+![](HashTestImages/MurMur2.png)
 
-![](HashTestImages/Whacky1024.png)
+![](HashTestImages/crc32.png)
 
-As you can see, distributions are comparable, however, Whacky hash loses a bit. To measure it properly, we will calculate dispersion of number of words in each bucket (normalised by load factor):
+![](HashTestImages/crc32SIMD.png)
 
-$\sigma_\text{MurMur}=1.0234509874327002$
+Input file had 15994 unique words, so load factor was $\approx 15.6$.
 
-$\sigma_\text{Whacky}=1.7210710632676653$
+Let's calculate dispersion of words in each bucket for each hash:
+
+$\sigma_\text{MurMur2}=2.34$
+
+$\sigma_\text{crc32}=2.22$
+
+$\sigma_\text{crc32_SIMD}=2.27$
 
 ## Naive version
 Naive version is pretty simple: hash function calculates sum of every charachter of the key string and takes remainder from division by number of buckets (256 in our case) as a hash for bucket.
@@ -94,43 +100,39 @@ This is the profile of naive version:
 That way we can tell that we should optimize hash first.
 
 ## First optimization
-Program hash function (WackyHash2) calculates subsums of the key and then xors them with seed.
+First optimization is the simplest, yet the most effective one: in order to optimize 32crc hash we just need to use an intrinsic.
 
-We can easily optimize it with intrinsics functions that use SIMD instructions:
+This way we get a huge performance boost with only 4 Assembly strings.
+
 
 <details>
 <summary>Show/hide code</summary>
   
 ```c
 
-static size_t WhackyHash2_SIMD(void* Key, size_t len, size_t MaxValue)
+uint64_t crc32HashIntrinsics(void* Key, size_t MaxValue)
 {
-    size_t seed = 0x69696ABE1;
-    size_t MLG = 0xABE1;
-    size_t tony = 0xEDA666EDA6667878;
-    
-    __m256i seedm256 = _mm256_set1_epi64x(seed);
+    uint64_t crc = 0xFFFFFFFF;
 
-    size_t HashSubSums[4] = {};
-    for(size_t i = 0; i < 4; i++)
-    {
-        HashSubSums[i] = ((char*)Key)[i * 8] +  ((char*)Key)[i * 8 + 1] + ((char*)Key)[i * 8 + 2] + ((char*)Key)[i * 8 + 3]
-        + ((char*)Key)[i * 8 + 4] +  ((char*)Key)[i * 8 + 5] + ((char*)Key)[i * 8 + 6] + ((char*)Key)[i * 8 + 7];
-    }
+    uint64_t part1 = *(const uint64_t*)(Key);
+    crc = _mm_crc32_u64(crc, part1);
 
-    __m256i SubSums256 = {(long long)HashSubSums[0], (long long)HashSubSums[1], (long long)HashSubSums[2], (long long)HashSubSums[3]};
-    SubSums256 = _mm256_xor_si256(SubSums256, seedm256);
+    uint64_t part2 = *(const uint64_t*)((char*)Key + 8);
+    crc = _mm_crc32_u64(crc, part2);
 
-    size_t HashSum = SubSums256[0] + SubSums256[1] + SubSums256[2] + SubSums256[3];
-    return HashSum % MaxValue;
+    uint64_t part3 = *(const uint64_t*)((char*)Key + 16);
+    crc = _mm_crc32_u64(crc, part3);
+
+    uint64_t part4 = *(const uint64_t*)((char*)Key + 24);
+    crc = _mm_crc32_u64(crc, part4);
+
+    return (crc ^ 0xFFFFFFFF) % (uint32_t)MaxValue;
 }
 
 ```
 </details>
 
-This way, we can gain high performance boost using only 3 assembly lines. Quite impressive!
-
-This is profile of first optmization:
+This is profile after the first optmization:
 
 <details>
   <summary>First optimization profile</summary>
@@ -142,10 +144,46 @@ This is profile of first optmization:
 
 ## Second optimization
 In order to optimize search function we will the fact that our keys' size is limited to 256 bits. 
+We can rewrite  loads key and elements of the list (here it treats list like an array) in ymm registers and then xors them. Then, vptest allows to check for 0 in register (it sets ZF to 1, if ymm == 0). Return value is index of the key in the bucket. If key isn't found, it returns 0. 
 
-New function - size_t ListSearch(const char* Key, void* listData, size_t ListSize) loads key and elements of the list (here it treats list like an array) in ymm registers and then xors them. Then, vptest allows to check for 0 in register (it sets ZF to 1, if ymm == 0). Return value is index of the key in the bucket. If key isn't found, it returns 0. 
+Since this function is quite small (only 5 string), we can write it as inline assembly right in our C code.
 
 This simple function uses SIMD instructions instead of linear byte-to-byte comparison as strncmp or strcmp does, which makes it faster.
+
+<details>
+<summary>Show/hide code</summary>
+  
+```c
+int mm_strcmp32(void* key, void* KeyFromList)
+{
+    uint8_t result = 1;
+    __asm__ __volatile__
+    (
+        "vmovaps (%1), %%ymm0\n"           
+        "vmovaps (%2), %%ymm1\n\t"         
+        "vpxor %%ymm1, %%ymm0, %%ymm0\n\t" 
+        "vptest %%ymm0, %%ymm0\n\t"        
+        "setne %0\n\t"                   
+        : "=r" (result)                    
+        : "D" (key), "S" (KeyFromList)     
+        : "ymm0", "ymm1", "cc", "memory"
+    );
+    
+    return (int)result;
+}
+```
+</details>
+
+<details>
+<summary>Second optimization profile</summary>
+
+  ![](PerfImages/SecondOptProfile.png)
+
+</details>
+
+## Third optimization
+Since we don't use optimization flags, mm_strcmp32() doesn't get inlined, so we can go even further in our search optimization, writing whole search function in Assembly.
+New function - size_t ListSearch(const char* Key, void* listData, size_t ListSize) contains mm_strcmp32() in it, while also going through list's data.
 
 Here is ListSearch() source code:
 
@@ -187,43 +225,12 @@ ListSearch:
 ```
 </details>
 
+Profile after third optimization.
 <details>
-<summary>Second optimization profile</summary>
-
-  ![](PerfImages/SecondOptProfile.png)
-
-</details>
-
-It is obvious that next step is optimizing SimpleHash() - programms' hash function.
-
-## Third optimization
-
-Now it's time ot optimize memset() function that is needed to clear the buffer when hash table is being intialized.
-
-That's easy, because, again, keys' sizes are limited to 256 bits, so we can load buffer to ymm register and then set it to needed value via SIMD instructions.
-
-<details>
-<summary>Show/hide code</summary>
-  
-```asm
-
-asm volatile
-( 
-    "vpxor %%ymm0, %%ymm0, %%ymm0\t\n"
-    "vmovaps %%ymm0, (%0)"
-    :"=r" (word)
-    :"r" (word)
-    :"memory", "ymm0"
-);
-```
-</details>
-
-<details>
-  
 <summary>Third optimization profile</summary>
 
   ![](PerfImages/ThirdOptProfile.png)
-  
+
 </details>
 
 ## Data processing
@@ -240,31 +247,31 @@ Let's place experimental data in a table:
   </tr>
   <tr>
     <th>Naive</th>
-    <th>$14402605506.0\pm 33491079$</th>
-    <th>$0.002$</th>
+    <th>$(10.5\pm 0.3)\cdot10^9$</th>
+    <th>$0.03$</th>
     <th>$1.00$</th>
     <th>$0$</th>
   </tr>
   <tr>
-    <th>First optimization</th>
-    <th>$10651982323\pm 29034815$</th>
-    <th>$0.003$</th>
-    <th>$1.36$</th>
-    <th>$3$</th>
-  </tr>
-  <tr>
-    <th>Second optimization</th>
-    <th>$7040251868.0\pm 5638961$</th>
-    <th>$0.0008$</th>
+    <th>SIMD hash</th>
+    <th>($5.1\pm 0.3)\cdot10^9$</th>
+    <th>$0.06$</th>
     <th>$2.06$</th>
-    <th>$40$</th>
+    <th>$4$</th>
   </tr>
   <tr>
-    <th>Third optimization</th>
-    <th>$6876360513.6\pm 4891910$</th>
-    <th>$0.0007$</th>
-    <th>$2.12$</th>
-    <th>$5$</th>
+    <th>Inline asm strcmp</th>
+    <th>$(4.5\pm 0.4)\cdot10^9$</th>
+    <th>$0.09$</th>
+    <th>$2.33$</th>
+    <th>$6$</th>
+  </tr>
+  <tr>
+    <th>Search in asm</th>
+    <th>$(3.39\pm 0.04)\cdot10^9$</th>
+    <th>$0.01$</th>
+    <th>$3.09$</th>
+    <th>$21$</th>
   </tr>
 </table>
 </details>
@@ -283,28 +290,27 @@ This way we get:
   </tr>
   <tr>
     <th>First optimization</th>
-    <th>$120$</th>
+    <th>$265$</th>
   </tr>
   <tr>
     <th>Second optimization</th>
-    <th>$17.5$</th>
+    <th>$45$</th>
   </tr>
   <tr>
     <th>Third optimization</th>
-    <th>$12$</th>
+    <th>$36$</th>
   </tr>
 </table>
 
 Now let's calculate overall COP:
 
 ```math
-\eta=23.3
+\eta\approx68
 ```
 (result are given without absolute errors because they are negligible)
 
 ## Sufficiency
-Now, why would we stop on the third optimization? Dynamic shows, that optimizing hottest function at that point gives less than $1\%$ to performance, so, considering we cannot optimize other functions any further,
-we come to a conclusion: any further optimization are gonna be insufficient.
+We have optimized all the hot functions and the dynamics of COP shows that optimizing something further is pointless, because it will require more assembly code. For example, on second optimization we had 133 COP. So third optimization, despite its high performance boost, lowered COP.
 
 ## Conclusion
-As expected, most efficient optimizations in terms of COP was the first one, followed by the second. However, it is noticable that second optimizatin gave more overall performance boost. 
+As expected, most efficient optimizations in terms of COP was the first one, followed by the second. However, third optimization gave bigger performance boost than the second one. But that is easily explainable: we optimizing the same function, just using different methods. Also third optimization is an upgrade to second, so that result is completely sensible.
