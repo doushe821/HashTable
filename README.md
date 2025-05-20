@@ -77,7 +77,7 @@ $\sigma_\text{MurMur2}=2.34$
 
 $\sigma_\text{crc32}=2.22$
 
-$\sigma_\text{crc32_SIMD}=2.27$
+$\sigma_\text{crc32SIMD}=2.27$
 
 ## Naive version
 Naive version is pretty simple: hash function calculates sum of every charachter of the key string and takes remainder from division by number of buckets (256 in our case) as a hash for bucket.
