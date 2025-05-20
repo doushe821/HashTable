@@ -41,7 +41,6 @@ char* FileToHashTableWordArray(FILE* fp, size_t* WordCounter);
 
 extern "C" size_t ListSearch(const char* Key, void* listData, size_t ListSize);
 //extern "C" int mm_strcmp32(void* Key, void* KeyFromBucket);
-int mm_strcmp32(void* Key, void* KeyFromBucket);
 
 
 #endif

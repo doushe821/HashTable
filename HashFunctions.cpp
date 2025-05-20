@@ -107,7 +107,7 @@ uint64_t crc32HashIntrinsics(void* Key, size_t MaxValue)
 {
     uint64_t crc = 0xFFFFFFFF;
 
-    uint64_t part1 = *(const uint64_t*)(Key);
+    uint64_t part1 = *(const uint64_t*)(Key); // TODO strict aliasing (UB)
     crc = _mm_crc32_u64(crc, part1);
 
     uint64_t part2 = *(const uint64_t*)((char*)Key + 8);
@@ -121,101 +121,3 @@ uint64_t crc32HashIntrinsics(void* Key, size_t MaxValue)
 
     return (crc ^ 0xFFFFFFFF) % (uint32_t)MaxValue;
 }
-
-//size_t WhackyHash(void* Key, size_t len, size_t MaxValue)
-//{
-//    size_t semen = 0x69696ABE1;
-//    size_t MLG = 0xABE1;
-//    size_t tony = 0xEDA666;
-//    
-//    size_t HashSum = 0;
-//    for(size_t i = 0; i < len / 4; i++)
-//    {
-//        int HashSubSum = ((char*)Key)[i * 4] +  ((char*)Key)[i * 4 + 1] + ((char*)Key)[i * 4 + 2] + ((char*)Key)[i * 4 + 3];
-//        HashSum += ((HashSubSum ^ semen) * MLG);
-//        HashSum ^= semen;
-//        HashSum *= MLG;
-//    }
-//
-//    return HashSum % MaxValue;
-//}
-//
-//size_t WhackyHash2(void* Key, size_t len, size_t MaxValue)
-//{
-//    size_t seed = 0x69696ABE1;
-//    
-//    size_t HashSum = 0;
-//    for(size_t i = 0; i < len / 4; i++)
-//    {
-//        int HashSubSum = ((char*)Key)[i * 4] +  ((char*)Key)[i * 4 + 1] + ((char*)Key)[i * 4 + 2] + ((char*)Key)[i * 4 + 3];
-//        HashSum += (HashSubSum ^ seed);
-//    }
-//    return HashSum % MaxValue;
-//}
-//
-//size_t WhackyHash2_SIMD(void* Key, size_t len, size_t MaxValue)
-//{
-//    size_t seed = 0x69696ABE1;
-//    
-//    __m256i seedm256 = _mm256_set1_epi64x(seed);
-//
-//    size_t HashSubSums[4] = {};
-//    for(size_t i = 0; i < 4; i++)
-//    {
-//        HashSubSums[i] = ((char*)Key)[i * 8] +  ((char*)Key)[i * 8 + 1] + ((char*)Key)[i * 8 + 2] + ((char*)Key)[i * 8 + 3]
-//        + ((char*)Key)[i * 8 + 4] +  ((char*)Key)[i * 8 + 5] + ((char*)Key)[i * 8 + 6] + ((char*)Key)[i * 8 + 7];
-//    }
-//
-//    __m256i SubSums256 = {(long long)HashSubSums[0], (long long)HashSubSums[1], (long long)HashSubSums[2], (long long)HashSubSums[3]};
-//    SubSums256 = _mm256_xor_si256(SubSums256, seedm256);
-//
-//    size_t HashSum = SubSums256[0] + SubSums256[1] + SubSums256[2] + SubSums256[3];
-//    return HashSum % MaxValue;
-//}
-
-//size_t crc32HashIntrinsics(const void* Key, const size_t MaxValue)
-//{
-//    size_t seed = 0xFFFFFFFFFFFFFFFF;
-//
-//    size_t partition1 = *(const size_t*)(Key);
-//    seed = _mm_crc32_u64(seed, partition1);
-//
-//    size_t partition2 = *(const size_t*)(Key + 8);
-//    seed = _mm_crc32_u64(seed, partition2);
-//
-//    return (seed ^ 0xFFFFFFFF) % MaxValue;
-//}
-
-
-//int crc32TableInit(uint32_t* table)
-//{
-//    uint8_t index = 0;
-//    uint8_t z = 0;
-//    do
-//    {
-//        table[index]=index;
-//        for(z = 8; z > 0; z--) 
-//        {
-//            if(table[index] & 1)
-//            {
-//                table[index] = (table[index]>>1)^0xEDB88320;
-//            }
-//            else
-//            {
-//                table[index] >>= 1;
-//            }
-//        }
-//    }while(++index);
-//    return 0;
-//}
-//
-//size_t crc32Hash(const void* Key, size_t len, size_t MaxValue, uint32_t* crcTable)
-//{
-//    u_int32_t crc = 0xFFFFFFFFFFFFFFFF;
-//    for(size_t i = 0; i < len; i++)
-//    {
-//        u_int8_t index = (crc ^ *(u_int8_t*)(Key + i * sizeof(u_int8_t))) & 0xFF;
-//        crc = (crc >> 8) ^ crcTable[i];
-//    }
-//    return (crc ^ 0xFFFFFFFF) % MaxValue;
-//}

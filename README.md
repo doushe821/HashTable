@@ -247,30 +247,30 @@ Let's place experimental data in a table:
   </tr>
   <tr>
     <th>Naive</th>
-    <th>$(10.5\pm 0.3)\cdot10^9$</th>
-    <th>$0.03$</th>
+    <th>$(87.1\pm 0.3)\cdot10^9$</th>
+    <th>$0.003$</th>
     <th>$1.00$</th>
     <th>$0$</th>
   </tr>
   <tr>
     <th>SIMD hash</th>
-    <th>($5.1\pm 0.3)\cdot10^9$</th>
-    <th>$0.06$</th>
-    <th>$2.06$</th>
+    <th>($22.2\pm 0.1)\cdot10^9$</th>
+    <th>$0.005$</th>
+    <th>$3.92$</th>
     <th>$4$</th>
   </tr>
   <tr>
     <th>Inline asm strcmp</th>
-    <th>$(4.5\pm 0.4)\cdot10^9$</th>
-    <th>$0.09$</th>
-    <th>$2.33$</th>
+    <th>$(19.1\pm 0.4)\cdot10^9$</th>
+    <th>$0.04$</th>
+    <th>$4.58$</th>
     <th>$6$</th>
   </tr>
   <tr>
     <th>Search in asm</th>
-    <th>$(3.39\pm 0.04)\cdot10^9$</th>
+    <th>$(15.82\pm 0.06)\cdot10^9$</th>
     <th>$0.01$</th>
-    <th>$3.09$</th>
+    <th>$5.44$</th>
     <th>$21$</th>
   </tr>
 </table>

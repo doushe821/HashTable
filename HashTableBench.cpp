@@ -1,6 +1,8 @@
 #include "HashTableBench.h"
 #include <inttypes.h>
 
+#include <immintrin.h>
+
 HashErrors LoadFactorBench(HashTable_t* HashTable)
 {
     FILE* LoadFactorTest = fopen("LoadFactor.csv", "w+b");
@@ -30,7 +32,7 @@ HashErrors SearchBench(HashTable_t* HashTable, flags_t Flags, uint32_t* crc32tab
 {
     FILE* SearchBenchFile = fopen("SearchBench.txt", "r+b");
     char* DataBuffer = NULL;
-    size_t ResultSum = 0;
+    volatile size_t ResultSum = 0;
     size_t WordCounter = 0;
     if(SearchBenchFile == NULL)
     {
@@ -43,49 +45,79 @@ HashErrors SearchBench(HashTable_t* HashTable, flags_t Flags, uint32_t* crc32tab
     }
     fprintf(stderr, "Words in bench = %zu\n", WordCounter);
 
+    unsigned long long start = 0;
+    unsigned long long end = 0;
     switch (Flags.searchOptimization)
     {
         case NO_OPTIMIZATIONS:
         {
-            for(size_t i = 0; i < WordCounter; i++)
+            start = __rdtsc();
+            for(size_t j = 0; j < 1; j++)
             {
-                ResultSum += HashTableSearchNaive(HashTable, (void*)(DataBuffer + i * 32), crc32table);
+                for(size_t i = 0; i < WordCounter; i++)
+                {
+                    ResultSum += HashTableSearchNaive(HashTable, (void*)(DataBuffer + i * 32), crc32table);
+                }
             }
+            end = __rdtsc();
             break;
         }
         case SIMD_HASH:
         {
-            for(size_t i = 0; i < WordCounter; i++)
+            start = __rdtsc();
+            for(size_t j = 0; j < 1; j++)
             {
-                ResultSum += HashTableSearchSIMDHash(HashTable, (void*)(DataBuffer + i * 32));
+                for(size_t i = 0; i < WordCounter; i++)
+                {
+                    ResultSum += HashTableSearchSIMDHash(HashTable, (void*)(DataBuffer + i * 32));
+                }
             }
+            end = __rdtsc();
             break;
         }
         case SIMD_HASH_STRCMP_IN_ASM:
         {
-            for(size_t i = 0; i < WordCounter; i++)
+            start = __rdtsc();
+            for(size_t j = 0; j < 60; j++)
             {
-                ResultSum += HashTableSearchSIMDHashAsmStrcmp(HashTable, (void*)(DataBuffer + i * 32));
+                for(size_t i = 0; i < WordCounter; i++)
+                {
+                    ResultSum += HashTableSearchSIMDHashAsmStrcmp(HashTable, (void*)(DataBuffer + i * 32));
+                }
             }
+            end = __rdtsc();
             break;
         }
         case SIMD_HASH_ASM_SEARCH:
-        {
-            for(size_t i = 0; i < WordCounter; i++)
+        {    
+            start = __rdtsc();
+            for(size_t j = 0; j < 60; j++)
             {
-                ResultSum += HashTableSearchAsmSearch(HashTable, (void*)(DataBuffer + i * 32));
+                for(size_t i = 0; i < WordCounter; i++)
+                {
+                    ResultSum += HashTableSearchAsmSearch(HashTable, (void*)(DataBuffer + i * 32));
+                }
             }
+            end = __rdtsc();
             break;    
         }
         default:
         {
-            for(size_t i = 0; i < WordCounter; i++)
+            start = __rdtsc();
+            for(size_t j = 0; j < 60; j++)
             {
-                ResultSum += HashTableSearchNaive(HashTable, (void*)(DataBuffer + i * 32), crc32table);
+                for(size_t i = 0; i < WordCounter; i++)
+                    {
+                        ResultSum += HashTableSearchNaive(HashTable, (void*)(DataBuffer + i * 32), crc32table);
+                    }
             }
+            end = __rdtsc();
             break;
         }
     }
+
+    fprintf(stderr, "Result sum = %zu\n", ResultSum);
+    fprintf(stderr, "Ticks = %llu\n", end - start);
 
     fclose(SearchBenchFile);
     free(DataBuffer);

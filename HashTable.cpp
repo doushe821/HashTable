@@ -17,6 +17,7 @@
 const size_t WordLengthMax = 32;
 const size_t listInitSize = 8192;
 
+static int mm_strcmp32(void* Key, void* KeyFromBucket);
 static int KeysComp(void* Key, void* KeyFromList);
 
 HashTable_t HashTableInit(size_t BucketCount)
@@ -70,6 +71,7 @@ char* FileToHashTableWordArray(FILE* fp, size_t* WordCounter)
         LocalWordCounter++;
         i += (size_t)nextptr - (size_t)(FileBuffer + i);
     }
+
     char* DataBuffer = (char*)aligned_alloc(sizeof(__m256), LocalWordCounter * sizeof(__m256)); 
 
     size_t FileBufferIndex = 0;
@@ -160,7 +162,7 @@ HashErrors HashTableInsertSIMDHash(char* key, HashTable_t* HashTable)
         return MISSALIGNMENT;
     }
 
-    size_t hash = crc32HashIntrinsics(key, HashTable->BucketCount);
+    size_t hash = crc32HashIntrinsics(key, HashTable->BucketCount); // TODO take module division here
 
     if(HashTable->KeysBucketArray[hash] == NULL)
     {
@@ -329,6 +331,11 @@ size_t HashTableSearchNaive(HashTable_t* HashTable, void* Key, uint32_t* crc32ta
 
     size_t index = ListSearchInd(HashTable->KeysBucketArray[hash], Key, KeysComp);
 
+    if(index == 0)
+    {
+        return 0;
+    }
+
     size_t Number =  *(size_t*)((char*)HashTable->ValuesBucketArray[hash]->data + index * HashTable->ValuesBucketArray[hash]->elsize);
 
     return Number;
@@ -341,76 +348,6 @@ static int KeysComp(void* Key, void* KeyFromList)
 
     return strncmp(KeyStr, KeyStrFromList, WordLengthMax);
 }
-
-//size_t HashTableSearchSIMDHashAsmStrcmp(HashTable_t* HashTable, void* Key)
-//{
-//    if(HashTable == NULL)
-//    {
-//        fprintf(stderr, "Hash table pointer is NULL\n");
-//        return NULL_HASH_TABLE_POINTER;
-//    }
-//    if(Key == NULL)
-//    {
-//        fprintf(stderr, "Key pointer is NULL");
-//        return NULL_KEY_POINTER;
-//    }
-//
-//    size_t hash = crc32HashIntrinsics(Key, HashTable->BucketCount);
-//    if(HashTable->KeysBucketArray[hash] == NULL)
-//    {
-//        //fprintf(stderr, "Bucket isn't loaded\n");
-//        return 0;
-//    }
-//
-//    size_t index = 0;
-//
-//    //size_t index = ListSearchInd(HashTable->KeysBucketArray[hash], Key, mm_strcmp32);
-//
-//    size_t ElemIndex = HashTable->KeysBucketArray[hash]->ref[0].next;
-//    while(ElemIndex != 0)
-//    {
-//        if(comp((char*)list->data + ElemIndex * list->elsize, Key) == 0)
-//        {
-//            return ;
-//        }
-//    
-//        ElemIndex = list->ref[ElemIndex].next;
-//
-//    }
-//
-//    size_t Number =  *(size_t*)((char*)HashTable->ValuesBucketArray[hash]->data + index * HashTable->ValuesBucketArray[hash]->elsize);
-//
-//    return Number;
-//}
-
-//HashErrors HashTableErase(char* key, HashTable_t* HashTable) 
-//{
-//    if(strlen(key) > WordLengthMax)
-//    {
-//        HashTable->ErrorCode = KEY_IS_TOO_BIG;
-//        return KEY_IS_TOO_BIG;
-//    }
-//    if(HashTable == NULL)
-//    {
-//        HashTable->ErrorCode = NULL_HASH_TABLE_POINTER;
-//        return NULL_HASH_TABLE_POINTER;
-//    }
-//
-//    size_t hash = WhackyHash2_SIMD((void*)key, sizeof(__m256), HashTable->BucketCount);
-//
-//    size_t index = ListSearch(key, HashTable->KeysBucketArray[hash]->data, GetLinearListSize((HashTable->KeysBucketArray[hash]))); 
-//    if(index == 0)
-//    {
-//        HashTable->ErrorCode = NO_KEY_TO_DELETE;
-//        return NO_KEY_TO_DELETE;
-//    }
-//    else
-//    {   
-//        memset((char*)HashTable->KeysBucketArray[hash]->data + index * WordLengthMax, 0, WordLengthMax);
-//        memset((char*)HashTable->ValuesBucketArray[hash]->data + index * sizeof(index), 0, sizeof(index));
-//    }
-//    return MODULE_SUCCESS;
-//}
 
 enum HashErrors HashTableDump(HashTable_t* HashTable)
 {
@@ -517,6 +454,10 @@ size_t HashTableSearchSIMDHash(HashTable_t* HashTable, void* Key)
 
     size_t index = ListSearchInd(HashTable->KeysBucketArray[hash], Key, KeysComp);
 
+    if(index == 0)
+    {
+        return 0;
+    }
     size_t Number =  *(size_t*)((char*)HashTable->ValuesBucketArray[hash]->data + index * HashTable->ValuesBucketArray[hash]->elsize);
 
     return Number;
@@ -561,7 +502,7 @@ size_t HashTableSearchSIMDHashAsmStrcmp(HashTable_t* HashTable, void* Key)
     return Number;
 }
 
-int mm_strcmp32(void* key, void* KeyFromList)
+static int mm_strcmp32(void* key, void* KeyFromList)
 {
     uint8_t result = 1;
     __asm__ __volatile__
