@@ -28,7 +28,7 @@ HashErrors LoadFactorBench(HashTable_t* HashTable)
     return MODULE_SUCCESS;
 }
 
-HashErrors SearchBench(HashTable_t* HashTable, flags_t Flags, uint32_t* crc32table)
+HashErrors SearchBench(HashTable_t* HashTable, flags_t Flags)
 {
     FILE* SearchBenchFile = fopen("SearchBench.txt", "r+b");
     char* DataBuffer = NULL;
@@ -56,7 +56,7 @@ HashErrors SearchBench(HashTable_t* HashTable, flags_t Flags, uint32_t* crc32tab
             {
                 for(size_t i = 0; i < WordCounter; i++)
                 {
-                    ResultSum += HashTableSearchNaive(HashTable, (void*)(DataBuffer + i * 32), crc32table);
+                    ResultSum += HashTableSearchNaive(HashTable, (void*)(DataBuffer + i * 32));
                 }
             }
             end = __rdtsc();
@@ -78,7 +78,7 @@ HashErrors SearchBench(HashTable_t* HashTable, flags_t Flags, uint32_t* crc32tab
         case SIMD_HASH_STRCMP_IN_ASM:
         {
             start = __rdtsc();
-            for(size_t j = 0; j < 60; j++)
+            for(size_t j = 0; j < 1; j++)
             {
                 for(size_t i = 0; i < WordCounter; i++)
                 {
@@ -91,7 +91,7 @@ HashErrors SearchBench(HashTable_t* HashTable, flags_t Flags, uint32_t* crc32tab
         case SIMD_HASH_ASM_SEARCH:
         {    
             start = __rdtsc();
-            for(size_t j = 0; j < 60; j++)
+            for(size_t j = 0; j < 1; j++)
             {
                 for(size_t i = 0; i < WordCounter; i++)
                 {
@@ -104,11 +104,11 @@ HashErrors SearchBench(HashTable_t* HashTable, flags_t Flags, uint32_t* crc32tab
         default:
         {
             start = __rdtsc();
-            for(size_t j = 0; j < 60; j++)
+            for(size_t j = 0; j < 1; j++)
             {
                 for(size_t i = 0; i < WordCounter; i++)
                     {
-                        ResultSum += HashTableSearchNaive(HashTable, (void*)(DataBuffer + i * 32), crc32table);
+                        ResultSum += HashTableSearchNaive(HashTable, (void*)(DataBuffer + i * 32));
                     }
             }
             end = __rdtsc();

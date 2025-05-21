@@ -17,7 +17,7 @@
 const size_t WordLengthMax = 32;
 const size_t listInitSize = 8192;
 
-static int mm_strcmp32(void* Key, void* KeyFromBucket);
+inline static int mm_strcmp32(void* Key, void* KeyFromBucket);
 static int KeysComp(void* Key, void* KeyFromList);
 
 HashTable_t HashTableInit(size_t BucketCount)
@@ -87,7 +87,7 @@ char* FileToHashTableWordArray(FILE* fp, size_t* WordCounter)
     return DataBuffer;
 }
 
-HashErrors HashTableInsertNaive(char* key, HashTable_t* HashTable, uint32_t* crc32Table)
+HashErrors HashTableInsertNaive(char* key, HashTable_t* HashTable)
 {
     if(strlen(key) > WordLengthMax)
     {
@@ -105,7 +105,7 @@ HashErrors HashTableInsertNaive(char* key, HashTable_t* HashTable, uint32_t* crc
         return MISSALIGNMENT;
     }
 
-    size_t hash = crc32Hash(key, WordLengthMax, HashTable->BucketCount, crc32Table);
+    size_t hash = crc32Hash(key, WordLengthMax, HashTable->BucketCount);
 
     if(HashTable->KeysBucketArray[hash] == NULL)
     {
@@ -116,31 +116,28 @@ HashErrors HashTableInsertNaive(char* key, HashTable_t* HashTable, uint32_t* crc
         size_t count = 1;
         PushFront(HashTable->ValuesBucketArray[hash], &count);
     }
+    size_t index = 0;
+    for(size_t i = 0; i < GetLinearListSize((HashTable->KeysBucketArray[hash])) / WordLengthMax; i++)
+    {
+        if(strncmp((char*)key, (char*)HashTable->KeysBucketArray[hash]->data + i * WordLengthMax, strlen(key)) == 0)
+        {
+            index = i;
+            break;
+        }
+    }
+    if(index == 0)
+    {
+        size_t NewValue = 1;
+        PushFront(HashTable->KeysBucketArray[hash], (void*)key);
+        PushFront(HashTable->ValuesBucketArray[hash], &NewValue);
+    }
     else
     {
-        size_t index = 0;
-        for(size_t i = 0; i < GetLinearListSize((HashTable->KeysBucketArray[hash])) / WordLengthMax; i++)
-        {
-            if(strncmp((char*)key, (char*)HashTable->KeysBucketArray[hash]->data + i * WordLengthMax, WordLengthMax) == 0)
-            {
-                index = i;
-                break;
-            }
-        }
-        if(index == 0)
-        {
-            size_t NewValue = 1;
-            PushInd(HashTable->KeysBucketArray[hash], (void*)key, GetLinearListSize((HashTable->KeysBucketArray[hash])) + 1);
-            PushInd(HashTable->ValuesBucketArray[hash], &NewValue, GetLinearListSize((HashTable->ValuesBucketArray[hash])) + 1);
-        }
-        else
-        {
-            size_t value = 0;
-            memcpy(&value, ListGetNodeValueInd(HashTable->ValuesBucketArray[hash], index), sizeof(value));
-            value++;
-            ListUpdateNodeValue(HashTable->ValuesBucketArray[hash], &value, index);
-        }        
-    }
+        size_t value = 0;
+        memcpy(&value, ListGetNodeValueInd(HashTable->ValuesBucketArray[hash], index), sizeof(value));
+        value++;
+        ListUpdateNodeValue(HashTable->ValuesBucketArray[hash], &value, index);
+    }  
     return MODULE_SUCCESS;
 }
 
@@ -173,33 +170,31 @@ HashErrors HashTableInsertSIMDHash(char* key, HashTable_t* HashTable)
         size_t count = 1;
         PushFront(HashTable->ValuesBucketArray[hash], &count);
     }
+    size_t index = 0;
+    for(size_t i = 0; i < GetLinearListSize((HashTable->KeysBucketArray[hash])) / WordLengthMax; i++)
+    {
+        if(strncmp((char*)key, (char*)HashTable->KeysBucketArray[hash]->data + i * WordLengthMax, strlen(key)) == 0)
+        {
+            index = i;
+            break;
+        }
+    }
+    if(index == 0)
+    {
+        size_t NewValue = 1;
+        PushFront(HashTable->KeysBucketArray[hash], (void*)key);
+        PushFront(HashTable->ValuesBucketArray[hash], &NewValue);
+    }
     else
     {
-        size_t index = 0;
-        for(size_t i = 0; i < GetLinearListSize((HashTable->KeysBucketArray[hash])) / WordLengthMax; i++)
-        {
-            if(strncmp((char*)key, (char*)HashTable->KeysBucketArray[hash]->data + i * WordLengthMax, WordLengthMax) == 0)
-            {
-                index = i;
-                break;
-            }
-        }
-        if(index == 0)
-        {
-            size_t NewValue = 1;
-            PushInd(HashTable->KeysBucketArray[hash], (void*)key, GetLinearListSize((HashTable->KeysBucketArray[hash])) + 1);
-            PushInd(HashTable->ValuesBucketArray[hash], &NewValue, GetLinearListSize((HashTable->ValuesBucketArray[hash])) + 1);
-        }
-        else
-        {
-            size_t value = 0;
-            memcpy(&value, ListGetNodeValueInd(HashTable->ValuesBucketArray[hash], index), sizeof(value));
-            value++;
-            ListUpdateNodeValue(HashTable->ValuesBucketArray[hash], &value, index);
-        }        
-    }
+        size_t value = 0;
+        memcpy(&value, ListGetNodeValueInd(HashTable->ValuesBucketArray[hash], index), sizeof(value));
+        value++;
+        ListUpdateNodeValue(HashTable->ValuesBucketArray[hash], &value, index);
+    }   
     return MODULE_SUCCESS;
 }
+
 
 HashErrors HashTableInsertSIMDHashAsmStrcmp(char* key, HashTable_t* HashTable)
 {
@@ -230,38 +225,35 @@ HashErrors HashTableInsertSIMDHashAsmStrcmp(char* key, HashTable_t* HashTable)
         size_t count = 1;
         PushFront(HashTable->ValuesBucketArray[hash], &count);
     }
+
+    size_t index = 0;
+    for(size_t i = 0; i < GetLinearListSize((HashTable->KeysBucketArray[hash])) / WordLengthMax; i++)
+    {
+        if(mm_strcmp32((char*)key, (char*)HashTable->KeysBucketArray[hash]->data + i * WordLengthMax) == 0)
+        {
+            index = i;
+            break;
+        }
+    }
+    if(index == 0)
+    {
+        size_t NewValue = 1;
+        PushFront(HashTable->KeysBucketArray[hash], (void*)key);
+        PushFront(HashTable->ValuesBucketArray[hash], &NewValue);
+    }
     else
     {
-        size_t index = 0;
-        for(size_t i = 0; i < GetLinearListSize((HashTable->KeysBucketArray[hash])) / WordLengthMax; i++)
-        {
-            if(mm_strcmp32((char*)key, (char*)HashTable->KeysBucketArray[hash]->data + i * WordLengthMax) == 0)
-            {
-                index = i;
-                break;
-            }
-        }
-        if(index == 0)
-        {
-            size_t NewValue = 1;
-            PushInd(HashTable->KeysBucketArray[hash], (void*)key, GetLinearListSize((HashTable->KeysBucketArray[hash])) + 1);
-            PushInd(HashTable->ValuesBucketArray[hash], &NewValue, GetLinearListSize((HashTable->ValuesBucketArray[hash])) + 1);
-        }
-        else
-        {
-            size_t value = 0;
-            memcpy(&value, ListGetNodeValueInd(HashTable->ValuesBucketArray[hash], index), sizeof(value));
-            value++;
-            ListUpdateNodeValue(HashTable->ValuesBucketArray[hash], &value, index);
-        }        
-    }
+        size_t value = 0;
+        memcpy(&value, ListGetNodeValueInd(HashTable->ValuesBucketArray[hash], index), sizeof(value));
+        value++;
+        ListUpdateNodeValue(HashTable->ValuesBucketArray[hash], &value, index);
+    }        
     return MODULE_SUCCESS;
 }
 
 
 HashErrors HashTableInsertSIMDHashAsmSearch(char* key, HashTable_t* HashTable)
 {
-   
     if(strlen(key) > WordLengthMax)
     {
         HashTable->ErrorCode = KEY_IS_TOO_BIG;
@@ -271,14 +263,14 @@ HashErrors HashTableInsertSIMDHashAsmSearch(char* key, HashTable_t* HashTable)
     {
         HashTable->ErrorCode = NULL_HASH_TABLE_POINTER;
         return NULL_HASH_TABLE_POINTER;
-    }
+    } 
     if(((size_t)key % WordLengthMax) != 0)
     {
         HashTable->ErrorCode = MISSALIGNMENT;
         return MISSALIGNMENT;
     }
 
-    size_t hash = crc32HashIntrinsics((void*)key, WordLengthMax);
+    size_t hash = crc32HashIntrinsics(key, HashTable->BucketCount);
 
     if(HashTable->KeysBucketArray[hash] == NULL)
     {
@@ -289,28 +281,39 @@ HashErrors HashTableInsertSIMDHashAsmSearch(char* key, HashTable_t* HashTable)
         size_t count = 1;
         PushFront(HashTable->ValuesBucketArray[hash], &count);
     }
+
+    size_t index = 0;
+    for(size_t i = 0; i < GetLinearListSize((HashTable->KeysBucketArray[hash])) / WordLengthMax; i++)
+    {
+        if(mm_strcmp32((char*)key, (char*)HashTable->KeysBucketArray[hash]->data + i * WordLengthMax) == 0)
+        {
+            index = i;
+            break;
+        }
+    }
+    if(index == 0)
+    {
+        size_t NewValue = 1;
+        PushFront(HashTable->KeysBucketArray[hash], (void*)key);
+        PushFront(HashTable->ValuesBucketArray[hash], &NewValue);
+    }
     else
     {
-        size_t index = ListSearch(key, HashTable->KeysBucketArray[hash]->data, GetLinearListSize((HashTable->KeysBucketArray[hash])));
-        if(index == 0)
-        {
-            size_t NewValue = 1;
-            PushFront(HashTable->KeysBucketArray[hash], (void*)key);//, GetLinearListSize((HashTable->KeysBucketArray[hash])) + 1);
-            PushFront(HashTable->ValuesBucketArray[hash], &NewValue);//, //GetLinearListSize((HashTable->ValuesBucketArray[hash])) + 1);
-        }
-        else
-        {
-            size_t value = 0;
-            memcpy(&value, ListGetNodeValueInd(HashTable->ValuesBucketArray[hash], index), sizeof(value));
-            value++;
-            ListUpdateNodeValue(HashTable->ValuesBucketArray[hash], &value, index);
-        }        
-    }
+        size_t value = 0;
+        memcpy(&value, ListGetNodeValueInd(HashTable->ValuesBucketArray[hash], index), sizeof(value));
+        value++;
+        ListUpdateNodeValue(HashTable->ValuesBucketArray[hash], &value, index);
+    }        
     return MODULE_SUCCESS;
 }
 
-size_t HashTableSearchNaive(HashTable_t* HashTable, void* Key, uint32_t* crc32table)
+size_t HashTableSearchNaive(HashTable_t* HashTable, void* Key)
 {
+    __asm__ __volatile__
+    (
+        "NaiveSearch:"
+    );
+
     if(HashTable == NULL)
     {
         fprintf(stderr, "Hash table pointer is NULL\n");
@@ -322,10 +325,9 @@ size_t HashTableSearchNaive(HashTable_t* HashTable, void* Key, uint32_t* crc32ta
         return NULL_KEY_POINTER;
     }
 
-    size_t hash = crc32Hash(Key, WordLengthMax, HashTable->BucketCount, crc32table);
+    size_t hash = crc32Hash(Key, WordLengthMax, HashTable->BucketCount);
     if(HashTable->KeysBucketArray[hash] == NULL)
     {
-        //fprintf(stderr, "Bucket isn't loaded\n");
         return 0;
     }
 
@@ -341,11 +343,48 @@ size_t HashTableSearchNaive(HashTable_t* HashTable, void* Key, uint32_t* crc32ta
     return Number;
 }
 
+
+size_t HashTableSearchSIMDHash(HashTable_t* HashTable, void* Key)
+{
+    __asm__ __volatile__
+    (
+        "FirstOptSearch:"
+    );
+    if(HashTable == NULL)
+    {
+        fprintf(stderr, "Hash table pointer is NULL\n");
+        return NULL_HASH_TABLE_POINTER;
+    }
+    if(Key == NULL)
+    {
+        fprintf(stderr, "Key pointer is NULL");
+        return NULL_KEY_POINTER;
+    }
+
+    size_t hash = crc32HashIntrinsics(Key, HashTable->BucketCount);
+
+    if(HashTable->KeysBucketArray[hash] == NULL)
+    {
+        return 0;
+    }
+
+    size_t index = ListSearchInd(HashTable->KeysBucketArray[hash], Key, KeysComp);
+
+    if(index == 0)
+    {
+        return 0;
+    }
+
+    size_t Number =  *(size_t*)((char*)HashTable->ValuesBucketArray[hash]->data + index * HashTable->ValuesBucketArray[hash]->elsize);
+
+    return Number;
+}
+
+
 static int KeysComp(void* Key, void* KeyFromList)
 {
     char* KeyStr = (char*)Key;
     char* KeyStrFromList = (char*)KeyFromList;
-
     return strncmp(KeyStr, KeyStrFromList, WordLengthMax);
 }
 
@@ -425,39 +464,31 @@ size_t HashTableSearchAsmSearch(HashTable_t* HashTable, void* Key)
         return 0;     
     }
 
-    size_t index = ListSearch((char*)Key, HashTable->KeysBucketArray[hash]->data, GetLinearListSize(HashTable->KeysBucketArray[hash]));
-
-    size_t Number =  *(size_t*)((char*)HashTable->ValuesBucketArray[hash]->data + index * HashTable->ValuesBucketArray[hash]->elsize);
-
-    return Number;
-}
-
-size_t HashTableSearchSIMDHash(HashTable_t* HashTable, void* Key)
-{
-    if(HashTable == NULL)
+    size_t index = 0;
+    size_t ListSize = GetLinearListSize(HashTable->KeysBucketArray[hash]) / HashTable->KeysBucketArray[hash]->elsize;
+    uint8_t result = 0;
+    for(size_t i = 1; i < ListSize; i++)
     {
-        fprintf(stderr, "Hash table pointer is NULL\n");
-        return NULL_HASH_TABLE_POINTER;
-    }
-    if(Key == NULL)
-    {
-        fprintf(stderr, "Key pointer is NULL");
-        return NULL_KEY_POINTER;
-    }
 
-    size_t hash = crc32HashIntrinsics(Key, HashTable->BucketCount);
-    if(HashTable->KeysBucketArray[hash] == NULL)
-    {
-        //fprintf(stderr, "Bucket isn't loaded\n");
-        return 0;
+        __asm__ __volatile__
+        (
+            "vmovaps (%1), %%ymm0\n"           
+            "vmovaps (%2), %%ymm1\n\t"         
+            "vpxor %%ymm1, %%ymm0, %%ymm0\n\t" 
+            "vptest %%ymm0, %%ymm0\n\t"        
+            "setne %0\n\t"                   
+            : "=r" (result)                    
+            : "D" (Key), "S" ((char*)HashTable->KeysBucketArray[hash]->data + i * HashTable->KeysBucketArray[hash]->elsize)   
+            : "ymm0", "ymm1", "cc", "memory"
+        );
+
+        if(result == 0)
+        {
+            index = i;
+            break;
+        }
     }
 
-    size_t index = ListSearchInd(HashTable->KeysBucketArray[hash], Key, KeysComp);
-
-    if(index == 0)
-    {
-        return 0;
-    }
     size_t Number =  *(size_t*)((char*)HashTable->ValuesBucketArray[hash]->data + index * HashTable->ValuesBucketArray[hash]->elsize);
 
     return Number;
@@ -483,19 +514,12 @@ size_t HashTableSearchSIMDHashAsmStrcmp(HashTable_t* HashTable, void* Key)
         return 0;     
     }
 
-  //  size_t index = 0;
-  //  size_t ListSize = GetLinearListSize(HashTable->KeysBucketArray[hash]);
-  //  
-  //  for(size_t i = 0; i < ListSize; i++)
-  //  {
-  //      void* ListElemValue = (char*)HashTable->KeysBucketArray[hash]->data + i * WordLengthMax;
-  //      if(mm_strcmp32(Key, ListElemValue) == 0)
-  //      {
-  //          index = i;
-  //          break;
-  //      }
-  //  }
     size_t index = ListSearchInd(HashTable->KeysBucketArray[hash], Key, mm_strcmp32);
+
+    if(index == 0)
+    {
+        return 0;
+    }
 
     size_t Number =  *(size_t*)((char*)HashTable->ValuesBucketArray[hash]->data + index * HashTable->ValuesBucketArray[hash]->elsize);
 

@@ -71,7 +71,10 @@ size_t MurmurHash2 (char * key, size_t len, size_t MaxValue)
     return h % MaxValue;
 }
 
-void crc32TableInit(uint32_t* Table)
+
+static uint32_t crc32Table[256] = {};
+
+void crc32TableInit()
 {
     uint32_t crc = 0;
     for (int i = 0; i < 256; i++)
@@ -88,17 +91,17 @@ void crc32TableInit(uint32_t* Table)
                 crc >>= 1;
             }
         }
-        Table[i] = crc;
+        crc32Table[i] = crc;
     }
 }
 
-uint32_t crc32Hash(void* Key, size_t Len, size_t MaxValue, uint32_t* crcTable)
+uint32_t crc32Hash(void* Key, size_t Len, size_t MaxValue)
 {
     uint32_t crc = 0xFFFFFFFF;
     for (size_t i = 0; i < Len; i++)
     {
         uint8_t index = (crc ^ (*((char*)Key + i))) & 0xFF;
-        crc = (crc >> 8) ^ crcTable[index];
+        crc = (crc >> 8) ^ crc32Table[index];
     }
     return (crc ^ 0xFFFFFFFF) % (uint32_t)MaxValue;
 }

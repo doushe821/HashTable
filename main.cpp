@@ -13,6 +13,9 @@
 
 int main(int argc, char** argv)
 {
+    uint64_t start = 0;
+    uint64_t end = 0;
+    start = __rdtsc();
     flags_t CMDFlags = {};
 
     ParseCMD(argc, argv, &CMDFlags);
@@ -34,8 +37,7 @@ int main(int argc, char** argv)
     HashTable_t HashTable = HashTableInit(BucketCount);
     ParseError(HashTable.ErrorCode);
 
-    uint32_t crc32table[256] = {};
-    crc32TableInit(crc32table);
+    crc32TableInit();
 
     switch(CMDFlags.searchOptimization)
     {
@@ -43,7 +45,7 @@ int main(int argc, char** argv)
         {
             for(size_t i = 0; i < WordCounter - 1; i++)
             {
-                HashTableInsertNaive(DataBuffer + i * sizeof(__m256), &HashTable, crc32table);
+                HashTableInsertNaive(DataBuffer + i * sizeof(__m256), &HashTable);
             }
             break;
         }
@@ -75,14 +77,17 @@ int main(int argc, char** argv)
         {
             for(size_t i = 0; i < WordCounter - 1; i++)
             {
-                HashTableInsertNaive(DataBuffer + i * sizeof(__m256), &HashTable, crc32table);
+                HashTableInsertNaive(DataBuffer + i * sizeof(__m256), &HashTable);
             }
             break;
         }
     }
 
+    end = __rdtsc();
 
-    SearchBench(&HashTable, CMDFlags, crc32table);
+    fprintf(stderr, "Initialising ticks = %zu\n", end - start);
+
+    SearchBench(&HashTable, CMDFlags);
     LoadFactorBench(&HashTable);
     HashTableDestr(&HashTable);
     free(DataBuffer);

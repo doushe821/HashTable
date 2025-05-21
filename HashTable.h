@@ -18,19 +18,18 @@ HashTable_t HashTableInit(size_t BucketCount);
 int HashTableDestr(HashTable_t* HashTable);
 
 
-size_t HashTableSearchNaive(HashTable_t* HashTable, void* Key, uint32_t* crc32table);
+size_t HashTableSearchNaive(HashTable_t* HashTable, void* Key);
 size_t HashTableSearchAsmSearchSIMDHash(HashTable_t* HashTable, void* Key);
 size_t HashTableSearchSIMDHashAsmStrcmp(HashTable_t* HashTable, void* Key);
 
 size_t HashTableSearchAsmSearch(HashTable_t* HashTable, void* Key);
-size_t HashTableSearchAsmStrcmp(HashTable_t* HashTable, void* Key, uint32_t* crc32table);
 size_t HashTableSearch(HashTable_t* HashTable, void* Key);
 size_t HashTableSearchSIMDHash(HashTable_t* HashTable, void* Key);
 //HashErrors HashTableErase(char* key, HashTable_t* HashTable);
 
 enum HashErrors HashTableDump(HashTable_t* HashTable);
 
-HashErrors HashTableInsertNaive(char* key, HashTable_t* HashTable, uint32_t* crc32Table);
+HashErrors HashTableInsertNaive(char* key, HashTable_t* HashTable);
 HashErrors HashTableInsertSIMDHash(char* key, HashTable_t* HashTable);
 HashErrors HashTableInsertSIMDHashAsmStrcmp(char* key, HashTable_t* HashTable);
 HashErrors HashTableInsertSIMDHashAsmSearch(char* key, HashTable_t* HashTable);

@@ -5,6 +5,6 @@
 #include "CMDParser.h"
 
 HashErrors LoadFactorBench(HashTable_t* HashTable);
-HashErrors SearchBench(HashTable_t* HashTable, flags_t Flags, uint32_t* crc32table);
+HashErrors SearchBench(HashTable_t* HashTable, flags_t Flags);
 
 #endif
