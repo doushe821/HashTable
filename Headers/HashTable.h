@@ -1,7 +1,7 @@
 #ifndef HASH_TABLE_H_INCLUDED
 #define HASH_TABLE_H_INCLUDED
 
-#include "List/List.h"
+#include "../List/List.h"
 #include "ErrorParser.h"
 #include "HashFunctions.h"
 

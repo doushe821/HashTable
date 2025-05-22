@@ -1,4 +1,4 @@
-#include "HashFunctions.h"
+#include "../Headers/HashFunctions.h"
 #include <stdlib.h>
 #include <xmmintrin.h>
 #include <emmintrin.h>

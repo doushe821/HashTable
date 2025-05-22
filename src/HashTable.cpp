@@ -3,16 +3,16 @@
 #include <string.h>
 #include <inttypes.h>
 
-#include "HashTable.h"
-#include "List/List.h"
-#include "List/ListStruct.h"
-#include "ErrorParser.h"
-#include "FileBufferizer.h"
+#include "../Headers/HashTable.h"
+#include "../List/List.h"
+#include "../List/ListStruct.h"
+#include "../Headers/ErrorParser.h"
+#include "../Headers/FileBufferizer.h"
 #include <emmintrin.h>
 #include <xmmintrin.h>
 #include <x86intrin.h>
 
-#include "HashFunctions.h"
+#include "../Headers/HashFunctions.h"
 
 const size_t WordLengthMax = 32;
 const size_t listInitSize = 8192;

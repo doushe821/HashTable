@@ -20,7 +20,7 @@ CC?=clang
 TARGET?=debug
 
 ifeq ($(TARGET), release)
-	CFLAGS=-O2 -g -no-pie -z noexecstack -mavx2 -march=native -flto
+	CFLAGS=-O2 -g -no-pie -z noexecstack -mavx2 -march=native
 else ifeq ($(TARGET), debug)
 	CFLAGS=-ggdb3 -g -z noexecstack -std=c++17 -Wall -Wextra -Weffc++ -Waggressive-loop-optimizations -no-pie -mavx2\
 	-Wc++14-compat -Wmissing-declarations -Wcast-align -Wcast-qual -Wchar-subscripts \
@@ -36,7 +36,7 @@ else ifeq ($(TARGET), debug)
 endif
 
 
-SOURCES=main.cpp FileBufferizer.cpp HashTable.cpp List/List.cpp ErrorParser.cpp HashTableBench.cpp HashFunctions.cpp CMDParser.cpp
+SOURCES=src/main.cpp src/FileBufferizer.cpp src/HashTable.cpp List/List.cpp src/ErrorParser.cpp src/HashTableBench.cpp src/HashFunctions.cpp src/CMDParser.cpp
 SOURCES_ASM=ListSearch.asm
 OBJECTS:=$(addprefix $(OUT_O_DIR)/,$(SOURCES:.cpp=.o))
 OBJECTS_ASM:=$(addprefix $(OUT_O_DIR)/,$(SOURCES_ASM:.asm=.o))

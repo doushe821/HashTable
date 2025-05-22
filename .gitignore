@@ -4,11 +4,8 @@
 *.txt
 *.data
 *.old
-*.GOVNO
-*.LEGA
-*.PENIS
-%data
 Hash
 Makefile
 Run
 build
+*.asm
