@@ -182,46 +182,34 @@ int mm_strcmp32(void* key, void* KeyFromList)
 </details>
 
 ## Third optimization
-Since we don't use optimization flags, mm_strcmp32() doesn't get inlined, so we can go even further in our search optimization, writing whole search function in Assembly.
-New function - size_t ListSearch(const char* Key, void* listData, size_t ListSize) contains mm_strcmp32() in it, while also going through list's data.
 
-Here is ListSearch() source code:
+Now let's try to inline our cmp function and make search use it.
 
 <details>
 <summary>Show/hide code</summary>
   
-```asm
-global ListSearch
+```c
+    for(size_t i = 1; i < ListSize; i++)
+    {
 
-ListSearch:
-    xor rax, rax
-    cmp rdx, 0h
-    je .KeyFound
+        __asm__ __volatile__
+        (
+            "vmovaps (%1), %%ymm0\n"           
+            "vmovaps (%2), %%ymm1\n\t"         
+            "vpxor %%ymm1, %%ymm0, %%ymm0\n\t" 
+            "vptest %%ymm0, %%ymm0\n\t"        
+            "setne %0\n\t"                   
+            : "=r" (result)                    
+            : "D" (Key), "S" ((char*)HashTable->KeysBucketArray[hash]->data + i * HashTable->KeysBucketArray[hash]->elsize)   
+            : "ymm0", "ymm1", "cc", "memory"
+        );
 
-    add rsi, 20h
- 
-.SearchLoop:
-
-    inc rax
-    vmovaps ymm0, yword [rdi]
-    vmovaps ymm1, yword [rsi]
-
-    vpxor ymm0, ymm1 
-    vptest ymm0, ymm0
-    jz .KeyFound
-
-    add rsi, 20h
-    sub rdx, 20h
-
-    cmp rdx, 0h
-    jne .SearchLoop
-
-    xor rax, rax 
-    ret
-    
-
-.KeyFound:
-  ret
+        if(result == 0)
+        {
+            index = i;
+            break;
+        }
+    }
 ```
 </details>
 
@@ -247,31 +235,31 @@ Let's place experimental data in a table:
   </tr>
   <tr>
     <th>Naive</th>
-    <th>$(87.1\pm 0.3)\cdot10^9$</th>
-    <th>$0.003$</th>
+    <th>$(36.4\pm 0.3)\cdot10^9$</th>
+    <th>$0.01$</th>
     <th>$1.00$</th>
     <th>$0$</th>
   </tr>
   <tr>
     <th>SIMD hash</th>
-    <th>($22.2\pm 0.1)\cdot10^9$</th>
-    <th>$0.005$</th>
-    <th>$3.92$</th>
+    <th>($24.2\pm 0.3)\cdot10^9$</th>
+    <th>$0.01$</th>
+    <th>$1.49$</th>
     <th>$4$</th>
   </tr>
   <tr>
-    <th>Inline asm strcmp</th>
-    <th>$(19.1\pm 0.4)\cdot10^9$</th>
-    <th>$0.04$</th>
-    <th>$4.58$</th>
-    <th>$6$</th>
+    <th>Inline asm strcmp (no function inline)</th>
+    <th>$(16.53\pm 0.09)\cdot10^9$</th>
+    <th>$0.001$</th>
+    <th>$2.2$</th>
+    <th>$8$</th>
   </tr>
   <tr>
-    <th>Search in asm</th>
+    <th>Function inlined</th>
     <th>$(15.82\pm 0.06)\cdot10^9$</th>
     <th>$0.01$</th>
-    <th>$5.44$</th>
-    <th>$21$</th>
+    <th>$2.3$</th>
+    <th>$8$</th>
   </tr>
 </table>
 </details>
@@ -290,27 +278,27 @@ This way we get:
   </tr>
   <tr>
     <th>First optimization</th>
-    <th>$265$</th>
+    <th>$122.5$</th>
   </tr>
   <tr>
     <th>Second optimization</th>
-    <th>$45$</th>
+    <th>$90$</th>
   </tr>
   <tr>
     <th>Third optimization</th>
-    <th>$36$</th>
+    <th>$12.5$</th>
   </tr>
 </table>
 
 Now let's calculate overall COP:
 
 ```math
-\eta\approx68
+\eta\approx93
 ```
 (result are given without absolute errors because they are negligible)
 
 ## Sufficiency
-We have optimized all the hot functions and the dynamics of COP shows that optimizing something further is pointless, because it will require more assembly code. For example, on second optimization we had 133 COP. So third optimization, despite its high performance boost, lowered COP.
+Last optimization had a really small impact on overall performance, so we can understand that we've done enough.
 
 ## Conclusion
-As expected, most efficient optimizations in terms of COP was the first one, followed by the second. However, third optimization gave bigger performance boost than the second one. But that is easily explainable: we optimizing the same function, just using different methods. Also third optimization is an upgrade to second, so that result is completely sensible.
+As expected, most efficient optimizations in terms of COP was the first one, followed by the second.

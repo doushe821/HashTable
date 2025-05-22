@@ -52,7 +52,7 @@ HashErrors SearchBench(HashTable_t* HashTable, flags_t Flags)
         case NO_OPTIMIZATIONS:
         {
             start = __rdtsc();
-            for(size_t j = 0; j < 1; j++)
+            for(size_t j = 0; j < 100; j++)
             {
                 for(size_t i = 0; i < WordCounter; i++)
                 {
@@ -65,7 +65,7 @@ HashErrors SearchBench(HashTable_t* HashTable, flags_t Flags)
         case SIMD_HASH:
         {
             start = __rdtsc();
-            for(size_t j = 0; j < 1; j++)
+            for(size_t j = 0; j < 100; j++)
             {
                 for(size_t i = 0; i < WordCounter; i++)
                 {
@@ -78,7 +78,7 @@ HashErrors SearchBench(HashTable_t* HashTable, flags_t Flags)
         case SIMD_HASH_STRCMP_IN_ASM:
         {
             start = __rdtsc();
-            for(size_t j = 0; j < 1; j++)
+            for(size_t j = 0; j < 100; j++)
             {
                 for(size_t i = 0; i < WordCounter; i++)
                 {
@@ -91,7 +91,7 @@ HashErrors SearchBench(HashTable_t* HashTable, flags_t Flags)
         case SIMD_HASH_ASM_SEARCH:
         {    
             start = __rdtsc();
-            for(size_t j = 0; j < 1; j++)
+            for(size_t j = 0; j < 100; j++)
             {
                 for(size_t i = 0; i < WordCounter; i++)
                 {

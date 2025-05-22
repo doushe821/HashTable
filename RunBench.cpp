@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 int main()
 {
@@ -11,13 +12,12 @@ int main()
         {"oThird"},
     };
 
-    char PerfCallString[50] = {};
+    char PerfCallString[50] = {"./Hash --opt "};
     for(int i = 0; i < 4; i++)
     {
-        sprintf(PerfCallString,  "perf record --output=%s%d.data ./Hash --opt %d", PerfData[i], 0, i);
+        PerfCallString[strlen(PerfCallString)] = i + '0';
         for(int j = 0; j < 10; j++)
         {
-            PerfCallString[27] = '0' + j;
             system(PerfCallString);
         }
     }
