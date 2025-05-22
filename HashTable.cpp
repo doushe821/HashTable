@@ -526,7 +526,7 @@ size_t HashTableSearchSIMDHashAsmStrcmp(HashTable_t* HashTable, void* Key)
     return Number;
 }
 
-static int mm_strcmp32(void* key, void* KeyFromList)
+inline static int mm_strcmp32(void* key, void* KeyFromList)
 {
     uint8_t result = 1;
     __asm__ __volatile__

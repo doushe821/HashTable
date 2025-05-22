@@ -20,7 +20,7 @@ CC?=clang
 TARGET?=debug
 
 ifeq ($(TARGET), release)
-	CFLAGS=-O2 -g -no-pie -z noexecstack -mavx2 -march=native
+	CFLAGS=-O2 -g -no-pie -z noexecstack -mavx2 -march=native -flto
 else ifeq ($(TARGET), debug)
 	CFLAGS=-ggdb3 -g -z noexecstack -std=c++17 -Wall -Wextra -Weffc++ -Waggressive-loop-optimizations -no-pie -mavx2\
 	-Wc++14-compat -Wmissing-declarations -Wcast-align -Wcast-qual -Wchar-subscripts \
