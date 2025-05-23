@@ -3,21 +3,21 @@
 #include <string.h>
 #include <inttypes.h>
 
-#include "../Headers/HashTable.h"
-#include "../List/List.h"
-#include "../List/ListStruct.h"
-#include "../Headers/ErrorParser.h"
-#include "../Headers/FileBufferizer.h"
+#include "HashTable.h"
+#include "List.h"
+#include "ListStruct.h"
+#include "ErrorParser.h"
+#include "FileBufferizer.h"
 #include <emmintrin.h>
 #include <xmmintrin.h>
 #include <x86intrin.h>
 
-#include "../Headers/HashFunctions.h"
+#include "HashFunctions.h"
 
 const size_t WordLengthMax = 32;
 const size_t listInitSize = 8192;
 
-inline static int mm_strcmp32(void* Key, void* KeyFromBucket);
+static int mm_strcmp32(void* Key, void* KeyFromBucket);
 static int KeysComp(void* Key, void* KeyFromList);
 
 HashTable_t HashTableInit(size_t BucketCount)
@@ -346,10 +346,6 @@ size_t HashTableSearchNaive(HashTable_t* HashTable, void* Key)
 
 size_t HashTableSearchSIMDHash(HashTable_t* HashTable, void* Key)
 {
-    __asm__ __volatile__
-    (
-        "FirstOptSearch:"
-    );
     if(HashTable == NULL)
     {
         fprintf(stderr, "Hash table pointer is NULL\n");
@@ -470,17 +466,7 @@ size_t HashTableSearchAsmSearch(HashTable_t* HashTable, void* Key)
     for(size_t i = 1; i < ListSize; i++)
     {
 
-        __asm__ __volatile__
-        (
-            "vmovaps (%1), %%ymm0\n"           
-            "vmovaps (%2), %%ymm1\n\t"         
-            "vpxor %%ymm1, %%ymm0, %%ymm0\n\t" 
-            "vptest %%ymm0, %%ymm0\n\t"        
-            "setne %0\n\t"                   
-            : "=r" (result)                    
-            : "D" (Key), "S" ((char*)HashTable->KeysBucketArray[hash]->data + i * HashTable->KeysBucketArray[hash]->elsize)   
-            : "ymm0", "ymm1", "cc", "memory"
-        );
+        result = mm_strcmp32(Key, (char*)HashTable->KeysBucketArray[hash]->data + i * HashTable->KeysBucketArray[hash]->elsize);   
 
         if(result == 0)
         {
@@ -526,10 +512,10 @@ size_t HashTableSearchSIMDHashAsmStrcmp(HashTable_t* HashTable, void* Key)
     return Number;
 }
 
-inline static int mm_strcmp32(void* key, void* KeyFromList)
+static int mm_strcmp32(void* key, void* KeyFromList)
 {
     uint8_t result = 1;
-    __asm__ __volatile__
+    __asm__
     (
         "vmovaps (%1), %%ymm0\n"           
         "vmovaps (%2), %%ymm1\n\t"         

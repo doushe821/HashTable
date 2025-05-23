@@ -2,13 +2,13 @@
 #include <inttypes.h>
 #include <stdlib.h>
 
-#include "../Headers/FileBufferizer.h"
-#include "../Headers/HashFunctions.h"
-#include "../Headers/ErrorParser.h"
-#include "../Headers/HashTable.h"
-#include "../Headers/HashTableBench.h"
-#include "../List/ListStruct.h"
-#include "../Headers/CMDParser.h"
+#include "FileBufferizer.h"
+#include "HashFunctions.h"
+#include "ErrorParser.h"
+#include "HashTable.h"
+#include "HashTableBench.h"
+#include "ListStruct.h"
+#include "CMDParser.h"
 #include <x86intrin.h>
 
 int main(int argc, char** argv)

@@ -1,10 +1,6 @@
-
-
 #include <string.h>
 
-#include "../Headers/CMDParser.h"
-
-//static char* itoa(int num, char* string);
+#include "CMDParser.h"
 
 int ParseCMD(int argc, char** argv, flags_t* flags)
 {
@@ -46,10 +42,3 @@ int ParseCMD(int argc, char** argv, flags_t* flags)
     }
     return 0;
 }
-
-
-//static char* itoa(int num, char* string)
-//{
-//    sprintf(string, "%d", num);
-//    return string;
-//}

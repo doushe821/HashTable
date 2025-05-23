@@ -1,4 +1,4 @@
-#include "../Headers/FileBufferizer.h"
+#include "FileBufferizer.h"
 
 char* FileToString(FILE* out)
 {

@@ -56,6 +56,16 @@ Error is calculated using following formula:
 \sigma_k=k\cdot(\frac{\sum(k_i-\overline{k})^2}{N(N-1)})^{1/2}
 ```
 
+## Environment
+PC:  Intel(R) Pentium(R) Gold 7505 @ 2.00GHz (frequency was fixed on 2.00GHz while running bench), RAM: 7821040 KiB, 3200MHz
+
+OS: Ubuntu 24.04.
+
+Compiler: clang 18.1.3
+
+Compiler flags: -O2 -mavx2 -march=native -flto 
+
+
 ## Hash comparison
 In the beginning, we have to choose right hash: one that can easily be optimized, yet one with good distribution.
 
@@ -92,14 +102,15 @@ Keys in values are stored in two separate lists, however, their indexes in the l
 
 This is the profile of naive version:
 <details>
-<summary>Naive version profile</summary>
+<summary>Naive version profile and flame graph</summary>
   
 ![](PerfImages/NaiveProfile.png)
+![](PerfImages/NaiveFlameGraph.png)
 </details>
 
 That way we can tell that we should optimize hash first.
 
-## First optimization
+## SIMD hash optimization
 First optimization is the simplest, yet the most effective one: in order to optimize 32crc hash we just need to use an intrinsic.
 
 This way we get a huge performance boost with only 4 Assembly strings.
@@ -135,14 +146,15 @@ uint64_t crc32HashIntrinsics(void* Key, size_t MaxValue)
 This is profile after the first optmization:
 
 <details>
-  <summary>First optimization profile</summary>
+  <summary>SIMD hash optimization profile and flame graph</summary>
   
-  ![](PerfImages/FirstOptProfile.png)
+  ![](PerfImages/SIMDHashProfile.png)
+  ![](PerfImages/SIMDHashFlameGraph.png)
 
 </details>
 
 
-## Second optimization
+## Inline assembly strncmp
 In order to optimize search function we will the fact that our keys' size is limited to 256 bits. 
 We can rewrite  loads key and elements of the list (here it treats list like an array) in ymm registers and then xors them. Then, vptest allows to check for 0 in register (it sets ZF to 1, if ymm == 0). Return value is index of the key in the bucket. If key isn't found, it returns 0. 
 
@@ -175,13 +187,14 @@ int mm_strcmp32(void* key, void* KeyFromList)
 </details>
 
 <details>
-<summary>Second optimization profile</summary>
+<summary>Inline assembly strncmp optimization profile and flame graph</summary>
 
-  ![](PerfImages/SecondOptProfile.png)
+  ![](PerfImages/mm_strncmp32Profile.png)
+  ![](PerfImages/mm_strncmp32FlameGraph.png)
 
 </details>
 
-## Third optimization
+## Inlined search function
 
 Now let's try to inline our cmp function and make search use it.
 
@@ -192,17 +205,7 @@ Now let's try to inline our cmp function and make search use it.
     for(size_t i = 1; i < ListSize; i++)
     {
 
-        __asm__ __volatile__
-        (
-            "vmovaps (%1), %%ymm0\n"           
-            "vmovaps (%2), %%ymm1\n\t"         
-            "vpxor %%ymm1, %%ymm0, %%ymm0\n\t" 
-            "vptest %%ymm0, %%ymm0\n\t"        
-            "setne %0\n\t"                   
-            : "=r" (result)                    
-            : "D" (Key), "S" ((char*)HashTable->KeysBucketArray[hash]->data + i * HashTable->KeysBucketArray[hash]->elsize)   
-            : "ymm0", "ymm1", "cc", "memory"
-        );
+        result = mm_strcmp32(Key, (char*)HashTable->KeysBucketArray[hash]->data + i * HashTable->KeysBucketArray[hash]->elsize);   
 
         if(result == 0)
         {
@@ -213,22 +216,25 @@ Now let's try to inline our cmp function and make search use it.
 ```
 </details>
 
+This way we can guarantee function inline by compiler, because it is no longer called by pointer (ListSearchInd() that was used previously calls it by pointer ).
+
 Profile after third optimization.
 <details>
-<summary>Third optimization profile</summary>
+<summary>Inlined search profile and flame graph</summary>
 
-  ![](PerfImages/ThirdOptProfile.png)
+  ![](PerfImages/SearchInlineProfile.png)
+  ![](PerfImages/SearchInlineFlameGraph.png)
 
 </details>
 
 ## Data processing
-Let's place experimental data in a table:
+Let's place experimental data in a table (t - time in ticks, $\varepsilon_t$ - time error, k = (Naive time)/(Optimization time), q - quantity of strings written in assembly (or using intrinsics)):
 <details>
   <summary>Show/hide data table</summary>
 <table>
   <tr>
     <th>Version</th>
-    <th>$t$</th>
+    <th>$t, ticks$</th>
     <th>$\varepsilon_t$</th>
     <th>$k$</th>
     <th>$q$</th> 
@@ -277,15 +283,15 @@ This way we get:
     <th>$\eta$</th>
   </tr>
   <tr>
-    <th>First optimization</th>
+    <th>SIMD hash</th>
     <th>$122.5$</th>
   </tr>
   <tr>
-    <th>Second optimization</th>
+    <th>Inline assembly strncmp</th>
     <th>$90$</th>
   </tr>
   <tr>
-    <th>Third optimization</th>
+    <th>Inlined search function</th>
     <th>$12.5$</th>
   </tr>
 </table>

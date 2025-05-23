@@ -1,9 +1,10 @@
-#include "../Headers/HashFunctions.h"
+#include "HashFunctions.h"
 #include <stdlib.h>
 #include <xmmintrin.h>
 #include <emmintrin.h>
 #include <x86intrin.h>
 #include <inttypes.h>
+#include <string.h>
 #include <assert.h>
 
 size_t MurmurHash2 (char * key, size_t len, size_t MaxValue)
@@ -110,16 +111,20 @@ uint64_t crc32HashIntrinsics(void* Key, size_t MaxValue)
 {
     uint64_t crc = 0xFFFFFFFF;
 
-    uint64_t part1 = *(const uint64_t*)(Key); // TODO strict aliasing (UB)
+    uint64_t part1 = 0;
+    memcpy(&part1, Key, sizeof(uint64_t));
     crc = _mm_crc32_u64(crc, part1);
 
-    uint64_t part2 = *(const uint64_t*)((char*)Key + 8);
+    uint64_t part2 = 0;
+    memcpy(&part2, (char*)Key + 8, sizeof(uint64_t));
     crc = _mm_crc32_u64(crc, part2);
 
-    uint64_t part3 = *(const uint64_t*)((char*)Key + 16);
+    uint64_t part3 = 0;
+    memcpy(&part3, (char*)Key + 16, sizeof(uint64_t));
     crc = _mm_crc32_u64(crc, part3);
 
-    uint64_t part4 = *(const uint64_t*)((char*)Key + 24);
+    uint64_t part4 = 0;
+    memcpy(&part4, (char*)Key + 24, sizeof(uint64_t));
     crc = _mm_crc32_u64(crc, part4);
 
     return (crc ^ 0xFFFFFFFF) % (uint32_t)MaxValue;

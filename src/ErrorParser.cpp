@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "../Headers/ErrorParser.h"
+#include "ErrorParser.h"
 
 void ParseError(enum HashErrors code)
 {

@@ -20,9 +20,9 @@ CC?=clang
 TARGET?=debug
 
 ifeq ($(TARGET), release)
-	CFLAGS=-O2 -g -no-pie -z noexecstack -mavx2 -march=native
+	CFLAGS=-O2 -g -no-pie -z noexecstack -flto -mavx2 -march=native -I Headers/HashTable -I List
 else ifeq ($(TARGET), debug)
-	CFLAGS=-ggdb3 -g -z noexecstack -std=c++17 -Wall -Wextra -Weffc++ -Waggressive-loop-optimizations -no-pie -mavx2\
+	CFLAGS=-ggdb3 -g -z noexecstack -std=c++17 -Wall -Wextra -Weffc++ -Waggressive-loop-optimizations -no-pie -mavx2 -I Headers\
 	-Wc++14-compat -Wmissing-declarations -Wcast-align -Wcast-qual -Wchar-subscripts \
 	-Wconditionally-supported -Wconversion -Wctor-dtor-privacy -Wempty-body -Wfloat-equal \
 	-Wformat-nonliteral -Wformat-security -Wformat-signedness -Wformat=2 -Winline -Wlogical-op \
@@ -35,9 +35,10 @@ else ifeq ($(TARGET), debug)
 	-fsanitize=address,alignment,bool,bounds,enum,float-cast-overflow,float-divide-by-zero,integer-divide-by-zero,leak,nonnull-attribute,null,object-size,return,returns-nonnull-attribute,shift,signed-integer-overflow,undefined,unreachable,vla-bound,vptr 
 endif
 
+LFLAGS = -I Headers/HashTable -I List
+
 
 SOURCES=src/main.cpp src/FileBufferizer.cpp src/HashTable.cpp List/List.cpp src/ErrorParser.cpp src/HashTableBench.cpp src/HashFunctions.cpp src/CMDParser.cpp
-SOURCES_ASM=ListSearch.asm
 OBJECTS:=$(addprefix $(OUT_O_DIR)/,$(SOURCES:.cpp=.o))
 OBJECTS_ASM:=$(addprefix $(OUT_O_DIR)/,$(SOURCES_ASM:.asm=.o))
 LISTINGS:=$(addprefix $(OUT_O_DIR)/,$(SOURCES_ASM:.cpp=.lst))
