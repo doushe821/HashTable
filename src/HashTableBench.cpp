@@ -43,7 +43,6 @@ HashErrors SearchBench(HashTable_t* HashTable, flags_t Flags)
     {
         DataBuffer = FileToHashTableWordArray(SearchBenchFile, &WordCounter);
     }
-    fprintf(stderr, "Words in bench = %zu\n", WordCounter);
 
     unsigned long long start = 0;
     unsigned long long end = 0;
@@ -52,7 +51,7 @@ HashErrors SearchBench(HashTable_t* HashTable, flags_t Flags)
         case NO_OPTIMIZATIONS:
         {
             start = __rdtsc();
-            for(size_t j = 0; j < 1000; j++)
+            for(size_t j = 0; j < 500; j++)
             {
                 for(size_t i = 0; i < WordCounter; i++)
                 {
@@ -65,7 +64,7 @@ HashErrors SearchBench(HashTable_t* HashTable, flags_t Flags)
         case SIMD_HASH:
         {
             start = __rdtsc();
-            for(size_t j = 0; j < 1000; j++)
+            for(size_t j = 0; j < 500; j++)
             {
                 for(size_t i = 0; i < WordCounter; i++)
                 {
@@ -78,7 +77,7 @@ HashErrors SearchBench(HashTable_t* HashTable, flags_t Flags)
         case SIMD_HASH_STRCMP_IN_ASM:
         {
             start = __rdtsc();
-            for(size_t j = 0; j < 1000; j++)
+            for(size_t j = 0; j < 500; j++)
             {
                 for(size_t i = 0; i < WordCounter; i++)
                 {
@@ -91,7 +90,7 @@ HashErrors SearchBench(HashTable_t* HashTable, flags_t Flags)
         case SIMD_HASH_ASM_SEARCH:
         {    
             start = __rdtsc();
-            for(size_t j = 0; j < 1000; j++)
+            for(size_t j = 0; j < 500; j++)
             {
                 for(size_t i = 0; i < WordCounter; i++)
                 {
@@ -104,7 +103,7 @@ HashErrors SearchBench(HashTable_t* HashTable, flags_t Flags)
         default:
         {
             start = __rdtsc();
-            for(size_t j = 0; j < 1000; j++)
+            for(size_t j = 0; j < 500; j++)
             {
                 for(size_t i = 0; i < WordCounter; i++)
                     {

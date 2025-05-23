@@ -20,11 +20,11 @@ CC?=clang
 TARGET?=debug
 
 ifeq ($(TARGET), release)
-	CFLAGS=-O2 -g -no-pie -z noexecstack -flto -mavx2 -march=native -I Headers/HashTable -I List
+	CFLAGS=-O2 -g -no-pie -z noexecstack -mavx2 -march=native -I Headers/HashTable -I List
 else ifeq ($(TARGET), debug)
-	CFLAGS=-ggdb3 -g -z noexecstack -std=c++17 -Wall -Wextra -Weffc++ -Waggressive-loop-optimizations -no-pie -mavx2 -I Headers\
+	CFLAGS=-ggdb3 -g -z noexecstack -std=c++17 -Wall -Wextra -Weffc++ -Waggressive-loop-optimizations -no-pie -mavx2 -I Headers/HashTable -I List\
 	-Wc++14-compat -Wmissing-declarations -Wcast-align -Wcast-qual -Wchar-subscripts \
-	-Wconditionally-supported -Wconversion -Wctor-dtor-privacy -Wempty-body -Wfloat-equal \
+	-Wconditionally-supported -Wconversion -Wctor-dtor-privacy -Wempty-bodyI Headers/HashTable -I List -Wfloat-equal \
 	-Wformat-nonliteral -Wformat-security -Wformat-signedness -Wformat=2 -Winline -Wlogical-op \
 	-Wnon-virtual-dtor -Wopenmp-simd -Woverloaded-virtual -Wpacked -Wpointer-arith -Winit-self \
 	-Wredundant-decls -Wshadow -Wsign-promo -Wstrict-null-sentinel -Wstrict-overflow=2 \
